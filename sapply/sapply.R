@@ -11,6 +11,8 @@ Ymd <- function(x){ as.POSIXct(strptime(x, format=Ymd.format))}
 
 ################
 
+# Iterate over the vector
+
 b <- Ymd(
      sapply(a,function(x) {
           paste("2013",x,01,sep="-")
