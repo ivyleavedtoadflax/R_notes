@@ -6,6 +6,6 @@ This repo is also home to a short R tutorial course, which can be found in the f
 
 Each other directory refers to an individual R command, and provides an example of how to use that command, or it refers to a particular outcome, and includes scripts on how to achieve that outcome: e.g. overlaid_histograms/
 
-Incomplete exampels are followed by the suffix '_incomplete'
+Incomplete examples are followed by the suffix '_incomplete'
 
 Html files for examples were created using the 'compile a notebook' function in RStudio (http://www.rstudio.com/)
