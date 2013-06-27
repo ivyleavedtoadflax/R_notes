@@ -99,41 +99,8 @@
 }
 </style>
 <title>Getting Started with R - Getting data into R</title>
-<style rel="stylesheet" type="text/css" href="C:/Users/s162906/Dropbox/JamesR/R_tutorial/stylesheet.css">
-body{
-margin-top:50px;
-margin-bottom:100px;
-margin-right:50px;
-margin-left:75px;
-}
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-p{
-font-family:"Calibri","Verdana","Arial";
-}
-
-h1{
-font-family:"Calibri","Verdana","Arial";
-}
-
-
-h2{
-font-family:"Calibri","Verdana","Arial";
-}
-
-h3{
-font-family:"Calibri","Verdana","Arial";
-}
-
-ul{
-font-family:"Calibri","Verdana","Arial";
-}
-
-b{
-font-family:"Lucida Console";
-font-size:10pt
-}
-
-</style>
 </head>
 
 <body>
@@ -142,7 +109,7 @@ font-size:10pt
 
 <p>Probably the first question you are likely to ask when approaching R for the first time is 'how do I get my data into R'?</p>
 
-<p>R is able to read directly from excel spread sheets using a number of packages, however they usually take some tweaking. In this tutorial we will restrict ourselves to importing data from a 'comma seperated values' (.csv) files and 'tab delimited' text files (.txt). You can create files in this format using the 'Save As' menu in Excel, or whichever spread sheet you are using.</p>
+<p>R is able to read directly from excel spread sheets using a number of packages, however they usually take some tweaking. In this tutorial we will restrict ourselves to importing data from 'comma separated values' (.csv) files and 'tab delimited' text files (.txt). You can create files in this format using the 'Save As' menu in Excel, or whichever spread sheet software you are using.</p>
 
 <h2>Small variables</h2>
 
@@ -184,7 +151,7 @@ short_variable
 
 <h2>Importing tables</h2>
 
-<p>Obviously you won't want to manually input all your data, it is much easier to import from a file which you have prepared in a spread sheet. As mentioned, in this course we will work exclusively with the simple formats '.csv' and .txt. </p>
+<p>Obviously you won't want to manually input all your data, it is much easier to import from a file which you have prepared in a spread sheet. As mentioned, in this course we will work exclusively with the simple formats '.csv' and .txt.</p>
 
 <p>When importing data from files, there are a few rules that must be adhered to, otherwise R will throw up an error.</p>
 
@@ -275,8 +242,8 @@ rats
 ## 35      134         3   2     3
 ## 36      127         3   2     3
 </pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># We can select or individual columns or rows with square brackets.</span>
-<span class="comment"># rats[1,1] will give you the value on the first row of the first column:</span>
+<span class="comment"># We can select individual columns or rows with square brackets. rats[1,1]</span>
+<span class="comment"># will give you the value on the first row of the first column:</span>
 
 rats[1, 1]
 </pre></div><div class="output"><pre class="knitr r">## [1] 131
@@ -323,7 +290,7 @@ rats[<span class="functioncall">seq</span>(3, 36, 3), ]
 <span class="comment"># In this case the three arguments <span class="keyword">in</span> the seq <span class="keyword">function</span> mean: start at</span>
 <span class="comment"># value 3, end at value 36, and jump 3 rows at a time.</span>
 
-<span class="comment"># We can also compute some sumamry statistics from the data:</span>
+<span class="comment"># We can also compute some summary statistics from the data:</span>
 
 <span class="functioncall">summary</span>(rats)
 </pre></div><div class="output"><pre class="knitr r">##     Glycogen     Treatment      Rat          Liver  
@@ -334,7 +301,7 @@ rats[<span class="functioncall">seq</span>(3, 36, 3), ]
 ##  3rd Qu.:150   3rd Qu.:3   3rd Qu.:2.0   3rd Qu.:3  
 ##  Max.   :162   Max.   :3   Max.   :2.0   Max.   :3
 </pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># Or</span>
+<span class="comment"># Or look at the structure of the object</span>
 
 <span class="functioncall">str</span>(rats)
 </pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
@@ -345,13 +312,13 @@ rats[<span class="functioncall">seq</span>(3, 36, 3), ]
 </pre></div></div></div>
 
 
-<p> <b>str()</b> is useful, because it lets us know how R is seeing the parts of this table. <b>int</b> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otehrwise we would be doing the wrong analysis.</p>
+<p> <b>str()</b> is useful, because it lets us know how R is seeing the parts of this table. <b>int</b> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis.</p>
 
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># To solve this, either use characters - A, B, C instead of 1, 2, 3 <span class="keyword">for</span></span>
 <span class="comment"># factors, or convert them manually:</span>
 
-rats$Treatment &lt;- <span class="functioncall">as.factor</span>(rats$Treatment)
+rats$Treatment &lt;- <span class="functioncall">factor</span>(rats$Treatment)
 
 <span class="functioncall">str</span>(rats)
 </pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
