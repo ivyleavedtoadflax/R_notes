@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<title>Installing R Packages</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+
+<h1>Installing R packages</h1>
+
+<p>One of the strengths of R is that there are literally thousands of packages available for you to extend to core capabilities if the R statistical environment. You may one day even with to write your own packages.</p>
+
+<p>Downloading and installing packages is a very simple procedure in R and can be done with a single line of code -- You will probably do this a lot!</p>
+
+<p>You may be asked to specify a mirror from which to download the package, if so choose London - Imperial College - or a similar nearby location.</p>
+
+<!--begin.rcode,eval=FALSE
+install.packages('agricolae')
+end.rcode-->
+
+<p>R will then downlaod the package and install it in the relevant directory.</p>
+
+<p>In order to use the package you need to call the package using <b>library</b>. This may or may not generate a message or warning.</p>
+
+<!--begin.rcode, eval=FALSE
+library(agricolae)
+end.rcode-->
+
+<p>If you wanto to suppress warnings (for instance if you wish to call a package from within a function) you can also <b>require</b>:</p>
+
+<!--begin.rcode, eval=FALSE
+require(agricolae)
+end.rcode-->
+
+<p>Note that you will need to call the package with <b>library</b> or <b>require</b> every time you run a new instance of R. Running the <b>install.packages</b> command will also update a package to the latest available version.</p>
+
+
+</body>
+</html>
