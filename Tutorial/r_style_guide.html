@@ -1,0 +1,141 @@
+<html>
+
+<head>
+<style type="text/css">.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}, 
+.warning {
+	font-weight: bold;
+} 
+.message {
+	font-style: italic;
+} 
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f7f7f7;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+
+.source {
+  color: #333333;
+}
+.background {
+  color: #F7F7F7;
+}
+
+.number {
+  color: #000000;
+}
+
+.functioncall {
+  color: #800054;
+  font-weight: bolder;
+}
+
+.string {
+  color: #9999FF;
+}
+
+.keyword {
+  font-weight: bolder;
+  color: black;
+}
+
+.argument {
+  color: #B04005;
+}
+
+.comment {
+  color: #2E9957;
+}
+
+.roxygencomment {
+  color: #707AB3;
+}
+
+.formalargs {
+  color: #B04005;
+}
+
+.eqformalargs {
+  color: #B04005;
+}
+
+.assignement {
+  font-weight: bolder;
+  color: #000000;
+}
+
+.package {
+  color: #96B525;
+}
+
+.slot {
+  font-style: italic;
+}
+
+.symbol {
+  color: #000000;
+}
+
+.prompt {
+  color: #333333;
+}
+</style>
+<title>Getting Started with R - R coding style</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+
+<h1>R coding style</h1>
+
+<p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your R code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example<a href=#footnote-1>[1]</a>:
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># Good</span>
+<span class="functioncall"><span class="keyword">if</span></span> (debug)
+<span class="functioncall">plot</span>(x, y)
+
+<span class="comment"># Bad</span>
+<span class="functioncall"><span class="keyword">if</span></span>(debug)
+<span class="functioncall">plot</span> (x, y)
+</pre></div></div></div>
+
+
+
+
+<p>In the above example, it makes no difference at all <em>how</em> the code is interpreted by R, but it can make the difference between code that is easy to read, and code that isn't. This is especially important if you are sharing your code with collaborators, as there is nothing worse than having to re-arrange someone else's code before you can even read it!</p>
+
+<p>Throughout this document I have adhered (loosely in places) to <a href="https://github.com/hadley/devtools/wiki/Style">Hadley Wickham's style guide</a>, which is based on the Google style guide. If you want to explicitly know what this means - follow the link above and have a read - this is probably a good idea once you have had some practice with the language.</p>
+
+<p>By all means, if you prefer, use a different style, it really doesn't matter so long as your code is clear and easy to read. Some important rules to follow, whichever style you decide to follow however are:</p>
+
+<ol>
+<li>Be consistent: use the same style throughout all your scripts.</li>
+<li>Make file and object names meaningful: don't fall into the lazy practice of calling objects 'a' or 'b', or other unhelpful names.</li>
+<li>Comment your code liberally: explain why you are doing what you are doing - it makes it so much easier when either you go back to code you wrote months earlier, or when sharing your code with other collaborators.</li>
+</ol>
+
+<br><br>
+<hr>
+
+<p id="footnote-1">[1] Hadley Wickam style guide <a href="https://github.com/hadley/devtools/wiki/Style">https://github.com/hadley/devtools/wiki/Style</a></p>
+
+</body>
+</html>
