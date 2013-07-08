@@ -312,13 +312,16 @@ rats[<span class="functioncall">seq</span>(3, 36, 3), ]
 </pre></div></div></div>
 
 
-<p> <b>str()</b> is useful, because it lets us know how R is seeing the parts of this table. <b>int</b> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis.</p>
+<p> <b>str()</b> is useful, because it lets us know how R is seeing the parts of this table. <b>int</b> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labelling it as a <b>factor</b>.</p>
 
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># To solve this, either use characters - A, B, C instead of 1, 2, 3 <span class="keyword">for</span></span>
 <span class="comment"># factors, or convert them manually:</span>
 
 rats$Treatment &lt;- <span class="functioncall">factor</span>(rats$Treatment)
+
+<span class="comment"># By using the factor command, we <span class="keyword">in</span> effect convert a continuous variable</span>
+<span class="comment"># into a categorical one:</span>
 
 <span class="functioncall">str</span>(rats)
 </pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
@@ -329,11 +332,13 @@ rats$Treatment &lt;- <span class="functioncall">factor</span>(rats$Treatment)
 </pre></div></div></div>
 
 
+<p>There is a dedicated function to convert numerical factor levels to character based levels in the library <b>plyr</b>. This can save you the hassle of using <b>factor</b> each time you open a dataset (although youc ould of course do this in.</p>
+
 <p>Now convert Rat and Liver into categorical variables in the same way - we will need this data later.</p>
 
 <p>Note that in this example we refer to the individual columns of the table with a <b>$</b>. R studio is great for this. Type <b>rats$</b> in the console and the press the tab button. RStudio will then automatically complete the variable name, or give you the options available. Try it.</p>
 
-<p>We could also have referred to the columns by number: <b>rats[,1]</b>.</p>
+<p>We could also have referred to the columns by number: <b>rats[ ,1]</b>.</p>
 
 <p>Another option which gives you a much more familiar spread sheet like view is <b>fix(rats)</b> - try this too.</p>
 
