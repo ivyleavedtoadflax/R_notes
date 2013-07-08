@@ -110,15 +110,16 @@
 
 <p>Downloading and installing packages is a very simple procedure in R and can be done with a single line of code -- You will probably do this a lot!</p>
 
-<p>You may be asked to specify a mirror from which to download the package, if so choose London - Imperial College - or a similar nearby location.</p>
+<p>Int his instance, we specify the repository from which we will download the package - if you omitted <b>repos=""</b> then you would be asked to select a repository from a list. Rstudio's mirror is hosted by amazon, and hence, is pretty fast - so we'll use that one.</p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="functioncall">install.packages</span>(<span class="string">"agricolae"</span>)
+<span class="comment"># Note that this may throw up a</span>
 
+<span class="functioncall">install.packages</span>(<span class="string">"agricolae"</span>, repos = <span class="string">"http://cran.rstudio.com/"</span>)
 </pre></div></div></div>
 
 
-<p>R will then downlaod the package and install it in the relevant directory.</p>
+<p>R will then download the package and install it in the relevant directory.</p>
 
 <p>In order to use the package you need to call the package using <b>library</b>. This may or may not generate a message or warning.</p>
 
