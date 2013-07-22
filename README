@@ -1,11 +1,13 @@
 README
 
-This is a repository for general notes on functions and scripts for the statistical programming environment R (http://cran.r-project.org/).
+This repo is also home to the notes produced for a short course in R run at Cranfield University, designed for researchers currently completing their analyses in other programs. The course is due to be run at Cranfield University, Bedfordshire, from August 2013.
 
-This repo is also home to a short R tutorial course, which can be found in the folder Tutorial/, and was run as part of an 'Introduction to R' course at Cranfield University, Bedfordshire, 2013.
+Notes for the course can be found in /Tutorial. Users are advised to clone or download the repository and then run index.html from the local folder. Links to the rest of the course are available from there.
 
-Each other directory refers to an individual R command, and provides an example of how to use that command, or it refers to a particular outcome, and includes scripts on how to achieve that outcome: e.g. overlaid_histograms/
+The course was written in html and R and compiled using RStudio (http://www.rstudio.com/).
+
+This repo is also home to a collection of notes and examples on using particular R functions. These can be found in /Notes. Each sub-directory refers to an individual R command, and provides an example of how to use that command, or it refers to a particular outcome, and includes scripts on how to achieve that outcome: e.g. overlaid_histograms/
 
 Incomplete examples are followed by the suffix '_incomplete'
 
-Html files for examples were created using the 'compile a notebook' function in RStudio (http://www.rstudio.com/)
+Html files for examples were created using the 'compile a notebook' function in RStudio (http://www.rstudio.com/).
