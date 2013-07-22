@@ -8,19 +8,19 @@
 .error {
 	font-weight: bold;
 	color: #FF0000;
-}, 
+},
 .warning {
 	font-weight: bold;
-} 
+}
 .message {
 	font-style: italic;
-} 
+}
 .source, .output, .warning, .error, .message {
 	padding: 0em 1em;
   border:solid 1px #F7F7F7;
 }
 .source {
-  background-color: #f7f7f7;
+  background-color: #f5f5f5;
 }
 .rimage.left {
   text-align: left;
@@ -31,73 +31,36 @@
 .rimage.center {
   text-align: center;
 }
-
-.source {
-  color: #333333;
+.hl.num {
+  color: #AF0F91;
 }
-.background {
-  color: #F7F7F7;
+.hl.str {
+  color: #317ECC;
 }
-
-.number {
-  color: #000000;
-}
-
-.functioncall {
-  color: #800054;
-  font-weight: bolder;
-}
-
-.string {
-  color: #9999FF;
-}
-
-.keyword {
-  font-weight: bolder;
-  color: black;
-}
-
-.argument {
-  color: #B04005;
-}
-
-.comment {
-  color: #2E9957;
-}
-
-.roxygencomment {
-  color: #707AB3;
-}
-
-.formalargs {
-  color: #B04005;
-}
-
-.eqformalargs {
-  color: #B04005;
-}
-
-.assignement {
-  font-weight: bolder;
-  color: #000000;
-}
-
-.package {
-  color: #96B525;
-}
-
-.slot {
+.hl.com {
+  color: #AD95AF;
   font-style: italic;
 }
-
-.symbol {
+.hl.opt {
   color: #000000;
 }
-
-.prompt {
-  color: #333333;
+.hl.std {
+  color: #585858;
 }
-</style>
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}</style>
 <title>Getting Started with R - Course Outline</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
@@ -133,7 +96,7 @@
      </ul>
 <li>Visualising your data</li>
      <ul>
-     <li>R-base graphics</li>
+     <li><a href="R-base_graphics.html">R-base graphics</a></li>
           <ul>
           <li>Scatter-plots</li>
           <li>Histograms</li>

@@ -8,19 +8,19 @@
 .error {
 	font-weight: bold;
 	color: #FF0000;
-}, 
+},
 .warning {
 	font-weight: bold;
-} 
+}
 .message {
 	font-style: italic;
-} 
+}
 .source, .output, .warning, .error, .message {
 	padding: 0em 1em;
   border:solid 1px #F7F7F7;
 }
 .source {
-  background-color: #f7f7f7;
+  background-color: #f5f5f5;
 }
 .rimage.left {
   text-align: left;
@@ -31,73 +31,36 @@
 .rimage.center {
   text-align: center;
 }
-
-.source {
-  color: #333333;
+.hl.num {
+  color: #AF0F91;
 }
-.background {
-  color: #F7F7F7;
+.hl.str {
+  color: #317ECC;
 }
-
-.number {
-  color: #000000;
-}
-
-.functioncall {
-  color: #800054;
-  font-weight: bolder;
-}
-
-.string {
-  color: #9999FF;
-}
-
-.keyword {
-  font-weight: bolder;
-  color: black;
-}
-
-.argument {
-  color: #B04005;
-}
-
-.comment {
-  color: #2E9957;
-}
-
-.roxygencomment {
-  color: #707AB3;
-}
-
-.formalargs {
-  color: #B04005;
-}
-
-.eqformalargs {
-  color: #B04005;
-}
-
-.assignement {
-  font-weight: bolder;
-  color: #000000;
-}
-
-.package {
-  color: #96B525;
-}
-
-.slot {
+.hl.com {
+  color: #AD95AF;
   font-style: italic;
 }
-
-.symbol {
+.hl.opt {
   color: #000000;
 }
-
-.prompt {
-  color: #333333;
+.hl.std {
+  color: #585858;
 }
-</style>
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}</style>
 <title>Getting Started with R - Getting data into R</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
@@ -120,33 +83,38 @@
 <p>It is a good idea to get into the habit of commenting every few lines of code, and explain why - not necessarily how (as this will be self evident) you have written a certain line of code. It makes reading code much easier, especially if you didn't write it.</p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="comment"># Create an object called short_variable, and assign a series of numbers</span>
-<span class="comment"># to it.</span>
+<span class="hl com"># Create an object called short_variable, and assign a series of numbers</span>
+<span class="hl com"># to it.</span>
 
-# We use <span class="string">'&lt;-'</span> to create the object. This is called <span class="string">'gets'</span>.
+# We use <span class="hl str">'&lt;-'</span> to create the object. This is called <span class="hl str">'gets'</span>.
 
-short_variable &lt;- <span class="functioncall">c</span>(1, 5, 6, 7, 9, 2, 10)
+short_variable &lt;- <span class="hl kwd">c</span>(1, 5, 6, 7, 9, 2, 10)
 
-<span class="comment"># To see what is contained within an object, simply input the name of the</span>
-<span class="comment"># object.</span>
+<span class="hl com"># To see what is contained within an object, simply input the name of the</span>
+<span class="hl com"># object.</span>
 
 short_variable
-</pre></div><div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
-</pre></div><div class="source"><pre class="knitr r">
-# Note that this the equivalent <span class="keyword">in</span> R of writing <span class="functioncall">print</span>(short_variable).
-<span class="comment"># This is not particularly important <span class="keyword">in</span> this course, but it becomes</span>
-<span class="comment"># important as you begin to write your own functions.</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
+</pre></div>
+<div class="source"><pre class="knitr r">
+# Note that this the equivalent <span class="hl kwa">in</span> R of writing <span class="hl kwd">print</span>(short_variable).
+<span class="hl com"># This is not particularly important <span class="hl kwa">in</span> this course, but it becomes</span>
+<span class="hl com"># important as you begin to write your own functions.</span>
 
-<span class="functioncall">print</span>(short_variable)
-</pre></div><div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># A more convenient way of entering a series of numbers is to use the</span>
-# <span class="functioncall">scan</span>() <span class="keyword">function</span>.  You must still assign a name to the object you are
-# creating as before, but <span class="functioncall">scan</span>() Will allow you to enter the data more
-<span class="comment"># easily.</span>
+<span class="hl kwd">print</span>(short_variable)
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># A more convenient way of entering a series of numbers is to use the</span>
+# <span class="hl kwd">scan</span>() <span class="hl kwa">function</span>.  You must still assign a name to the object you are
+# creating as before, but <span class="hl kwd">scan</span>() Will allow you to enter the data more
+<span class="hl com"># easily.</span>
 
-<span class="comment"># Try that now.</span>
-</pre></div></div></div>
+<span class="hl com"># Try that now.</span>
+</pre></div>
+</div></div>
 
 
 <h2>Importing tables</h2>
@@ -164,20 +132,21 @@ short_variable
 <p>Let's assume we've done that already:</p>
 
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">
-# To import from a <span class="string">'.txt'</span> file we used the <span class="functioncall">read.table</span>() <span class="keyword">function</span> again you
-<span class="comment"># must assign the <span class="keyword">function</span> a name first. In this case we will import a</span>
-# data file referred to <span class="keyword">in</span> <span class="string">'The R book'</span>. Notice that we are able to import
-<span class="comment"># it directly from the internet, but the location could just as easily be</span>
-# a local folder: <span class="string">'C://data/'</span>
+# To import from a <span class="hl str">'.txt'</span> file we used the <span class="hl kwd">read.table</span>() <span class="hl kwa">function</span> again you
+<span class="hl com"># must assign the <span class="hl kwa">function</span> a name first. In this case we will import a</span>
+# data file referred to <span class="hl kwa">in</span> <span class="hl str">'The R book'</span>. Notice that we are able to import
+<span class="hl com"># it directly from the internet, but the location could just as easily be</span>
+# a local folder: <span class="hl str">'C://data/'</span>
 
-rats &lt;- <span class="functioncall">read.table</span>(<span class="string">"http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt"</span>, 
+rats &lt;- <span class="hl kwd">read.table</span>(<span class="hl str">"http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt"</span>, 
     header = T)
 
-<span class="comment"># Call the data to examine it. Note this data is dealt with on p475 of</span>
-# <span class="string">'The R Book'</span>
+<span class="hl com"># Call the data to examine it. Note this data is dealt with on p475 of</span>
+# <span class="hl str">'The R Book'</span>
 
 rats
-</pre></div><div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
+</pre></div>
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 1       131         1   1     1
 ## 2       130         1   1     1
 ## 3       131         1   1     2
@@ -214,51 +183,61 @@ rats
 ## 34      138         3   2     2
 ## 35      134         3   2     3
 ## 36      127         3   2     3
-</pre></div></div></div>
+</pre></div>
+</div></div>
 
 
 <p>This isn't a particularly big table so we can view the whole thing at once, but if it was longer we might want to summarise the data or look at smaller chunks fo it.</p>
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># we can look at the first 6 rows with:</span>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># we can look at the first 6 rows with:</span>
 
-<span class="functioncall">head</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
+<span class="hl kwd">head</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
 ## 1      131         1   1     1
 ## 2      130         1   1     1
 ## 3      131         1   1     2
 ## 4      125         1   1     2
 ## 5      136         1   1     3
 ## 6      142         1   1     3
-</pre></div><div class="source"><pre class="knitr r">
+</pre></div>
+<div class="source"><pre class="knitr r">
 
-<span class="comment"># Or the last 6 rows with:</span>
+<span class="hl com"># Or the last 6 rows with:</span>
 
-<span class="functioncall">tail</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
+<span class="hl kwd">tail</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 31      138         3   2     1
 ## 32      140         3   2     1
 ## 33      139         3   2     2
 ## 34      138         3   2     2
 ## 35      134         3   2     3
 ## 36      127         3   2     3
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># We can select individual columns or rows with square brackets. rats[1,1]</span>
-<span class="comment"># will give you the value on the first row of the first column:</span>
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># We can select individual columns or rows with square brackets. rats[1,1]</span>
+<span class="hl com"># will give you the value on the first row of the first column:</span>
 
 rats[1, 1]
-</pre></div><div class="output"><pre class="knitr r">## [1] 131
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># The first number denotes row, the second column. So to see the whole</span>
-<span class="comment"># first row, we do:</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 131
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># The first number denotes row, the second column. So to see the whole</span>
+<span class="hl com"># first row, we do:</span>
 
 rats[1, ]
-</pre></div><div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
+</pre></div>
+<div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
 ## 1      131         1   1     1
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># We can also specify a series by using a colon:</span>
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># We can also specify a series by using a colon:</span>
 
 rats[1:10, ]
-</pre></div><div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
+</pre></div>
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 1       131         1   1     1
 ## 2       130         1   1     1
 ## 3       131         1   1     2
@@ -269,11 +248,13 @@ rats[1:10, ]
 ## 8       148         1   2     1
 ## 9       140         1   2     2
 ## 10      143         1   2     2
-</pre></div><div class="source"><pre class="knitr r">
-# If we wanted every third row, we could use the <span class="functioncall">seq</span>() <span class="keyword">function</span>:
+</pre></div>
+<div class="source"><pre class="knitr r">
+# If we wanted every third row, we could use the <span class="hl kwd">seq</span>() <span class="hl kwa">function</span>:
 
-rats[<span class="functioncall">seq</span>(3, 36, 3), ]
-</pre></div><div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
+rats[<span class="hl kwd">seq</span>(3, 36, 3), ]
+</pre></div>
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 3       131         1   1     2
 ## 6       142         1   1     3
 ## 9       140         1   2     2
@@ -286,50 +267,57 @@ rats[<span class="functioncall">seq</span>(3, 36, 3), ]
 ## 30      136         3   1     3
 ## 33      139         3   2     2
 ## 36      127         3   2     3
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># In this case the three arguments <span class="keyword">in</span> the seq <span class="keyword">function</span> mean: start at</span>
-<span class="comment"># value 3, end at value 36, and jump 3 rows at a time.</span>
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># In this case the three arguments <span class="hl kwa">in</span> the seq <span class="hl kwa">function</span> mean: start at</span>
+<span class="hl com"># value 3, end at value 36, and jump 3 rows at a time.</span>
 
-<span class="comment"># We can also compute some summary statistics from the data:</span>
+<span class="hl com"># We can also compute some summary statistics from the data:</span>
 
-<span class="functioncall">summary</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">##     Glycogen     Treatment      Rat          Liver  
+<span class="hl kwd">summary</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">##     Glycogen     Treatment      Rat          Liver  
 ##  Min.   :125   Min.   :1   Min.   :1.0   Min.   :1  
 ##  1st Qu.:136   1st Qu.:1   1st Qu.:1.0   1st Qu.:1  
 ##  Median :141   Median :2   Median :1.5   Median :2  
 ##  Mean   :142   Mean   :2   Mean   :1.5   Mean   :2  
 ##  3rd Qu.:150   3rd Qu.:3   3rd Qu.:2.0   3rd Qu.:3  
 ##  Max.   :162   Max.   :3   Max.   :2.0   Max.   :3
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># Or look at the structure of the object</span>
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># Or look at the structure of the object</span>
 
-<span class="functioncall">str</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
+<span class="hl kwd">str</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
 ##  $ Glycogen : int  131 130 131 125 136 142 150 148 140 143 ...
 ##  $ Treatment: int  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Rat      : int  1 1 1 1 1 1 2 2 2 2 ...
 ##  $ Liver    : int  1 1 2 2 3 3 1 1 2 2 ...
-</pre></div></div></div>
+</pre></div>
+</div></div>
 
 
 <p> <b>str()</b> is useful, because it lets us know how R is seeing the parts of this table. <b>int</b> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labelling it as a <b>factor</b>.</p>
 
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># To solve this, either use characters - A, B, C instead of 1, 2, 3 <span class="keyword">for</span></span>
-<span class="comment"># factors, or convert them manually:</span>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># To solve this, either use characters - A, B, C instead of 1, 2, 3 <span class="hl kwa">for</span></span>
+<span class="hl com"># factors, or convert them manually:</span>
 
-rats$Treatment &lt;- <span class="functioncall">factor</span>(rats$Treatment)
+rats$Treatment &lt;- <span class="hl kwd">factor</span>(rats$Treatment)
 
-<span class="comment"># By using the factor command, we <span class="keyword">in</span> effect convert a continuous variable</span>
-<span class="comment"># into a categorical one:</span>
+<span class="hl com"># By using the factor command, we <span class="hl kwa">in</span> effect convert a continuous variable</span>
+<span class="hl com"># into a categorical one:</span>
 
-<span class="functioncall">str</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
+<span class="hl kwd">str</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
 ##  $ Glycogen : int  131 130 131 125 136 142 150 148 140 143 ...
 ##  $ Treatment: Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Rat      : int  1 1 1 1 1 1 2 2 2 2 ...
 ##  $ Liver    : int  1 1 2 2 3 3 1 1 2 2 ...
-</pre></div></div></div>
+</pre></div>
+</div></div>
 
 
 <p>Now convert Rat and Liver into categorical variables in the same way - we will need this data later.</p>
@@ -342,24 +330,40 @@ rats$Treatment &lt;- <span class="functioncall">factor</span>(rats$Treatment)
 
 
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="comment"># Install the package plyr - <span class="keyword">if</span> you don't have it already - note you can</span>
-# check this on the right hand <span class="string">'packages'</span> tab of RStudio.
+<span class="hl com"># Install the package plyr - <span class="hl kwa">if</span> you don't have it already - note you can</span>
+# check this on the right hand <span class="hl str">'packages'</span> tab of RStudio. But, it doesn't
+<span class="hl com"># hurt to run the command again, even <span class="hl kwa">if</span> it is installed!</span>
 
-<span class="functioncall">install.packages</span>(<span class="string">"plyr"</span>, repos = <span class="string">"http://cran.rstudio.com/"</span>)
-</pre></div><div class="message"><pre class="knitr r">## Installing package into 'C:/Users/s162906/Documents/R/win-library/3.0' (as
+<span class="hl kwd">install.packages</span>(<span class="hl str">"plyr"</span>, repos = <span class="hl str">"http://cran.rstudio.com/"</span>)
+</pre></div>
+<div class="message"><pre class="knitr r">## Installing package into 'C:/Users/s162906/Documents/R/win-library/3.0' (as
 ## 'lib' is unspecified)
-</pre></div><div class="output"><pre class="knitr r">## package 'plyr' successfully unpacked and MD5 sums checked
+</pre></div>
+<div class="output"><pre class="knitr r">## package 'plyr' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\s162906\AppData\Local\Temp\RtmpuChim8\downloaded_packages
-</pre></div><div class="source"><pre class="knitr r">
-<span class="comment"># Load the package:</span>
+## 	C:\Users\s162906\AppData\Local\Temp\RtmpKOPhWA\downloaded_packages
+</pre></div>
+<div class="source"><pre class="knitr r">
+<span class="hl com"># Load the package:</span>
 
-<span class="functioncall">library</span>(plyr)
+<span class="hl kwd">library</span>(plyr)
 
-rats$Treatment1 &lt;- <span class="functioncall">revalue</span>(rats$Treatment, <span class="functioncall">c</span>(`1` = <span class="string">"A"</span>, `2` = <span class="string">"B"</span>, `3` = <span class="string">"C"</span>))
+rats$Treatment1 &lt;- <span class="hl kwd">revalue</span>(rats$Treatment, <span class="hl kwd">c</span>(`1` = <span class="hl str">"A"</span>, `2` = <span class="hl str">"B"</span>, `3` = <span class="hl str">"C"</span>))
 
-</pre></div></div></div>
+rats$Treatment
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3
+## [36] 3
+## Levels: 1 2 3
+</pre></div>
+<div class="source"><pre class="knitr r">rats$Treatment1
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] A A A A A A A A A A A A B B B B B B B B B B B B C C C C C C C C C C C
+## [36] C
+## Levels: A B C
+</pre></div>
+</div></div>
 
 
 
@@ -371,16 +375,19 @@ rats$Treatment1 &lt;- <span class="functioncall">revalue</span>(rats$Treatment, 
 
 <p>If you have followed the above instructions, you should have something that looks like this:</p>
 
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">str</span>(rats)
-</pre></div><div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  5 variables:
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span>(rats)
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  5 variables:
 ##  $ Glycogen  : int  131 130 131 125 136 142 150 148 140 143 ...
 ##  $ Treatment : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Rat       : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 2 2 2 2 ...
 ##  $ Liver     : Factor w/ 3 levels "1","2","3": 1 1 2 2 3 3 1 1 2 2 ...
 ##  $ Treatment1: Factor w/ 3 levels "A","B","C": 1 1 1 1 1 1 1 1 1 1 ...
-</pre></div><div class="source"><pre class="knitr r">
+</pre></div>
+<div class="source"><pre class="knitr r">
 rats
-</pre></div><div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver Treatment1
+</pre></div>
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver Treatment1
 ## 1       131         1   1     1          A
 ## 2       130         1   1     1          A
 ## 3       131         1   1     2          A
@@ -417,13 +424,19 @@ rats
 ## 34      138         3   2     2          C
 ## 35      134         3   2     3          C
 ## 36      127         3   2     3          C
-</pre></div></div></div>
+</pre></div>
+</div></div>
 
 
+
+
+<p>Note that a longer discussion of getting data from excel files is available here: <a href="http://www.r-bloggers.com/read-excel-files-from-r/">http://www.r-bloggers.com/read-excel-files-from-r/</a>.</p>
 
 <hr>
 
-<p id="footnote-1">[1] Note that functions in R - bits of code that do things for you - be it calculate a mean, generate random numbers, plot a graph, etc are denote with open and closed brackets. - Usually when you run a function you will be asked to provide a number of arguments. In this example 'c' is the function, and the arguments are the numbers that follow.</p>
+<p id="footnote-1">[1] Note that functions in R - bits of code that do things for you - be it calculate a mean, generate random numbers, plot a graph, etc are denoted with open and closed brackets. - Usually when you run a function you will be asked to provide a number of arguments. In this example 'c' is the function, and the arguments are the numbers that follow.</p>
+
+
 
 </body>
 
