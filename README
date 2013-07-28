@@ -1,6 +1,6 @@
 README
 
-This repo is also home to the notes produced for a short course in R run at Cranfield University, designed for researchers currently completing their analyses in other programs. The course is due to be run at Cranfield University, Bedfordshire, from August 2013.
+This repo is home to the notes produced for a short course in R run at Cranfield University, designed for researchers currently completing their analyses in other programs. The course is due to be run at Cranfield University, Bedfordshire, from August 2013.
 
 Notes for the course can be found in /Tutorial. Users are advised to clone or download the repository and then run index.html from the local folder. Links to the rest of the course are available from there.
 
