@@ -52,8 +52,36 @@ print(short_variable)
 
 end.rcode-->
 
+<h2>Importing from the clipboad</h2>
 
-<h2>Importing tables</h2>
+<p>It is possible to import data from R directly from the clipboard - having just copied a table from a spreadsheet. Simply select the table of interest and copy it to clipboard as usial (Ctrl + C). The following code will then allow you to paste the table directly into R.</p>
+
+<!--begin.rcode, eval=FALSE
+
+# The line header = T  tells R that you have copied the column headers with the data too.
+
+new_table <- read.table("clipboard", header = T)
+
+end.rcode-->
+
+<p>If you copy direct from excel, this should work, but you may also want to copy from a 'comma seperated values' file (.csv), in which case you need to tell R using the argument <b>sep = ","</b>, or equivalent.</p>
+
+<p>Whilst this is an easy way of getting data into R, I do not recommend it. Unless you then plan on re-saving the data using R. The problem with this kind of method, is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
+
+<p>One solution to this, is to use R to re-save your data in a new format. This is very similar to the process of importing a new table:</p>
+
+<!--begin.rcode, eval=FALSE
+
+write.table(new_table, "C:/data/new_table.csv", sep = ",", row.names = FALSE)
+
+end.rcode-->
+
+<p>In this example, we save the data to a location o C:/ drive, and we specify that the file is seperated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.</p>
+
+<p>In the next section we will see how to import files like the one we have just produced.</p> 
+
+
+<h2>Importing tables from files</h2>
 
 <p>Obviously you won't want to manually input all your data, it is much easier to import from a file which you have prepared in a spread sheet. As mentioned, in this course we will work exclusively with the simple formats '.csv' and .txt.</p>
 
