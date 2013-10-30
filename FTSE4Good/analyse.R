@@ -78,27 +78,91 @@ rhs <- paste("present_matrix[",rowReps,",1] %in% subset(ftse,year==",yearReps,"&
 eq <- paste(paste(lhs, rhs, sep="<-"), collapse=";")
 eval(parse(text=eq))
 
+included_matrix <- matrix(ncol=12,nrow=length(unique(ftse[,1])))
+included_matrix[,1] <- as.character(unique(ftse[,1]))
+
+
+     
+# for (j in 2:13) {     
+#      
+#      yearRep <- c(0,rep(2008:2013,each=2)[-12])
+#      biannRep <- c(0,rep(1:2,length.out=11))
+# 
+#  for (i in 1:length(included_matrix[,1])) {
+#       
+# try(    
+# included_matrix[i,2] <-
+#      as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==yearRep[j]&biann==biannRep[j],Included_in_F4G_Series)[[1]])
+# )
+#      
+#  }
+# 
+#  
+# }
+ 
+
+for (i in 1:length(included_matrix[,1])) {
+     
+     try( 
+         included_matrix[i,2] <- 
+          as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2008&biann==1,Included_in_F4G_Series)[[1]])
+          )
+     try( 
+          included_matrix[i,3] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2008&biann==2,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,4] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2009&biann==1,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,5] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2009&biann==2,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,6] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2010&biann==1,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,7] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2010&biann==2,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,8] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2011&biann==1,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,9] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2011&biann==2,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,10] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2012&biann==1,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,11] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2012&biann==2,Included_in_F4G_Series)[[1]])
+     )
+     try( 
+          included_matrix[i,12] <- 
+               as.character(subset(ftse,Cons_code==included_matrix[i,1]&year==2013&biann==1,Included_in_F4G_Series)[[1]])
+     )
+     
+}
+
+
+included_matrix <- data.frame(included_matrix)
+colnames(included_matrix) <- c("Cons_code",paste(rep(2008:2013,each=2)[-12],rep(1:2),sep="_"))
+write.table(included_matrix,"included.csv",sep=",",row.names=FALSE)
+
+
+
+
+
 present_matrix <- data.frame(present_matrix)
 colnames(present_matrix) <- c("Cons_code",paste(rep(2008:2013,each=2)[-12],rep(1:2),sep="_"))
-# 
-# 
-# 
-# 
-# present_matrix[,1] <- ftse_LI
-# present_matrix[,2] <- ftse[match(ftse_2008_1,ftse[,1]),1]
-# present_matrix[,3] <- ftse_LI[match(ftse_LI2008_2,ftse_LI)]
-# present_matrix[,4] <- ftse_LI[match(ftse_LI,ftse_LI2009_1)]
-# present_matrix[,5] <- ftse_LI[match(ftse_LI,ftse_LI2009_2)]
-# present_matrix[,6] <- ftse_LI[match(ftse_LI,ftse_LI2010_1)]
-# present_matrix[,7] <- ftse_LI[match(ftse_LI,ftse_LI2010_2)]
-# present_matrix[,8] <- ftse_LI[match(ftse_LI,ftse_LI2011_1)]
-# present_matrix[,9] <- ftse_LI[match(ftse_LI,ftse_LI2011_2)]
-# present_matrix[,10] <- ftse_LI[match(ftse_LI,ftse_LI2012_1)]
-# present_matrix[,11] <- ftse_LI[match(ftse_LI,ftse_LI2012_2)]
-# present_matrix[,12] <- ftse_LI[match(ftse_LI,ftse_LI2013_1)]
-# 
-# head(present_matrix)
-# present_matrix[,2]
+
+names(ftse)
 
 write.table(present_matrix,"present.csv",sep=",",row.names=FALSE)
 
