@@ -70,6 +70,122 @@
 
 <h1>R-base graphics</h1>
 
+<p>R-base is the basic set of functiosn that come with R as standard - before you start to download any additional packages. The graphics functions included in R-base are simple, but also highly customisable, and capable of producing high standard, publication quality graphics.</p>
+
+<p>There are otehr graphics packages which offer more advanced graphical functions like <b>ggplot2</b>, these will not be covered in this course.</p>
+
+<h2>Producing a basic plot</h2>
+
+<p>The basic plotting functions are very easy, but we first need some data to work with. We'll refer to some of the data used in the R book again.</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">
+<span class="hl com"># As before, we import directly from an online text file</span>
+
+sapdecay &lt;- <span class="hl kwd">read.table</span>(<span class="hl str">"http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt"</span>, 
+    header = T)
+
+<span class="hl com"># Call the data to examine it. Note this data is dealt with on p70 of 'The</span>
+<span class="hl com"># R Book'</span>
+
+sapdecay
+</pre></div>
+<div class="output"><pre class="knitr r">##     x       y
+## 1   0 1.00000
+## 2   2 0.96024
+## 3   4 0.84466
+## 4   6 0.70694
+## 5   8 0.70864
+## 6  10 0.60980
+## 7  12 0.51325
+## 8  14 0.47140
+## 9  16 0.38408
+## 10 18 0.37228
+## 11 20 0.33409
+## 12 22 0.27331
+## 13 24 0.25162
+## 14 26 0.22279
+## 15 28 0.21022
+## 16 30 0.19059
+## 17 32 0.16691
+## 18 34 0.14073
+## 19 36 0.12029
+## 20 38 0.11646
+## 21 40 0.09274
+## 22 42 0.08397
+## 23 44 0.08829
+## 24 46 0.07179
+## 25 48 0.05933
+## 26 50 0.06171
+</pre></div>
+</div></div>
+
+
+<p>So, we have two columns of data, which we will plota aginst each other - this is very simple</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">
+<span class="hl kwd">plot</span>(sapdecay)
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+<span class="hl com"># In this example, R recognises that there are two columns <span class="hl kwa">in</span> the object</span>
+<span class="hl com"># sapdecay, and it simply plots them against each other. This kind of</span>
+<span class="hl com"># command is called a lazy command, because we have not specified any of</span>
+<span class="hl com"># the arguments explicityly.  The long version would be:</span>
+
+<span class="hl kwd">plot</span>(x = sapdecay$x, y = sapdecay$y)
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-22.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+# Note that we can also dispence with the sapdecay$ by using the <span class="hl kwd">with</span>()
+<span class="hl com"># command:</span>
+
+<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y))
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-23.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+</pre></div>
+</div></div>
+
+
+<p>This isn't a particularly inspiring plot, so let's make it look a little better...</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">
+
+<span class="hl com"># First let's make it a little easier to see al the changes that we are</span>
+<span class="hl com"># making</span>
+
+<span class="hl kwd">par</span>(mfrow = <span class="hl kwd">c</span>(2, 2))
+
+<span class="hl com"># This command splits the plotting area into four, so we can see four</span>
+<span class="hl com"># plots side by side. We'll cover the par command <span class="hl kwa">in</span> more detail <span class="hl kwa">in</span> the</span>
+<span class="hl com"># <span class="hl kwa">next</span> section.  We then simply make four plots, one after the other, and</span>
+<span class="hl com"># they will fill up the plotting area.</span>
+
+<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
+    type = <span class="hl str">"l"</span>, col = <span class="hl str">"red"</span>, lwd = 2, main = <span class="hl str">"Line"</span>))
+
+<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
+    type = <span class="hl str">"o"</span>, col = <span class="hl str">"green"</span>, lwd = 1, main = <span class="hl str">"Overplot"</span>))
+
+<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
+    type = <span class="hl str">"h"</span>, col = <span class="hl str">"blue"</span>, lwd = 2, main = <span class="hl str">"Histogram"</span>))
+
+<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
+    type = <span class="hl str">"s"</span>, col = <span class="hl str">"hotpink"</span>, lwd = 2, main = <span class="hl str">"Step"</span>))
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+<span class="hl com"># It's important that we resent the mfrow parameter at the end of</span>
+<span class="hl com"># plotting, otherwise all subsequent plots will apear on this four by four</span>
+<span class="hl com"># grid, which may not be what we want.</span>
+
+<span class="hl kwd">par</span>(mfrow = <span class="hl kwd">c</span>(1, 1))
+</pre></div>
+</div></div>
+
+
+
+
 </body>
 
 </html>

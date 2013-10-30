@@ -116,7 +116,7 @@ sd(dummy)
 # Let's also plot a probability density function of this data to see what it looks like:
 
 plot(
-     density(dummy), # create density estimates for the dummy datsset
+     density(dummy), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
      )
 
@@ -128,16 +128,8 @@ abline(
           mean(dummy)+sd(dummy),
           mean(dummy)-sd(dummy)
           ),
-     col = c(
-          "blue", 
-          "red", 
-          "red"
-          ),
-     lwd = c(
-          3, 
-          2, 
-          2
-          ),
+     col = c("blue", "red", "red"),
+     lwd = c(3, 2, 2),
      lty = 2
      )
 

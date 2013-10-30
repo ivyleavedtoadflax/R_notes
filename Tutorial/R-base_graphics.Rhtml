@@ -10,6 +10,129 @@
 
 <h1>R-base graphics</h1>
 
+<p>R-base is the basic set of functiosn that come with R as standard - before you start to download any additional packages. The graphics functions included in R-base are simple, but also highly customisable, and capable of producing high standard, publication quality graphics.</p>
+
+<p>There are otehr graphics packages which offer more advanced graphical functions like <b>ggplot2</b>, these will not be covered in this course.</p>
+
+<h2>Producing a basic plot</h2>
+
+<p>The basic plotting functions are very easy, but we first need some data to work with. We'll refer to some of the data used in the R book again.</p>
+
+<!--begin.rcode
+
+# As before, we import directly from an online text file
+
+sapdecay <- read.table("http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt", header=T)
+
+# Call the data to examine it. Note this data is dealt with on p70 of 'The R Book'
+
+sapdecay
+
+end.rcode-->
+
+<p>So, we have two columns of data, which we will plota aginst each other - this is very simple</p>
+
+<!--begin.rcode
+
+plot(sapdecay)
+
+# In this example, R recognises that there are two columns in the object sapdecay, and it simply plots them against each other. This kind of command is called a lazy command, because we have not specified any of the arguments explicityly.
+# The long version would be:
+
+plot(
+     x = sapdecay$x,
+     y = sapdecay$y
+     )
+
+# Note that we can also dispence with the sapdecay$ by using the with() command:
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y
+          )
+     )
+     
+
+end.rcode-->
+
+<p>This isn't a particularly inspiring plot, so let's make it look a little better...</p>
+
+<!--begin.rcode
+
+
+# First let's make it a little easier to see al the changes that we are making
+
+par(mfrow = c(2,2)) 
+
+# This command splits the plotting area into four, so we can see four plots side by side. We'll cover the par command in more detail in the next section.
+# We then simply make four plots, one after the other, and they will fill up the plotting area.
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "l",
+          col = "red",
+          lwd = 2,
+          main = "Line"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "o",
+          col = "green",
+          lwd = 1,
+          main = "Overplot"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "h",
+          col = "blue",
+          lwd = 2,
+          main = "Histogram"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "s",
+          col = "hotpink",
+          lwd = 2,
+          main = "Step"
+          )
+     )
+
+# It's important that we resent the mfrow parameter at the end of plotting, otherwise all subsequent plots will apear on this four by four grid, which may not be what we want.
+
+par(mfrow = c(1,1))
+
+end.rcode-->
+
+
+
 </body>
 
 </html>
