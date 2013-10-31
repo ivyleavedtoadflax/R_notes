@@ -54,19 +54,7 @@ eval(parse(text=eq))
 
 
 present_matrix <- matrix(ncol=12,nrow=length(unique(ftse[,1])))
-
 present_matrix[,1] <- as.character(unique(ftse[,1]))
-
-# for(k in 1:12) { 
-# 
-# #for (i in 1:length(present_matrix[,1])) {
-#      
-#      i <- 1
-#  
-#      present_matrix[i,k] <- present_matrix[i,1] %in% subset(ftse,year==2013 ,Cons_code)[[1]]
-# #}
-
-}
 
 rowReps <- rep(1:806,11)
 colReps <- rep(2:12,each=806)
@@ -77,6 +65,11 @@ lhs <- paste("present_matrix[",rowReps,",",colReps,"]",sep="")
 rhs <- paste("present_matrix[",rowReps,",1] %in% subset(ftse,year==",yearReps,"&biann==",biannReps,",Cons_code)[[1]]",sep="")
 eq <- paste(paste(lhs, rhs, sep="<-"), collapse=";")
 eval(parse(text=eq))
+
+present_matrix <- data.frame(present_matrix)
+colnames(present_matrix) <- c("Cons_code",paste(rep(2008:2013,each=2)[-12],rep(1:2),sep="_"))
+write.table(present_matrix,"present.csv",sep=",",row.names=FALSE)
+
 
 included_matrix <- matrix(ncol=12,nrow=length(unique(ftse[,1])))
 included_matrix[,1] <- as.character(unique(ftse[,1]))
@@ -159,11 +152,5 @@ write.table(included_matrix,"included.csv",sep=",",row.names=FALSE)
 
 
 
-present_matrix <- data.frame(present_matrix)
-colnames(present_matrix) <- c("Cons_code",paste(rep(2008:2013,each=2)[-12],rep(1:2),sep="_"))
-
-names(ftse)
-
-write.table(present_matrix,"present.csv",sep=",",row.names=FALSE)
 
 
