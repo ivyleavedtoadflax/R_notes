@@ -1,7 +1,8 @@
 <html>
 
 <head>
-<style type="text/css">.knitr.inline {
+<style type="text/css">
+.knitr.inline {
   background-color: #f7f7f7;
   border:solid 1px #B0B0B0;
 }
@@ -60,7 +61,8 @@
 .hl.kwd {
   color: #BC5A65;
   font-weight: bold;
-}</style>
+}
+</style>
 <title>Writing functions</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
@@ -69,7 +71,7 @@
 
 <h1>Writing functions</h1>
 
-<p>One of the great strengths of R, is that at its heart, it is a programming language, and hence has all the usual functionality one might expect from a programming language. This incldues teh ability to write functions.</p>
+<p>One of the great strengths of R, is that at its heart, it is a programming language, and hence has all the usual functionality one might expect from a programming language. This includes the ability to write functions.</p>
 
 <p>This can be extremely useful when it comes to repetitive tasks that we have to complete time and time again. You might for example, write a function to correctly format data arriving in a raw state, for example from weather stations or from lab equipment. You might also want to complete exactly the same analysis on many subsets of a large dataset; this can easily be handled by a function or loop.</p>
 
@@ -77,61 +79,59 @@
 
 <p>Let's start with something that many Excel users will be familiar with - the IF function.</p>
 
-<p>If you have ever done any coding in Excel, you will probably have come across the IF() command. This command takes the form of: <b>IF(logical_test,[value_if_true],[value_if_false])</b>. The astute among you will realise that this is in effect an IF ELSE statement! An example of its usage might be:</p>
+<p>If you have ever done any coding in Excel, you will probably have come across the IF() command. This command takes the form of: <tt>IF( logical_test, [value_if_true], [value_if_false] )</tt>. The astute among you will realise that this is in effect an IF ELSE statement! An example of its usage might be:</p>
 
-<p><b>=IF(A1>5,TRUE,FALSE)</b></p>
+<p><tt>=IF(A1>5,TRUE,FALSE)</tt></p>
 
 <p>I.e: if the value in cell A1 is greater than 5, the value in the current cell should be TRUE, and if not, the value should be FALSE - simple enough.</p>
 
-<p>Let's try something similar in R. In R the <b>if</b> command is composed of just two elements the logical_test, as Excel calls it (more correctly, the "condition"), and the value_if_true (or the "consequent"). The syntax looks like this: <b>if (condition) {consequent}</b>.</p>
+<p>Let's try something similar in R. In R the <tt>if</tt> command is composed of just two elements the logical_test, as Excel calls it (more correctly, the "condition"), and the value_if_true (or the "consequent"). The syntax looks like this: <tt>if (condition) {consequent}</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">
-x &lt;- 9  <span class="hl com"># define object x with the value 5</span>
+<p>Define object <tt>x</tt> with the value 5</p>
 
-<span class="hl com"># try out the <span class="hl kwa">if</span> statement:</span>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl num">9</span>
+</pre></div>
+</div></div>
 
-<span class="hl kwd"><span class="hl kwa">if</span></span> (x &gt; 5) {
-    <span class="hl kwd">print</span>(<span class="hl kwa">TRUE</span>)
-}
+
+<p>Try out the if statement...</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(x</span> <span class="hl opt">&gt;</span> <span class="hl num">5</span><span class="hl std">) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">}</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
 </pre></div>
 </div></div>
 
 
-<p>So far so good...and if we want to do exactly the same thing as we did in Excel we need to add <b>else</b>.</p>
+<p>So far so good...and if we want to do exactly the same thing as we did in Excel we need to add <tt>else</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl kwd"><span class="hl kwa">if</span></span> (x &gt; 5) {
-    <span class="hl kwd">print</span>(<span class="hl kwa">TRUE</span>)
-} <span class="hl kwa">else</span> {
-    <span class="hl com"># note that it is important that the <span class="hl kwa">else</span> is on the same line as the closed curly bracket</span>
-    <span class="hl kwd">print</span>(<span class="hl kwa">FALSE</span>)
-}
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(x</span> <span class="hl opt">&gt;</span> <span class="hl num">5</span><span class="hl std">) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">}</span> <span class="hl kwa">else</span> <span class="hl std">{</span>
+    <span class="hl com"># note that it is important that the else is on the same line as the closed</span>
+    <span class="hl com"># curly bracket</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl num">FALSE</span><span class="hl std">)</span>
+<span class="hl std">}</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
-</pre></div>
-<div class="source"><pre class="knitr r">
 </pre></div>
 </div></div>
 
 
-<p>Something to note from this is example is that R recognises <b>TRUE</b> and <b>FALSE</b> as booleans, hence you don't need to use quotes. If you wanted to use a character string, you would definitely need to use quotes.</p>
+<p>Something to note from this is example is that R recognises <tt>TRUE</tt> and <tt>FALSE</tt> as booleans, hence you don't need to use quotes. If you wanted to use a character string, you would definitely need to use quotes.</p>
 
 
 <h3>For loops</h3>
 
-<p><b>For</b> loops are used when you need to perform the same action many times, but taking different inputs each time. You could, for instance, run the same statistical test on a several different sets of data. The example below shows a simple for loop.</p>
+<p><tt>For</tt> loops are used when you need to perform the same action many times, but taking different inputs each time. You could, for instance, run the same statistical test on a several different sets of data. The example below shows a simple for loop.</p>
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># In specifying a <span class="hl kwa">for</span> loop, we must define the range over which we want</span>
-<span class="hl com"># the loop to run.  In this case we use 1:10. The loop will then iterate</span>
-<span class="hl com"># across the sequence 1, 2, 3...etc substituting i <span class="hl kwa">for</span> the number of the</span>
-<span class="hl com"># iteration</span>
+<p>In specifying a for loop, we must define the range over which we want the loop to run. In this case we use 1:10. The loop will then iterate across the sequence 1, 2, 3...etc substituting i for the number of the iteration</p>
 
-<span class="hl kwd"><span class="hl kwa">for</span></span> (i <span class="hl kwa">in</span> 1:10) {
-    <span class="hl kwd">print</span>(<span class="hl kwd">paste</span>(<span class="hl str">"This is iteration number"</span>, i, sep = <span class="hl str">" "</span>))
-}
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;This is iteration number&quot;</span><span class="hl std">, i,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot; &quot;</span><span class="hl std">))</span>
+<span class="hl std">}</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] "This is iteration number 1"
 ## [1] "This is iteration number 2"
@@ -144,29 +144,18 @@ x &lt;- 9  <span class="hl com"># define object x with the value 5</span>
 ## [1] "This is iteration number 9"
 ## [1] "This is iteration number 10"
 </pre></div>
-<div class="source"><pre class="knitr r">
-</pre></div>
 </div></div>
 
 
 <h2>Real world example</h2>
 
-<p>Now we will combine an <b>if else</b>, statement and a <b>for</b> loop in order to demonstarte the power of these tools.</p>
+<p>Now we will combine an <tt>if else</tt>, statement and a <tt>for</tt> loop in order to demonstrate the power of these tools.</p>
 
+<p>First generate 100 random numbers using a normal distribution using rnorm - see <tt>?rnorm</tt> for details. We set the seed to 500 first to make this example reproducible. See <tt>?set.seed</tt></p>
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># First generate 100 random numbers using a normal distribution using rnorm - see ?rnorm <span class="hl kwa">for</span> details.</span>
-<span class="hl com"># We set the seed to 500 first to make this example reproducible. See ?set.seed</span>
-
-<span class="hl kwd">set.seed</span>(500) 
-
-dummy &lt;- <span class="hl kwd">rnorm</span>(
-     100, 
-     mean = 10, 
-     sd = 2
-     )
-
-dummy
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">)</span>
+<span class="hl std">dummy</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl std">dummy</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   [1] 11.937 13.931 11.773 10.061 11.899  8.847 11.443 11.238 10.042 10.550
 ##  [11]  7.165  6.437  8.761 11.017  6.494  7.010 10.598  9.371 11.872 12.942
@@ -179,15 +168,12 @@ dummy
 ##  [81] 12.904  9.892 12.065  8.235  9.052  7.915  8.826  7.321 11.194  9.468
 ##  [91]  8.390 11.075  8.990  7.980 12.411 11.876 12.381  7.436  8.371  6.086
 </pre></div>
-<div class="source"><pre class="knitr r">
-<span class="hl com"># Now limit the data to two decimal places to make it easier to read</span>
+</div></div>
 
-dummy &lt;- <span class="hl kwd">round</span>(
-     dummy, 
-     digits = 2 
-     )
 
-dummy
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Now limit the data to two decimal places to make it easier to read</span>
+<span class="hl std">dummy</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">round</span><span class="hl std">(dummy,</span> <span class="hl kwc">digits</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl std">dummy</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   [1] 11.94 13.93 11.77 10.06 11.90  8.85 11.44 11.24 10.04 10.55  7.16
 ##  [12]  6.44  8.76 11.02  6.49  7.01 10.60  9.37 11.87 12.94  8.28 11.94
@@ -200,90 +186,71 @@ dummy
 ##  [89] 11.19  9.47  8.39 11.08  8.99  7.98 12.41 11.88 12.38  7.44  8.37
 ## [100]  6.09
 </pre></div>
-<div class="source"><pre class="knitr r">
-<span class="hl com"># Calculate the mean of this vector</span>
+</div></div>
 
-<span class="hl kwd">mean</span>(dummy)
+
+<p>Calculate the mean of this vector...</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">mean</span><span class="hl std">(dummy)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 9.858
 </pre></div>
-<div class="source"><pre class="knitr r">
-<span class="hl com"># Calculate the mean of this vector</span>
+</div></div>
 
-<span class="hl kwd">sd</span>(dummy)
+
+<p>Calculate the mean of this vector</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd</span><span class="hl std">(dummy)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 2.124
 </pre></div>
-<div class="source"><pre class="knitr r">
-<span class="hl com"># Let's also plot a probability density <span class="hl kwa">function</span> of this data to see what it looks like:</span>
-
-<span class="hl kwd">plot</span>(
-     <span class="hl kwd">density</span>(dummy), # create density estimates <span class="hl kwa">for</span> the dummy datsset
-     lwd = 2   <span class="hl com"># set the line weight to 2 pixels</span>
-     )
-
-<span class="hl com"># and draw on the mean and mean +- standard deviation</span>
-
-<span class="hl kwd">abline</span>(
-     v = <span class="hl kwd">c</span>(
-          <span class="hl kwd">mean</span>(dummy),
-          <span class="hl kwd">mean</span>(dummy)+<span class="hl kwd">sd</span>(dummy),
-          <span class="hl kwd">mean</span>(dummy)-<span class="hl kwd">sd</span>(dummy)
-          ),
-     col = <span class="hl kwd">c</span>(
-          <span class="hl str">"blue"</span>, 
-          <span class="hl str">"red"</span>, 
-          <span class="hl str">"red"</span>
-          ),
-     lwd = <span class="hl kwd">c</span>(
-          3, 
-          2, 
-          2
-          ),
-     lty = 2
-     )
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
-<div class="source"><pre class="knitr r">
-
-</pre></div>
 </div></div>
+
+
+<p>Let's also plot a probability density function of this data to see what it looks like:</p>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwd">density</span><span class="hl std">(dummy),</span> <span class="hl com"># create density estimates for the dummy dataset</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span>   <span class="hl com"># set the line weight to 2 pixels</span>
+     <span class="hl std">)</span>
+<span class="hl com"># and draw on the mean and mean +- standard deviation</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span>
+     <span class="hl kwc">v</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy),</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy)</span><span class="hl opt">+</span><span class="hl kwd">sd</span><span class="hl std">(dummy),</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy)</span><span class="hl opt">-</span><span class="hl kwd">sd</span><span class="hl std">(dummy)</span>
+          <span class="hl std">),</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">),</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">),</span>
+     <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
 
 
 <p>Now let us suppose that we wanted to know which of the values within the dummy data lie above or below 1 standard deviation of the mean. i.e. to the left (below) or to the right (above) the red dotted lines in our plot.</p>
 
 <p>Suppose that we also want to create vector which contained a simple 'ABOVE' or 'BELOW' to accompany it.</p>
 
-<p>This can be achieved with an <b>if else</b> statement nested within a <b>for</b> loop.</p>
+<p>This can be achieved with an <tt>if else</tt> statement nested within a <tt>for</tt> loop.</p>
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># First the <span class="hl kwa">if</span> statement: let's start by using the last value of the dummy</span>
-<span class="hl com"># data:</span>
+<p>First the <tt>if</tt> statement: let's start by using the last value of the dummy data:</p>
 
-
-
-<span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[100] &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) {
-    
-    <span class="hl kwd">print</span>(<span class="hl str">"ABOVE"</span>)
-    
-}
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
 </pre></div>
 </div></div>
 
 
-<p> And... nothing happens... because the last value of dummy is <code class="knitr inline">6.09</code>; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <b>else if</b> statement to decide.
+<p> And... nothing happens... because the last value of dummy is <code class="knitr inline">6.09</code>; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <tt>else if</tt> statement to decide.</p>
 
 
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[100] &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) {
-    
-    <span class="hl kwd">print</span>(<span class="hl str">"ABOVE"</span>)
-    
-} <span class="hl kwa">else</span> <span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[100] &lt; (<span class="hl kwd">mean</span>(dummy) - <span class="hl kwd">sd</span>(dummy))) {
-    
-    <span class="hl kwd">print</span>(<span class="hl str">"BELOW"</span>)
-    
-}
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] "BELOW"
 </pre></div>
@@ -293,17 +260,12 @@ dummy
 
 <p>There is a third possibility - the values are within the red lines in our plot - i.e. within one standard deviation of the mean. We can add an else statement to deal with this eventuality too.</p>
 
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[100] &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) {
-    
-    <span class="hl kwd">print</span>(<span class="hl str">"ABOVE"</span>)
-    
-} <span class="hl kwa">else</span> <span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[100] &lt; (<span class="hl kwd">mean</span>(dummy) - <span class="hl kwd">sd</span>(dummy))) {
-    
-    <span class="hl kwd">print</span>(<span class="hl str">"BELOW"</span>)
-    
-} <span class="hl kwa">else</span> 
-<span class="hl kwd">print</span>(<span class="hl str">"WITHIN"</span>)
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span> <span class="hl kwa">else</span>
+<span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] "BELOW"
 </pre></div>
@@ -312,29 +274,20 @@ dummy
 
 <p>So it turns out that the first value of the dummy data is below one standard deviation of the mean.</p>
 
-<p>Now let's wrap the <b>if else</b> statement with a <b>for</b> loop, and run it over the whole dummy dataset.</p>
+<p>Now let's wrap the <tt>if else</tt> statement with a <tt>for</tt> loop, and run it over the whole dummy dataset.</p>
 
 
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># first we must specify what we want to the loop to iterate over:</span>
-
-<span class="hl kwd"><span class="hl kwa">for</span></span> (i <span class="hl kwa">in</span> dummy) {
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first we must specify what we want to the loop to iterate over:</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl std">dummy) {</span>
     <span class="hl com"># it's usual to name the indexer as i</span>
-    
-    <span class="hl com"># we replace dummy[100] with i <span class="hl kwa">in</span> both instances</span>
-    
-    <span class="hl kwd"><span class="hl kwa">if</span></span> (i &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) {
-        
-        <span class="hl kwd">print</span>(<span class="hl str">"ABOVE"</span>)
-        
-    } <span class="hl kwa">else</span> <span class="hl kwd"><span class="hl kwa">if</span></span> (i &lt; (<span class="hl kwd">mean</span>(dummy) - <span class="hl kwd">sd</span>(dummy))) {
-        
-        <span class="hl kwd">print</span>(<span class="hl str">"BELOW"</span>)
-        
-    } <span class="hl kwa">else</span> 
-    <span class="hl kwd">print</span>(<span class="hl str">"WITHIN"</span>)
-    
-}
+    <span class="hl com"># we replace dummy[100] with i in both instances</span>
+    <span class="hl kwa">if</span> <span class="hl std">(i</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+        <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
+    <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(i</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+        <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">)</span>
+    <span class="hl std">}</span> <span class="hl kwa">else</span>
+    <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] "WITHIN"
 ## [1] "ABOVE"
@@ -440,213 +393,433 @@ dummy
 </div></div>
 
 
-
 <p>So we get a list of "ABOVE", "BELOW" or "WITHIN". To make this really useful, we should need to get the loop to produce an output. There are several ways to do this, but a simple way is shown in the next example.</p>
 
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># First we create a vector into which we will store the answers.</span>
+<p>First we create a vector into which we will store the answers:</p>
 
-dummy_sd &lt;- <span class="hl kwd">vector</span>(length = 100, mode = <span class="hl str">"character"</span>)
-
-
-<span class="hl com"># Instead of interating directly over the dummy vector, this time, we need</span>
-<span class="hl com"># to iterate over a vectore of numbers, the same length as the dummy data.</span>
-
-<span class="hl kwd"><span class="hl kwa">for</span></span> (i <span class="hl kwa">in</span> 1:<span class="hl kwd">length</span>(dummy)) {
-    
-    # now we need to change i back to dummy - but use <span class="hl str">'i'</span> as subscript:
-    
-    <span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[i] &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) {
-        
-        <span class="hl com"># instead of printing the results, we assign them to a subscript within</span>
-        <span class="hl com"># the dummy_sd vector</span>
-        
-        dummy_sd[i] &lt;- <span class="hl str">"ABOVE"</span>
-        
-    } <span class="hl kwa">else</span> <span class="hl kwd"><span class="hl kwa">if</span></span> (dummy[i] &lt; (<span class="hl kwd">mean</span>(dummy) - <span class="hl kwd">sd</span>(dummy))) {
-        
-        
-        dummy_sd[i] &lt;- <span class="hl str">"BELOW"</span>
-        
-    } <span class="hl kwa">else</span> 
-    
-    dummy_sd[i] &lt;- <span class="hl str">"WITHIN"</span>
-    
-}
-
-<span class="hl com"># Check the results</span>
-
-dummy_data &lt;- <span class="hl kwd">data.frame</span>(data = dummy, sd = dummy_sd)
-
-dummy_data
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">length</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;character&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##      data     sd
-## 1   11.94 WITHIN
-## 2   13.93  ABOVE
-## 3   11.77 WITHIN
-## 4   10.06 WITHIN
-## 5   11.90 WITHIN
-## 6    8.85 WITHIN
-## 7   11.44 WITHIN
-## 8   11.24 WITHIN
-## 9   10.04 WITHIN
-## 10  10.55 WITHIN
-## 11   7.16  BELOW
-## 12   6.44  BELOW
-## 13   8.76 WITHIN
-## 14  11.02 WITHIN
-## 15   6.49  BELOW
-## 16   7.01  BELOW
-## 17  10.60 WITHIN
-## 18   9.37 WITHIN
-## 19  11.87 WITHIN
-## 20  12.94  ABOVE
-## 21   8.28 WITHIN
-## 22  11.94 WITHIN
-## 23  12.11  ABOVE
-## 24  10.38 WITHIN
-## 25   8.58 WITHIN
-## 26   8.53 WITHIN
-## 27   9.84 WITHIN
-## 28   8.26 WITHIN
-## 29   7.18  BELOW
-## 30  13.60  ABOVE
-## 31   6.14  BELOW
-## 32  12.02  ABOVE
-## 33  12.95  ABOVE
-## 34   9.44 WITHIN
-## 35   8.12 WITHIN
-## 36   9.16 WITHIN
-## 37   6.85  BELOW
-## 38  12.24  ABOVE
-## 39   9.07 WITHIN
-## 40   7.83 WITHIN
-## 41   9.19 WITHIN
-## 42  13.63  ABOVE
-## 43   9.91 WITHIN
-## 44  11.66 WITHIN
-## 45  10.38 WITHIN
-## 46  10.54 WITHIN
-## 47   9.15 WITHIN
-## 48   9.28 WITHIN
-## 49   7.83 WITHIN
-## 50   8.98 WITHIN
-## 51  12.06  ABOVE
-## 52  11.21 WITHIN
-## 53  14.41  ABOVE
-## 54   8.74 WITHIN
-## 55  12.19  ABOVE
-## 56  10.71 WITHIN
-## 57   9.74 WITHIN
-## 58   6.03  BELOW
-## 59   9.85 WITHIN
-## 60   6.70  BELOW
-## 61  13.21  ABOVE
-## 62   7.63  BELOW
-## 63  11.35 WITHIN
-## 64   5.88  BELOW
-## 65  14.27  ABOVE
-## 66   9.23 WITHIN
-## 67  10.27 WITHIN
-## 68   7.66  BELOW
-## 69  10.92 WITHIN
-## 70   8.79 WITHIN
-## 71   8.96 WITHIN
-## 72  11.72 WITHIN
-## 73  10.94 WITHIN
-## 74   5.80  BELOW
-## 75   7.94 WITHIN
-## 76  13.10  ABOVE
-## 77   8.46 WITHIN
-## 78  11.30 WITHIN
-## 79  10.30 WITHIN
-## 80   8.14 WITHIN
-## 81  12.90  ABOVE
-## 82   9.89 WITHIN
-## 83  12.06  ABOVE
-## 84   8.24 WITHIN
-## 85   9.05 WITHIN
-## 86   7.91 WITHIN
-## 87   8.83 WITHIN
-## 88   7.32  BELOW
-## 89  11.19 WITHIN
-## 90   9.47 WITHIN
-## 91   8.39 WITHIN
-## 92  11.08 WITHIN
-## 93   8.99 WITHIN
-## 94   7.98 WITHIN
-## 95  12.41  ABOVE
-## 96  11.88 WITHIN
-## 97  12.38  ABOVE
-## 98   7.44  BELOW
-## 99   8.37 WITHIN
-## 100  6.09  BELOW
+</div></div>
+
+
+<p>Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.</p>
+
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dummy)) {</span>
+    <span class="hl com"># now we need to change i back to dummy - but use 'i' as subscript:</span>
+    <span class="hl kwa">if</span> <span class="hl std">(dummy[i]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+        <span class="hl com"># instead of printing the results, we assign them to a subscript within the</span>
+        <span class="hl com"># dummy_sd vector</span>
+        <span class="hl std">dummy_sd[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;ABOVE&quot;</span>
+    <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(dummy[i]</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+        <span class="hl std">dummy_sd[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;BELOW&quot;</span>
+    <span class="hl std">}</span> <span class="hl kwa">else</span>
+    <span class="hl std">dummy_sd[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;WITHIN&quot;</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+
+
+<p>Check the results:</p>
+
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= dummy,</span> <span class="hl kwc">sd</span> <span class="hl std">= dummy_sd)</span>
+<span class="hl std">dummy_data[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">50</span><span class="hl std">, ]</span>  <span class="hl com"># we just look at the first 50 rows</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##     data     sd
+## 1  11.94 WITHIN
+## 2  13.93  ABOVE
+## 3  11.77 WITHIN
+## 4  10.06 WITHIN
+## 5  11.90 WITHIN
+## 6   8.85 WITHIN
+## 7  11.44 WITHIN
+## 8  11.24 WITHIN
+## 9  10.04 WITHIN
+## 10 10.55 WITHIN
+## 11  7.16  BELOW
+## 12  6.44  BELOW
+## 13  8.76 WITHIN
+## 14 11.02 WITHIN
+## 15  6.49  BELOW
+## 16  7.01  BELOW
+## 17 10.60 WITHIN
+## 18  9.37 WITHIN
+## 19 11.87 WITHIN
+## 20 12.94  ABOVE
+## 21  8.28 WITHIN
+## 22 11.94 WITHIN
+## 23 12.11  ABOVE
+## 24 10.38 WITHIN
+## 25  8.58 WITHIN
+## 26  8.53 WITHIN
+## 27  9.84 WITHIN
+## 28  8.26 WITHIN
+## 29  7.18  BELOW
+## 30 13.60  ABOVE
+## 31  6.14  BELOW
+## 32 12.02  ABOVE
+## 33 12.95  ABOVE
+## 34  9.44 WITHIN
+## 35  8.12 WITHIN
+## 36  9.16 WITHIN
+## 37  6.85  BELOW
+## 38 12.24  ABOVE
+## 39  9.07 WITHIN
+## 40  7.83 WITHIN
+## 41  9.19 WITHIN
+## 42 13.63  ABOVE
+## 43  9.91 WITHIN
+## 44 11.66 WITHIN
+## 45 10.38 WITHIN
+## 46 10.54 WITHIN
+## 47  9.15 WITHIN
+## 48  9.28 WITHIN
+## 49  7.83 WITHIN
+## 50  8.98 WITHIN
 </pre></div>
 </div></div>
 
 
 <h2>Writing a function</h2>
 
-<p>Ok, so far so good, but it would be better if we could write our code in such a way that we can apply it to any vector of values, not just the one we specify..
+<p>OK, so far so good, but it would be better if we could write our code in such a way that we can apply it to any vector of values, not just the one we specify..
 
-<p>In fact, there are already functions built into R, which make the job much easier, for instance <b>sapply</b></p>
+<p>In fact, there are already functions built into R, which make the job much easier, for instance <tt>sapply</tt></p>
 
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r">
+<p>We assign a name to the vector which our function will produce, using 'gets' (<tt><-</tt>). Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.</p>
 
-# We assign a name to the vector which our <span class="hl kwa">function</span> will produce, using <span class="hl str">'gets'</span> (&lt;-)
-<span class="hl com"># Then we state the vector on which we want to evaluate our <span class="hl kwa">function</span> - <span class="hl kwa">in</span> this case our vector of dummy values.</span>
-
-dummy_sd1 &lt;- <span class="hl kwd">sapply</span>(dummy, 
-       
-       <span class="hl com"># then we need to wrap our <span class="hl kwa">for</span> loop and <span class="hl kwa">if</span> statements <span class="hl kwa">in</span> a <span class="hl kwa">function</span> wrapper</span>
-       
-           <span class="hl kwd"><span class="hl kwa">function</span></span>(x) {
-            
-            <span class="hl kwd"><span class="hl kwa">if</span></span> (x &gt; (<span class="hl kwd">mean</span>(dummy) + <span class="hl kwd">sd</span>(dummy))) { 
-                 
-                 # instead of using <span class="hl str">'print'</span> we just state the outcome
-                 
-                 <span class="hl str">"ABOVE"</span>
-                 
-                 } <span class="hl kwa">else</span> <span class="hl kwd"><span class="hl kwa">if</span></span> (x &lt; (<span class="hl kwd">mean</span>(dummy) - <span class="hl kwd">sd</span>(dummy))) {
-                      
-                      
-                      <span class="hl str">"BELOW"</span>
-                      
-                      } else
-                           
-                           
-                           <span class="hl str">"WITHIN"</span>
-            
-            }
-       )
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sapply</span><span class="hl std">(dummy,</span>
+       <span class="hl com"># then we need to wrap our for loop and if statements in a function wrapper</span>
+           <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
+            <span class="hl kwa">if</span> <span class="hl std">(x</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+                 <span class="hl com"># instead of using 'print' we just state the outcome</span>
+                 <span class="hl str">&quot;ABOVE&quot;</span>
+                 <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(x</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+                      <span class="hl str">&quot;BELOW&quot;</span>
+                      <span class="hl std">}</span> <span class="hl kwa">else</span>
+                           <span class="hl str">&quot;WITHIN&quot;</span>
+            <span class="hl std">}</span>
+       <span class="hl std">)</span>
+</pre></div>
+</div></div>
 
 
-<span class="hl com"># check <span class="hl kwa">if</span> the answer is the same as the previous example</span>
+<p>Check if the answer is the same as the previous example:</p>
 
-<span class="hl kwd">identical</span>(dummy_sd,dummy_sd1)
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">identical</span><span class="hl std">(dummy_sd, dummy_sd1)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
-</pre></div>
-<div class="source"><pre class="knitr r">
-
-
-<span class="hl com"># now we can a</span>
 </pre></div>
 </div></div>
 
 
 
-length(which(dummy > mean(dummy)))
+<p>In this case <tt>TRUE</tt> indicates that the two vectors are identical, and both methods produce exactly the same results.</p>
+
+<p>We can also adapt our code so that it is easier to run it on any set of data, by wrapping the whole function within a <tt>function</tt> wrapper. This means that we can specify the vector we want to perform the function on as an <i>argument</i> when we call the function.</p>
+
+<p>We will call the function <tt>sd_check</tt>. With <tt>function(y)</tt> we specify that the function <tt>sd_check()</tt> should be called with one argument <tt>y</tt> - in this case the name of the vector on which we wish to perform the function.</p>
+
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">) {</span>
+     <span class="hl com"># We need to open curly brackets in which to contain the function, unless</span>
+     <span class="hl com"># it call all be contained within one line</span>
+     <span class="hl com"># Everything below is the same as we have used previously.</span>
+     <span class="hl kwd">sapply</span><span class="hl std">(y,</span>
+            <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
+                 <span class="hl kwa">if</span> <span class="hl std">(x</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(y)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(y))) {</span>
+                      <span class="hl str">&quot;ABOVE&quot;</span>
+                      <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(x</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(y)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(y))) {</span>
+                           <span class="hl str">&quot;BELOW&quot;</span>
+                           <span class="hl std">}</span> <span class="hl kwa">else</span>
+                                <span class="hl str">&quot;WITHIN&quot;</span>
+                 <span class="hl std">}</span>
+            <span class="hl std">)</span>
+     <span class="hl com"># And we close the curly brackets here.</span>
+     <span class="hl std">}</span>
+</pre></div>
+</div></div>
 
 
-length(which(dummy > (mean(dummy) + sd(dummy))))/length(dummy)
+<p>To test our function, we will create a new vector of 100 numbers from a different distribution: the exponential distribution.</p>
+
+<p>We will again set the seed to 500, to ensure that we get reproducible results. Check <tt>?set.seed</tt> for more information, and we will round the data to decimal places as we create it.</p>
 
 
-system.time()
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">)</span>
+<span class="hl com"># We also specify the rounding to two decimal places in this command</span>
+<span class="hl std">dummy1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">round</span><span class="hl std">(</span><span class="hl kwd">rexp</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
 
-end.rcode-->
+<p>Lets plot this data in the same way as before:</p>
 
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwd">density</span><span class="hl std">(dummy1),</span> <span class="hl com"># create density estimates for the dummy dataset</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span>   <span class="hl com"># set the line weight to 2 pixels</span>
+     <span class="hl std">)</span>
+<span class="hl com"># and draw on the mean and mean +- standard deviation</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span>
+     <span class="hl kwc">v</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy1),</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy1)</span><span class="hl opt">+</span><span class="hl kwd">sd</span><span class="hl std">(dummy1),</span>
+          <span class="hl kwd">mean</span><span class="hl std">(dummy1)</span><span class="hl opt">-</span><span class="hl kwd">sd</span><span class="hl std">(dummy1)</span>
+          <span class="hl std">),</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">),</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">),</span>
+     <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+</pre></div>
+</div></div>
+
+
+<p>Here we can see that the distribution of the data are very different from the normal <tt>dummy</tt>. We can now run our function on this data. We call the function with <tt>sd_check(dummy1)</tt>, with the vector <tt>dummy1</tt> as argument <tt>y</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check</span><span class="hl std">(dummy1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   [1] "WITHIN" "WITHIN" "WITHIN" "BELOW"  "WITHIN" "WITHIN" "WITHIN"
+##   [8] "WITHIN" "WITHIN" "BELOW"  "WITHIN" "WITHIN" "WITHIN" "ABOVE" 
+##  [15] "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [22] "ABOVE"  "ABOVE"  "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN"
+##  [29] "ABOVE"  "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [36] "ABOVE"  "WITHIN" "WITHIN" "ABOVE"  "WITHIN" "BELOW"  "WITHIN"
+##  [43] "WITHIN" "WITHIN" "BELOW"  "WITHIN" "WITHIN" "ABOVE"  "ABOVE" 
+##  [50] "WITHIN" "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [57] "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [64] "ABOVE"  "WITHIN" "ABOVE"  "WITHIN" "ABOVE"  "WITHIN" "WITHIN"
+##  [71] "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [78] "WITHIN" "WITHIN" "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN"
+##  [85] "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [92] "WITHIN" "WITHIN" "ABOVE"  "WITHIN" "WITHIN" "WITHIN" "WITHIN"
+##  [99] "ABOVE"  "WITHIN"
+</pre></div>
+</div></div>
+
+
+<p>We can again assign this to a dataframe, but this time, we use a call to our function within our specification of the dataframe.</p>
+
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= dummy1,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl kwd">sd_check</span><span class="hl std">(dummy1)</span>  <span class="hl com"># here we call the function</span>
+<span class="hl std">)</span>
+<span class="hl std">dummy_data1</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##     data     sd
+## 1   0.67 WITHIN
+## 2   0.45 WITHIN
+## 3   0.14 WITHIN
+## 4   0.02  BELOW
+## 5   0.49 WITHIN
+## 6   0.82 WITHIN
+## 7   0.11 WITHIN
+## 8   0.46 WITHIN
+## 9   0.71 WITHIN
+## 10  0.02  BELOW
+## 11  0.24 WITHIN
+## 12  0.22 WITHIN
+## 13  0.71 WITHIN
+## 14  2.33  ABOVE
+## 15  0.62 WITHIN
+## 16  2.97  ABOVE
+## 17  0.08 WITHIN
+## 18  0.76 WITHIN
+## 19  0.63 WITHIN
+## 20  0.39 WITHIN
+## 21  0.03 WITHIN
+## 22  2.16  ABOVE
+## 23  3.01  ABOVE
+## 24  0.24 WITHIN
+## 25  2.65  ABOVE
+## 26  1.20 WITHIN
+## 27  0.69 WITHIN
+## 28  0.65 WITHIN
+## 29  3.08  ABOVE
+## 30  0.03 WITHIN
+## 31  1.38 WITHIN
+## 32  0.67 WITHIN
+## 33  1.09 WITHIN
+## 34  0.86 WITHIN
+## 35  1.71 WITHIN
+## 36  2.19  ABOVE
+## 37  1.93 WITHIN
+## 38  0.30 WITHIN
+## 39  2.35  ABOVE
+## 40  0.62 WITHIN
+## 41  0.02  BELOW
+## 42  0.54 WITHIN
+## 43  0.69 WITHIN
+## 44  1.24 WITHIN
+## 45  0.02  BELOW
+## 46  1.51 WITHIN
+## 47  1.04 WITHIN
+## 48  2.41  ABOVE
+## 49  2.78  ABOVE
+## 50  1.91 WITHIN
+## 51  0.98 WITHIN
+## 52  3.56  ABOVE
+## 53  1.07 WITHIN
+## 54  0.17 WITHIN
+## 55  1.25 WITHIN
+## 56  0.37 WITHIN
+## 57  0.15 WITHIN
+## 58  0.33 WITHIN
+## 59  0.21 WITHIN
+## 60  0.60 WITHIN
+## 61  1.04 WITHIN
+## 62  0.94 WITHIN
+## 63  1.50 WITHIN
+## 64  3.10  ABOVE
+## 65  0.91 WITHIN
+## 66  2.39  ABOVE
+## 67  0.08 WITHIN
+## 68  2.70  ABOVE
+## 69  0.75 WITHIN
+## 70  1.37 WITHIN
+## 71  0.07 WITHIN
+## 72  0.13 WITHIN
+## 73  0.71 WITHIN
+## 74  0.61 WITHIN
+## 75  0.73 WITHIN
+## 76  0.30 WITHIN
+## 77  0.08 WITHIN
+## 78  1.35 WITHIN
+## 79  0.50 WITHIN
+## 80  1.33 WITHIN
+## 81  3.72  ABOVE
+## 82  0.44 WITHIN
+## 83  0.07 WITHIN
+## 84  0.11 WITHIN
+## 85  0.04 WITHIN
+## 86  2.27  ABOVE
+## 87  0.40 WITHIN
+## 88  0.79 WITHIN
+## 89  0.36 WITHIN
+## 90  0.90 WITHIN
+## 91  0.29 WITHIN
+## 92  0.61 WITHIN
+## 93  0.47 WITHIN
+## 94  3.61  ABOVE
+## 95  1.96 WITHIN
+## 96  1.60 WITHIN
+## 97  0.59 WITHIN
+## 98  0.15 WITHIN
+## 99  5.23  ABOVE
+## 100 1.80 WITHIN
+</pre></div>
+</div></div>
+
+
+<p>It looks like there are far fewer values which are 'BELOW' the mean (x&#772;) - standard deviation (&sigma;) for the second dummy dataset (<tt>dummy1</tt>), not surprising given that it was randomly generated based on the exponential distribution. Let's take a closer look, and use this as an opportunity to write another short function.</p>
+
+<p>We will actually nest one function within another to make things simpler. This time we are going to use <tt>which</tt>, a command which essentially does the same as our nested <tt>if</tt> loops, but much more elegantly:</p>
+
+
+<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">which</span><span class="hl std">(dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1)))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 14 16 22 23 25 29 36 39 48 49 52 64 66 68 81 86 94 99
+</pre></div>
+</div></div>
+
+
+<p>We can count the number of values with length:</p>
+
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">length</span><span class="hl std">(</span><span class="hl kwd">which</span><span class="hl std">(dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1))))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 18
+</pre></div>
+</div></div>
+
+
+<p> We can make the results for readable. Here we use <tt>noquote</tt> to remove quotes around the result, and paste to combine some character text "ABOVE" with the results of some code.</p>
+
+<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">noquote</span><span class="hl std">(</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(</span><span class="hl kwd">which</span><span class="hl std">(dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1)))),</span>
+    <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot; = &quot;</span><span class="hl std">))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] ABOVE = 18
+</pre></div>
+</div></div>
+
+
+<p> So lets roll this into a more complicated that we can apply to other data:</p>
+<p>We generalise the logical <tt>dummy1 > (mean(dummy1) + sd(dummy1))</tt> into <tt>y</tt>, and the character "ABOVE" into <tt>x</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_sum</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">) {</span>
+     <span class="hl kwd">print</span><span class="hl std">(</span>
+          <span class="hl kwd">noquote</span><span class="hl std">(</span> <span class="hl com"># remove quotes from result</span>
+               <span class="hl kwd">paste</span><span class="hl std">(</span> <span class="hl com"># combine x with </span>
+                    <span class="hl std">x,</span>
+                    <span class="hl kwd">length</span><span class="hl std">(</span><span class="hl kwd">which</span><span class="hl std">(y)),</span>
+                    <span class="hl kwc">sep</span><span class="hl std">=</span><span class="hl str">&quot; = &quot;</span>
+                    <span class="hl std">)</span>
+               <span class="hl std">)</span>
+          <span class="hl std">)</span>
+     <span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+
+<p>So let's check it works:</p>
+
+<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">, (dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1))))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] ABOVE = 18
+</pre></div>
+</div></div>
+
+
+<p>And again:</p>
+
+<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">, (dummy</span> <span class="hl opt">&lt;</span> <span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy)</span> <span class="hl opt">&amp;</span> <span class="hl std">dummy</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span>
+    <span class="hl kwd">sd</span><span class="hl std">(dummy))))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] WITHIN = 66
+</pre></div>
+</div></div>
+
+
+<p>We can now run the function with a different set of arguments:</p>
+
+<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">, (dummy1</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1))))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] BELOW = 4
+</pre></div>
+</div></div>
+
+
+<p>So now we can simplify this again, by generalising <tt>dummy1</tt> with <tt>z</tt>:</p>
+
+<div class="chunk" id="unnamed-chunk-31"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_count</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">z</span><span class="hl std">) {</span>
+    <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">, (z</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
+    <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">, (z</span> <span class="hl opt">&lt;</span> <span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(z)</span> <span class="hl opt">&amp;</span> <span class="hl std">z</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
+    <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">, (z</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+
+<p>So for the normally distributed data...</p>
+
+<div class="chunk" id="unnamed-chunk-32"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] ABOVE = 18
+## [1] WITHIN = 66
+## [1] BELOW = 16
+</pre></div>
+</div></div>
+
+
+<p>...and the exponentially distributed data....</p>
+
+<div class="chunk" id="unnamed-chunk-33"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] ABOVE = 18
+## [1] WITHIN = 78
+## [1] BELOW = 4
+</pre></div>
+</div></div>
+
+
+<p>This should chime with what you already know about normal distributions, and particularly the <a href="http://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule">68-95-99.7 or three-sigma-rule</a>. These differences in distribution are why we must always perform normality checks when completing linear modelling.</p>
 
 </body>
 </html>

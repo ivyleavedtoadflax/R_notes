@@ -9,7 +9,7 @@
 
 <h1>Writing functions</h1>
 
-<p>One of the great strengths of R, is that at its heart, it is a programming language, and hence has all the usual functionality one might expect from a programming language. This incldues the ability to write functions.</p>
+<p>One of the great strengths of R, is that at its heart, it is a programming language, and hence has all the usual functionality one might expect from a programming language. This includes the ability to write functions.</p>
 
 <p>This can be extremely useful when it comes to repetitive tasks that we have to complete time and time again. You might for example, write a function to correctly format data arriving in a raw state, for example from weather stations or from lab equipment. You might also want to complete exactly the same analysis on many subsets of a large dataset; this can easily be handled by a function or loop.</p>
 
@@ -17,27 +17,29 @@
 
 <p>Let's start with something that many Excel users will be familiar with - the IF function.</p>
 
-<p>If you have ever done any coding in Excel, you will probably have come across the IF() command. This command takes the form of: <b>IF(logical_test,[value_if_true],[value_if_false])</b>. The astute among you will realise that this is in effect an IF ELSE statement! An example of its usage might be:</p>
+<p>If you have ever done any coding in Excel, you will probably have come across the IF() command. This command takes the form of: <tt>IF( logical_test, [value_if_true], [value_if_false] )</tt>. The astute among you will realise that this is in effect an IF ELSE statement! An example of its usage might be:</p>
 
-<p><b>=IF(A1>5,TRUE,FALSE)</b></p>
+<p><tt>=IF(A1>5,TRUE,FALSE)</tt></p>
 
 <p>I.e: if the value in cell A1 is greater than 5, the value in the current cell should be TRUE, and if not, the value should be FALSE - simple enough.</p>
 
-<p>Let's try something similar in R. In R the <b>if</b> command is composed of just two elements the logical_test, as Excel calls it (more correctly, the "condition"), and the value_if_true (or the "consequent"). The syntax looks like this: <b>if (condition) {consequent}</b>.</p>
+<p>Let's try something similar in R. In R the <tt>if</tt> command is composed of just two elements the logical_test, as Excel calls it (more correctly, the "condition"), and the value_if_true (or the "consequent"). The syntax looks like this: <tt>if (condition) {consequent}</tt>.</p>
+
+<p>Define object <tt>x</tt> with the value 5</p>
 
 <!--begin.rcode
+x <- 9  
+end.rcode-->
 
- x <- 9  # define object x with the value 5
+<p>Try out the <tt>if</tt> statement...</p>
 
-# try out the if statement:
-
+<!--begin.rcode
 if (x > 5) {
      print(TRUE)
      }
-
 end.rcode-->
 
-<p>So far so good...and if we want to do exactly the same thing as we did in Excel we need to add <b>else</b>.</p>
+<p>So far so good...and if we want to do exactly the same thing as we did in Excel we need to add <tt>else</tt>.</p>
 
 <!--begin.rcode
 
@@ -50,18 +52,16 @@ if (x > 5) {
           
 end.rcode-->
 
-<p>Something to note from this is example is that R recognises <b>TRUE</b> and <b>FALSE</b> as booleans, hence you don't need to use quotes. If you wanted to use a character string, you would definitely need to use quotes.</p>
+<p>Something to note from this is example is that R recognises <tt>TRUE</tt> and <tt>FALSE</tt> as booleans, hence you don't need to use quotes. If you wanted to use a character string, you would definitely need to use quotes.</p>
 
 
 <h3>For loops</h3>
 
-<p><b>For</b> loops are used when you need to perform the same action many times, but taking different inputs each time. You could, for instance, run the same statistical test on a several different sets of data. The example below shows a simple for loop.</p>
+<p><tt>For</tt> loops are used when you need to perform the same action many times, but taking different inputs each time. You could, for instance, run the same statistical test on a several different sets of data. The example below shows a simple for loop.</p>
+
+<p>In specifying a for loop, we must define the range over which we want the loop to run. In this case we use 1:10. The loop will then iterate across the sequence 1, 2, 3...etc substituting i for the number of the iteration</p>
 
 <!--begin.rcode
-
-# In specifying a for loop, we must define the range over which we want the loop to run.
-# In this case we use 1:10. The loop will then iterate across the sequence 1, 2, 3...etc
-# substituting i for the number of the iteration
 
 for (i in 1:10) {
      print(
@@ -73,19 +73,15 @@ for (i in 1:10) {
           )
      }
 
-
 end.rcode-->
 
 <h2>Real world example</h2>
 
-<p>Now we will combine an <b>if else</b>, statement and a <b>for</b> loop in order to demonstarte the power of these tools.</p>
+<p>Now we will combine an <tt>if else</tt>, statement and a <tt>for</tt> loop in order to demonstrate the power of these tools.</p>
 
+<p>First generate 100 random numbers using a normal distribution using rnorm - see <tt>?rnorm</tt> for details. We set the seed to 500 first to make this example reproducible. See <tt>?set.seed</tt></p>
 
 <!--begin.rcode
-
-# First generate 100 random numbers using a normal distribution using rnorm - see ?rnorm for details.
-# We set the seed to 500 first to make this example reproducible. See ?set.seed
-
 set.seed(500) 
 
 dummy <- rnorm(
@@ -95,7 +91,9 @@ dummy <- rnorm(
      )
 
 dummy
+end.rcode-->
 
+<!--begin.rcode
 # Now limit the data to two decimal places to make it easier to read
 
 dummy <- round(
@@ -104,17 +102,23 @@ dummy <- round(
      )
 
 dummy
+end.rcode-->
 
-# Calculate the mean of this vector
+<p>Calculate the mean of this vector...</p>
 
+<!--begin.rcode
 mean(dummy)
+end.rcode-->
 
-# Calculate the mean of this vector
+<p>Calculate the mean of this vector</p>
 
+<!--begin.rcode
 sd(dummy)
+end.rcode-->
 
-# Let's also plot a probability density function of this data to see what it looks like:
+<p>Let's also plot a probability density function of this data to see what it looks like:</p>
 
+<!--begin.rcode
 plot(
      density(dummy), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
@@ -133,31 +137,25 @@ abline(
      lty = 2
      )
 
-
-
 end.rcode-->
 
 <p>Now let us suppose that we wanted to know which of the values within the dummy data lie above or below 1 standard deviation of the mean. i.e. to the left (below) or to the right (above) the red dotted lines in our plot.</p>
 
 <p>Suppose that we also want to create vector which contained a simple 'ABOVE' or 'BELOW' to accompany it.</p>
 
-<p>This can be achieved with an <b>if else</b> statement nested within a <b>for</b> loop.</p>
+<p>This can be achieved with an <tt>if else</tt> statement nested within a <tt>for</tt> loop.</p>
+
+<p>First the <tt>if</tt> statement: let's start by using the last value of the dummy data:</p>
 
 <!--begin.rcode
-
-# First the if statement: let's start by using the last value of the dummy data:
-
-
-
 if (dummy[100] > (mean(dummy) + sd(dummy))) {
      
      print("ABOVE")
      
      } 
-
 end.rcode-->
 
-<p> And... nothing happens... because the last value of dummy is <!--rinline dummy[100] -->; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <b>else if</b> statement to decide.
+<p> And... nothing happens... because the last value of dummy is <!--rinline dummy[100] -->; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <tt>else if</tt> statement to decide.</p>
 
 
 <!--begin.rcode
@@ -195,7 +193,7 @@ end.rcode-->
 
 <p>So it turns out that the first value of the dummy data is below one standard deviation of the mean.</p>
 
-<p>Now let's wrap the <b>if else</b> statement with a <b>for</b> loop, and run it over the whole dummy dataset.</p>
+<p>Now let's wrap the <tt>if else</tt> statement with a <tt>for</tt> loop, and run it over the whole dummy dataset.</p>
 
 
 <!--begin.rcode
@@ -222,28 +220,28 @@ for (i in dummy) { # it's usual to name the indexer as i
 
 end.rcode-->
 
-
 <p>So we get a list of "ABOVE", "BELOW" or "WITHIN". To make this really useful, we should need to get the loop to produce an output. There are several ways to do this, but a simple way is shown in the next example.</p>
 
+<p>First we create a vector into which we will store the answers:</p>
+
 <!--begin.rcode
-
-# First we create a vector into which we will store the answers.
-
 dummy_sd <- vector(
      length = 100,
      mode = "character"
      )
+end.rcode-->
 
+<p>Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.</p>
 
-# Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.
-
+<!--begin.rcode
 for (i in 1:length(dummy)) { 
      
      # now we need to change i back to dummy - but use 'i' as subscript:
      
      if (dummy[i] > (mean(dummy) + sd(dummy))) { 
           
-          # instead of printing the results, we assign them to a subscript within the dummy_sd vector
+          # instead of printing the results, we assign them to a subscript
+          # within the dummy_sd vector
           
           dummy_sd[i] <- "ABOVE"
           
@@ -259,29 +257,30 @@ for (i in 1:length(dummy)) {
      
      }
 
-# Check the results
+end.rcode-->
 
+
+<p>Check the results:</p>
+
+<!--begin.rcode
 dummy_data <- data.frame(
      data = dummy, 
      sd = dummy_sd
      )
 
-dummy_data
+dummy_data[1:50,] # we just look at the first 50 rows
 
 end.rcode-->
 
 <h2>Writing a function</h2>
 
-<p>Ok, so far so good, but it would be better if we could write our code in such a way that we can apply it to any vector of values, not just the one we specify..
+<p>OK, so far so good, but it would be better if we could write our code in such a way that we can apply it to any vector of values, not just the one we specify..
 
-<p>In fact, there are already functions built into R, which make the job much easier, for instance <b>sapply</b></p>
+<p>In fact, there are already functions built into R, which make the job much easier, for instance <tt>sapply</tt></p>
+
+<p>We assign a name to the vector which our function will produce, using 'gets' (<tt><-</tt>). Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.</p>
 
 <!--begin.rcode
-
-
-# We assign a name to the vector which our function will produce, using 'gets' (<-)
-# Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.
-
 dummy_sd1 <- sapply(dummy, 
        
        # then we need to wrap our for loop and if statements in a function wrapper
@@ -306,27 +305,218 @@ dummy_sd1 <- sapply(dummy,
             
             }
        )
+end.rcode-->
 
+<p>Check if the answer is the same as the previous example:</p>
 
-# check if the answer is the same as the previous example
-
+<!--begin.rcode
 identical(dummy_sd,dummy_sd1)
-
 end.rcode-->
 
 
-<p>So now, we can apply our function to </p>
+<p>In this case <tt>TRUE</tt> indicates that the two vectors are identical, and both methods produce exactly the same results.</p>
 
-length(which(dummy > mean(dummy)))
+<p>We can also adapt our code so that it is easier to run it on any set of data, by wrapping the whole function within a <tt>function</tt> wrapper. This means that we can specify the vector we want to perform the function on as an <i>argument</i> when we call the function.</p>
 
+<p>We will call the function <tt>sd_check</tt>. With <tt>function(y)</tt> we specify that the function <tt>sd_check()</tt> should be called with one argument <tt>y</tt> - in this case the name of the vector on which we wish to perform the function.</p>
 
-length(which(dummy > (mean(dummy) + sd(dummy))))/length(dummy)
+<!--begin.rcode
 
-
-system.time()
+sd_check <- function(y) { 
+     
+     # We need to open curly brackets in which to contain the function, unless
+     # it call all be contained within one line
+     
+     # Everything below is the same as we have used previously.
+     
+     sapply(y, 
+            
+       
+            function(x) {
+                 
+                 if (x > (mean(y) + sd(y))) { 
+                      
+            
+                      "ABOVE"
+                      
+                      } else if (x < (mean(y) - sd(y))) {
+                           
+                           
+                           "BELOW"
+                           
+                           } else
+                                
+                                
+                                "WITHIN"
+                 
+                 }
+            )
+     
+     # And we close the curly brackets here.
+     
+     }
 
 end.rcode-->
 
+<p>To test our function, we will create a new vector of 100 numbers from a different distribution: the exponential distribution.</p>
+
+<p>We will again set the seed to 500, to ensure that we get reproducible results. Check <tt>?set.seed</tt> for more information, and we will round the data to decimal places as we create it.</p>
+
+
+<!--begin.rcode
+
+set.seed(500)
+
+# We also specify the rounding to two decimal places in this command
+
+dummy1 <- round(
+     rexp(100), 
+     2
+     )
+end.rcode-->
+<p>Lets plot this data in the same way as before:</p>
+
+<!--begin.rcode
+plot(
+     density(dummy1), # create density estimates for the dummy dataset
+     lwd = 2   # set the line weight to 2 pixels
+     )
+
+# and draw on the mean and mean +- standard deviation
+
+abline(
+     v = c(
+          mean(dummy1),
+          mean(dummy1)+sd(dummy1),
+          mean(dummy1)-sd(dummy1)
+          ),
+     col = c("blue", "red", "red"),
+     lwd = c(3, 2, 2),
+     lty = 2
+     )
+
+
+end.rcode-->
+
+<p>Here we can see that the distribution of the data are very different from the normal <tt>dummy</tt>. We can now run our function on this data. We call the function with <tt>sd_check(dummy1)</tt>, with the vector <tt>dummy1</tt> as argument <tt>y</tt>.</p>
+
+<!--begin.rcode
+
+sd_check(dummy1)
+end.rcode-->
+
+<p>We can again assign this to a dataframe, but this time, we use a call to our function within our specification of the dataframe.</p>
+
+<!--begin.rcode
+dummy_data1 <- data.frame(
+     data = dummy1, 
+     sd = sd_check(dummy1) # here we call the function
+     )
+
+dummy_data1
+
+end.rcode-->
+
+<p>It looks like there are far fewer values which are 'BELOW' the mean (x&#772;) - standard deviation (&sigma;) for the second dummy dataset (<tt>dummy1</tt>), not surprising given that it was randomly generated based on the exponential distribution. Let's take a closer look, and use this as an opportunity to write another short function.</p>
+
+<p>We will actually nest one function within another to make things simpler. This time we are going to use <tt>which</tt>, a command which essentially does the same as our nested <tt>if</tt> loops, but much more elegantly:</p>
+
+
+<!--begin.rcode
+
+which(
+     dummy1 > (mean(dummy1) + sd(dummy1))
+     )
+end.rcode-->
+
+<p>We can count the number of values with length:</p>
+
+<!--begin.rcode
+length(
+     which(
+          dummy1 > (mean(dummy1) + sd(dummy1))
+          )
+     )
+end.rcode-->
+
+<p> We can make the results for readable. Here we use <tt>noquote</tt> to remove quotes around the result, and paste to combine some character text "ABOVE" with the results of some code.</p>
+
+<!--begin.rcode
+noquote(
+     paste(
+          "ABOVE",
+          length(
+               which(
+                    dummy1 > (mean(dummy1) + sd(dummy1))
+                    )
+               ),
+          sep=" = "
+          )
+     )
+end.rcode-->
+
+<p> So lets roll this into a more complicated that we can apply to other data:</p>
+<p>We generalise the logical <tt>dummy1 > (mean(dummy1) + sd(dummy1))</tt> into <tt>y</tt>, and the character "ABOVE" into <tt>x</tt>.</p>
+
+<!--begin.rcode
+sd_check_sum <- function(x,y) {
+     
+     print( 
+          noquote( # remove quotes from result
+               paste( # combine x with 
+                    x,
+                    length(which(y)),
+                    sep=" = "
+                    )
+               )
+          )
+     
+     }
+end.rcode-->
+
+<p>So let's check it works:</p>
+
+<!--begin.rcode
+sd_check_sum("ABOVE",(dummy1 > (mean(dummy1) + sd(dummy1))))
+end.rcode-->
+
+<p>And again:</p>
+
+<!--begin.rcode
+sd_check_sum("WITHIN",(dummy < mean(dummy) + sd(dummy) & dummy > (mean(dummy) - sd(dummy))))
+end.rcode-->
+
+<p>We can now run the function with a different set of arguments:</p>
+
+<!--begin.rcode
+sd_check_sum("BELOW",(dummy1 < (mean(dummy1) - sd(dummy1))))
+end.rcode-->
+
+<p>So now we can simplify this again, by generalising <tt>dummy1</tt> with <tt>z</tt>:</p>
+
+<!--begin.rcode
+sd_check_count <- function(z) {
+     
+sd_check_sum("ABOVE",(z > (mean(z) + sd(z))))
+sd_check_sum("WITHIN",(z < mean(z) + sd(z) & z > (mean(z) - sd(z))))
+sd_check_sum("BELOW",(z < (mean(z) - sd(z))))
+
+     }
+end.rcode-->
+
+<p>So for the normally distributed data...</p>
+
+<!--begin.rcode
+sd_check_count(dummy)
+end.rcode-->
+
+<p>...and the exponentially distributed data....</p>
+
+<!--begin.rcode
+sd_check_count(dummy1)
+end.rcode-->
+
+<p>This should chime with what you already know about normal distributions, and particularly the <a href="http://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule">68-95-99.7 or three-sigma-rule</a>. These differences in distribution are why we must always perform normality checks when completing linear modelling.</p>
 
 </body>
 </html>
