@@ -1,7 +1,8 @@
 <html>
 
 <head>
-<style type="text/css">.knitr.inline {
+<style type="text/css">
+.knitr.inline {
   background-color: #f7f7f7;
   border:solid 1px #B0B0B0;
 }
@@ -60,7 +61,8 @@
 .hl.kwd {
   color: #BC5A65;
   font-weight: bold;
-}</style>
+}
+</style>
 <title>Getting Started with R - R-base graphics</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
@@ -70,24 +72,25 @@
 
 <h1>R-base graphics</h1>
 
-<p>R-base is the basic set of functiosn that come with R as standard - before you start to download any additional packages. The graphics functions included in R-base are simple, but also highly customisable, and capable of producing high standard, publication quality graphics.</p>
+<p>R-base is the basic set of functions that come with R as standard - before you start to download any additional packages. The graphics functions included in R-base are simple, but also highly customisable, and capable of producing high standard, publication quality graphics.</p>
 
-<p>There are otehr graphics packages which offer more advanced graphical functions like <b>ggplot2</b>, these will not be covered in this course.</p>
+<p>There are other graphics packages which offer more advanced graphical functions like <b>ggplot2</b>, these will not be covered in this course.</p>
 
 <h2>Producing a basic plot</h2>
 
 <p>The basic plotting functions are very easy, but we first need some data to work with. We'll refer to some of the data used in the R book again.</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl com"># As before, we import directly from an online text file</span>
+<p>As before, we import directly from an online text file</p>
 
-sapdecay &lt;- <span class="hl kwd">read.table</span>(<span class="hl str">"http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt"</span>, 
-    header = T)
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sapdecay</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">header</span> <span class="hl std">= T)</span>
+</pre></div>
+</div></div>
 
-<span class="hl com"># Call the data to examine it. Note this data is dealt with on p70 of 'The</span>
-<span class="hl com"># R Book'</span>
 
-sapdecay
+<p> We'll call the data to examine it. Note this data is dealt with on p70 of 'The R Book'. remember that typing the name of the object <tt>sapdecay</tt> is the 'short-hand' equivalent of typing <tt>print(sapdecay)</tt> - there are certain occasions when it will be necessary to use the full command - more of that later.</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sapdecay</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##     x       y
 ## 1   0 1.00000
@@ -120,71 +123,228 @@ sapdecay
 </div></div>
 
 
-<p>So, we have two columns of data, which we will plota aginst each other - this is very simple</p>
+<p>So, we have two columns of data, which we will plots against each other - this is very simple</p>
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">
-<span class="hl kwd">plot</span>(sapdecay)
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(sapdecay)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
-<div class="source"><pre class="knitr r">
-<span class="hl com"># In this example, R recognises that there are two columns <span class="hl kwa">in</span> the object</span>
-<span class="hl com"># sapdecay, and it simply plots them against each other. This kind of</span>
-<span class="hl com"># command is called a lazy command, because we have not specified any of</span>
-<span class="hl com"># the arguments explicityly.  The long version would be:</span>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
 
-<span class="hl kwd">plot</span>(x = sapdecay$x, y = sapdecay$y)
+
+<p>In this example, R recognises that there are two columns in the object sapdecay, and it simply plots them against each other. This kind of command is called a lazy command, because we have not specified any of the arguments explicitly.</p>
+
+<p>The long version would be:</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= sapdecay</span><span class="hl opt">$</span><span class="hl std">x,</span> <span class="hl kwc">y</span> <span class="hl std">= sapdecay</span><span class="hl opt">$</span><span class="hl std">y)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-22.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
-<div class="source"><pre class="knitr r">
-# Note that we can also dispence with the sapdecay$ by using the <span class="hl kwd">with</span>()
+</div><div class="rimage default"><img src="figure/unnamed-chunk-41.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl com"># Note that we can also dispence with the sapdecay$ by using the with()</span>
 <span class="hl com"># command:</span>
-
-<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y))
+<span class="hl kwd">with</span><span class="hl std">(sapdecay,</span> <span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-23.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
-<div class="source"><pre class="knitr r">
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-42.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
 
 
 <p>This isn't a particularly inspiring plot, so let's make it look a little better...</p>
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">
+<p>First let's make it a little easier to see al the changes that we are making</p>
 
-<span class="hl com"># First let's make it a little easier to see al the changes that we are</span>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># First let's make it a little easier to see al the changes that we are</span>
 <span class="hl com"># making</span>
-
-<span class="hl kwd">par</span>(mfrow = <span class="hl kwd">c</span>(2, 2))
-
-<span class="hl com"># This command splits the plotting area into four, so we can see four</span>
-<span class="hl com"># plots side by side. We'll cover the par command <span class="hl kwa">in</span> more detail <span class="hl kwa">in</span> the</span>
-<span class="hl com"># <span class="hl kwa">next</span> section.  We then simply make four plots, one after the other, and</span>
-<span class="hl com"># they will fill up the plotting area.</span>
-
-<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
-    type = <span class="hl str">"l"</span>, col = <span class="hl str">"red"</span>, lwd = 2, main = <span class="hl str">"Line"</span>))
-
-<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
-    type = <span class="hl str">"o"</span>, col = <span class="hl str">"green"</span>, lwd = 1, main = <span class="hl str">"Overplot"</span>))
-
-<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
-    type = <span class="hl str">"h"</span>, col = <span class="hl str">"blue"</span>, lwd = 2, main = <span class="hl str">"Histogram"</span>))
-
-<span class="hl kwd">with</span>(sapdecay, <span class="hl kwd">plot</span>(x = x, y = y, xlab = <span class="hl str">"<span class="hl kwd">Time</span> (hours)"</span>, ylab = <span class="hl str">"Decay rate"</span>, 
-    type = <span class="hl str">"s"</span>, col = <span class="hl str">"hotpink"</span>, lwd = 2, main = <span class="hl str">"Step"</span>))
+<span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+<span class="hl com"># This command splits the plotting area into four, so we can see four plots</span>
+<span class="hl com"># side by side. We'll cover the par command in more detail in the next</span>
+<span class="hl com"># section. We then simply make four plots, one after the other, and they</span>
+<span class="hl com"># will fill up the plotting area.</span>
+<span class="hl kwd">with</span><span class="hl std">(sapdecay,</span> <span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Time (hours)&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Decay rate&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Line&quot;</span><span class="hl std">))</span>
+<span class="hl kwd">with</span><span class="hl std">(sapdecay,</span> <span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Time (hours)&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Decay rate&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;o&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Overplot&quot;</span><span class="hl std">))</span>
+<span class="hl kwd">with</span><span class="hl std">(sapdecay,</span> <span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Time (hours)&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Decay rate&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;h&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Histogram&quot;</span><span class="hl std">))</span>
+<span class="hl kwd">with</span><span class="hl std">(sapdecay,</span> <span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Time (hours)&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Decay rate&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;s&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Step&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
-<div class="source"><pre class="knitr r">
-<span class="hl com"># It's important that we resent the mfrow parameter at the end of</span>
-<span class="hl com"># plotting, otherwise all subsequent plots will apear on this four by four</span>
-<span class="hl com"># grid, which may not be what we want.</span>
-
-<span class="hl kwd">par</span>(mfrow = <span class="hl kwd">c</span>(1, 1))
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl com"># It's important that we reset the mfrow parameter at the end of plotting,</span>
+<span class="hl com"># otherwise all subsequent plots will apear on this four by four grid, which</span>
+<span class="hl com"># may not be what we want.</span>
+<span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
 </div></div>
 
 
+<p>Using this method, it's also perfectly possible to combine plots of two different types, and plot them next to each other.</p>
 
+<p>Let's imagine that we want to test whether a variable is normally distributed - there are two very simple graphical commands built into R that make this easier: <tt>qqnorm</tt> and <tt>qqplot</tt>. These commands produce quantile-quantile plots for the normal distribution. Essentially if the data are normally distributed, they will conform to the straight line<a href="#footnote-1">[1]</a>.</p>
+
+<p>First we will create a vector of random numbers drawn from a normal distribution - so we already know that they are normal!</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">normal_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">normal_data</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   [1]  0.60520  1.11728  2.02779  0.31315 -0.97806  0.01849 -0.03488
+##   [8] -0.25960 -1.97426 -0.23876  1.57209  0.08457  0.09838  0.94025
+##  [15]  1.26858 -3.35627 -0.86146  2.44593 -0.74238  1.67453 -1.70221
+##  [22] -0.27018  2.32756 -3.37883  0.91193  0.90325  0.28828  1.27466
+##  [29]  0.49257  0.01668 -0.66057  1.69741 -2.10132 -0.62607  0.52675
+##  [36]  0.63788 -0.14925  2.45605  2.01719  0.56671 -1.03483  1.16927
+##  [43]  1.18335  0.22443  0.86405 -0.21578  0.46274 -1.90182  0.67325
+##  [50] -0.64173  1.10272 -1.88726  0.23169 -0.25311  0.21945  0.42686
+##  [57] -1.07067 -0.96852  0.85608 -1.08189 -0.85016 -1.47261 -0.71168
+##  [64] -0.62947  0.98356  0.57852 -0.22605 -0.17773  1.57914 -0.06343
+##  [71]  1.05206  0.84056  1.54379 -0.50330 -1.84963  0.89967 -0.65166
+##  [78]  0.40100 -2.62393  0.29155 -2.22649 -0.06322 -0.96122 -2.10935
+##  [85] -0.45823  1.09389 -0.54299  1.14168  0.45719  0.73446 -0.93930
+##  [92] -0.24559  0.75139  1.61052 -1.71210 -0.58960 -0.36389  0.09464
+##  [99] -1.38866 -0.93839
+</pre></div>
+</div></div>
+
+
+<p>And now...some plots. First, two plots side by side.</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+<span class="hl com"># Remember that the first number is the number of rows, the latter is the</span>
+<span class="hl com"># number of columns. So here, we have specified one row, two columns...</span>
+<span class="hl com"># Now the plots:</span>
+<span class="hl kwd">hist</span><span class="hl std">(normal_data)</span>
+<span class="hl kwd">qqnorm</span><span class="hl std">(normal_data)</span>
+<span class="hl kwd">qqline</span><span class="hl std">(normal_data)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+
+
+<p>So things should look pretty normal. In this example we have not specified a 'seed' (see <tt>?set.seed</tt> for more info). So every time that you run the code, you will get a different set of randomly generated numbers drawn from a normal distribution.</p>
+
+<p>All well and good, but what about one above the other? Just changed the one and 2 around in the <tt>par(mfrow=c(x,y))</tt> command.</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl com"># Remember that the first number is the number of rows, the latter is the</span>
+<span class="hl com"># number of columns. So here, we have specified one row, two columns...</span>
+<span class="hl com"># Now the plots:</span>
+<span class="hl kwd">hist</span><span class="hl std">(normal_data)</span>
+<span class="hl kwd">qqnorm</span><span class="hl std">(normal_data)</span>
+<span class="hl kwd">qqline</span><span class="hl std">(normal_data)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+
+
+<p>Easy right?</p>
+
+<h2>Customising your plots</h2>
+
+<p>There are a number of arguments that can be passed to the plot commands in order to customise your plots. The below list is lifted from the help file for the <tt>?plot.default</tt> command. You can normally get similar lists of possible arguments for other commands: e.g. <tt>?hist</tt>.</p>
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>1-character string giving the type of plot desired.  The
+following values are possible, for details, see <code>plot</code>:
+<code>"p"</code> for points, <code>"l"</code> for lines,
+<code>"b"</code> for both points and lines,
+<code>"c"</code> for empty points joined by lines,
+<code>"o"</code> for overplotted points and lines,
+<code>"s"</code> and <code>"S"</code> for stair steps and
+<code>"h"</code> for histogram-like vertical lines.  Finally,
+<code>"n"</code> does not produce any points or lines.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>the x limits (x1, x2) of the plot.  Note that <code>x1 &gt; x2</code>
+is allowed and leads to a &lsquo;reversed axis&rsquo;.
+</p>
+<p>The default value, <code>NULL</code>, indicates that the range of the finite values to be plotted should be used.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>the y limits of the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>a character string which contains <code>"x"</code> if the x axis
+is to be logarithmic, <code>"y"</code> if the y axis is to be logarithmic
+and <code>"xy"</code> or <code>"yx"</code> if both axes are to be logarithmic.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>a main title for the plot, see also <code>title</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+<p>a sub title for the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>a label for the x axis, defaults to a description of <code>x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>a label for the y axis, defaults to a description of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p>a logical value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a logical value indicating whether both axes should be drawn on
+the plot.  Use graphical parameter <code>"xaxt"</code> or <code>"yaxt"</code>
+to suppress just one of the axes.</p>
+</td></tr>
+<tr valign="top"><td><code>frame.plot</code></td>
+<td>
+<p>a logical indicating whether a box should be drawn
+around the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.first</code></td>
+<td>
+<p>an &lsquo;expression&rsquo; to be evaluated after the
+plot axes are set up but before any plotting takes place.  This can
+be useful for drawing background grids or scatterplot smooths.  Note
+that this works by lazy evaluation: passing this argument from other
+<code>plot</code> methods may well not work since it may be evaluated too
+early.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.last</code></td>
+<td>
+<p>an expression to be evaluated after plotting has
+taken place but before the axes, title and box are added.  See the
+comments about <code>panel.first</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+<p>the <i>y/x</i> aspect ratio, see <code>plot.window</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other graphical parameters (see <code>par</code> and
+section &lsquo;Details&rsquo; below).</p>
+</td></tr>
+</table>
+
+
+<div class="ex">
+
+<h2>Exercise</h2>
+
+<p>If you have time, try customising some of the previous plots by altering some of these arguments for yourself...</p>
+
+<p>Below is a plot produced using the <tt>normal_data</tt> vector we produced earlier. See if you can reproduce it by changing the arguments listed above.</p>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rimage default"><img src="figure/unnamed-chunk-9.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+
+
+
+</div>
+
+
+<br><br>
+<hr>
+
+<p id="footnote-1">[1] I'm not going to dwell on the reasons why this is so - we're more interested in the plotting graphs than the statistics behind it in this sections, but if you don't understand what is going on here, you should look it! <a href="http://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">http://en.wikipedia.org/wiki/Q-Q_plot</a>.</p>
 
 </body>
 
