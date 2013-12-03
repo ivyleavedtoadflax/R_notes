@@ -26,60 +26,56 @@
 
 <p>Get used to the idea of calling functions like this with a number of arguments following - we will do this a lot!</p>
 
+
+<p>Create an object called short_variable, and assign a series of numbers to it. We use <tt><-</tt> to create the object. This is called 'gets'.</p>
+
 <!--begin.rcode
-
-# Create an object called short_variable, and assign a series of numbers to it.
-
-# We use '<-' to create the object. This is called 'gets'.
-
 short_variable <- c(1,5,6,7,9,2,10)
-
-# To see what is contained within an object, simply input the name of the object.
-
-short_variable
-
-# Note that this the equivalent in R of writing print(short_variable).
-# This is not particularly important in this course, but it becomes important
-# as you begin to write your own functions.
-
-print(short_variable)
-
-# A more convenient way of entering a series of numbers is to use the scan() function.
-# You must still assign a name to the object you are creating as before, but scan()
-# Will allow you to enter the data more easily. 
-
-#Try that now.
-
 end.rcode-->
 
 
-<p>A more convenient way of entering a series of numbers is to use the scan() function.
-You must still assign a name to the object you are creating as before, but scan() Will allow you to enter the data more easily.</p>
+<p>To see what is contained within an object, simply input the name of the object.</p>
 
-<p class="ex">Try that now.</p>
+<!--begin.rcode
+short_variable
+end.rcode-->
 
+<p>Note that this the equivalent in R of writing <tt>print(short_variable)</tt>. This is not particularly important in this course, but it becomes important as you begin to write your own functions.</p>
+
+<p> A more convenient way of entering a series of numbers is to use the <tt>scan()</tt> function. You must still assign a name to the object you are creating as before, but <tt>scan()</tt> will allow you to enter the data more easily. </p>
+
+<div class= "ex">
+<h3>Exercise</h3>
+<p>Try creating a variable called <tt>short_variable2</tt> and populate it with 10 numbers, using <tt>scan()</tt>.</p>
+</div>
 
 <h2>Importing from the clipboard</h2>
 
 <p>It is possible to import data from R directly from the clipboard - having just copied a table from a spreadsheet. Simply select the table of interest and copy it to clipboard as usual (Ctrl + C). The following code will then allow you to paste the table directly into R.</p>
 
+<p> The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
+
 <!--begin.rcode, eval=FALSE
-
-# The line header = T  tells R that you have copied the column headers with the data too.
-
-new_table <- read.table("clipboard", header = T)
-
+new_table <- read.table(
+     "clipboard", 
+     header = T
+     )
 end.rcode-->
 
 <p>If you copy direct from excel, this should work, but you may also want to copy from a 'comma separated values' file (.csv), in which case you need to tell R using the argument <tt>sep = ","</tt>, or equivalent.</p>
 
-<p>Whilst this is an easy way of getting data into R, I do not recommend it. Unless you then plan on re-saving the data using R. The problem with this kind of method, is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
+<p>Whilst this is an easy way of getting data into R, <b>I do not recommend it</b>, unless you then plan on re-saving the data using R. The problem with this kind of method is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
 
 <p>One solution to this, is to use R to re-save your data in a new format. This is very similar to the process of importing a new table:</p>
 
 <!--begin.rcode, eval=FALSE
 
-write.table(new_table, "C:/data/new_table.csv", sep = ",", row.names = FALSE)
+write.table(
+     new_table, 
+     "C:/data/new_table.csv", 
+     sep = ",", 
+     row.names = FALSE
+     )
 
 end.rcode-->
 
@@ -102,73 +98,88 @@ end.rcode-->
 
 <p>Let's assume we've done that already:</p>
 
+<p>To import from a '.txt' file we used the <tt>read.table()</tt> function again you must assign the function a name first. In this case we will import a data file referred to in 'The R book'. Notice that we are able to import it directly from the internet, but the location could just as easily be a local folder: <tt>C://data/</tt>.</p>
+
 <!--begin.rcode
+rats <- read.table(
+     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt", 
+     header = T
+     )
+end.rcode-->
 
-# To import from a '.txt' file we used the read.table() function
-# again you must assign the function a name first. In this case we will import a data file
-# referred to in 'The R book'. Notice that we are able to import it directly from
-# the internet, but the location could just as easily be a local folder: "C://data/"
+<p>Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'</p>
 
-rats <- read.table("http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt", header=T)
-
-# Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'
-
+<!--begin.rcode
 rats
-
 end.rcode-->
 
 <p>This isn't a particularly big table so we can view the whole thing at once, but if it was longer we might want to summarise the data or look at smaller chunks of it.</p>
 
+<p>we can look at the first 6 rows with:</p>
+
 <!--begin.rcode
-# we can look at the first 6 rows with:
-
 head(rats)
-
-
-# Or the last 6 rows with:
-
-tail(rats)
-
-# We can select individual columns or rows with square brackets. rats[1,1] will give you the value on the first row of the first column:
-
-rats[1,1]
-
-# The first number denotes row, the second column. So to see the whole first row, we do:
-
-rats[1,]
-
-# We can also specify a series by using a colon:
-
-rats[1:10,]
-
-# If we wanted every third row, we could use the seq() function:
-
-rats[seq(3,36,3),]
-
-# In this case the three arguments in the seq function mean: start at value 3, end at value 36, and jump 3 rows at a time. 
-
-# We can also compute some summary statistics from the data:
-
-summary(rats)
-
-# Or look at the structure of the object
-
-str(rats)
-
 end.rcode-->
 
-<p> <tt>str()</tt> is useful, because it lets us know how R is seeing the parts of this table. <tt>int</tt> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labeling it as a <tt>factor</tt>.</p>
-
+<p>Or the last 6 rows with:</p>
 
 <!--begin.rcode
-# To solve this, either use characters - A, B, C instead of 1, 2, 3 for factors, or convert them manually:
+tail(rats)
+end.rcode-->
 
-rats$Treatment <- factor(rats$Treatment)
+<p>We can select individual columns or rows with square brackets. <tt>rats[1,1]</tt> will give you the value on the first row of the first column:</p>
 
-# By using the factor command, we in effect convert a continuous variable into a categorical one:
+<!--begin.rcode
+rats[1,1]
+end.rcode-->
 
+
+<p>The first number denotes row, the second column. So to see the whole first row, we do:</p>
+
+<!--begin.rcode
+rats[1,]
+end.rcode-->
+
+<p>We can also specify a series by using a colon:</p>
+
+<!--begin.rcode
+rats[1:10,]
+end.rcode-->
+
+<p>If we wanted every third row, we could use the <tt>seq()</tt> function:</p>
+
+<!--begin.rcode
+rats[seq(3,36,3),]
+end.rcode-->
+
+<p>In this case the three arguments in the seq function mean: start at value 3, end at value 36, and jump 3 rows at a time.</p>
+
+<p>We can also compute some summary statistics from the data:</p>
+
+<!--begin.rcode
+summary(rats)
+end.rcode-->
+
+<p>Or look at the structure of the object</p>
+
+<!--begin.rcode
 str(rats)
+end.rcode-->
 
+<p><tt>str()</tt> is useful, because it lets us know how R is seeing the parts of this table. <tt>int</tt> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labeling it as a <tt>factor</tt>.</p>
+
+<p>To solve this, either use characters - A, B, C instead of 1, 2, 3 for factors, or convert them manually:</p>
+
+<!--begin.rcode
+rats$Treatment <- factor(
+     rats$Treatment
+     )
+end.rcode-->
+
+<p>By using the factor command, we in effect convert a continuous variable into a categorical one:</p>
+
+<!--begin.rcode
+str(rats)
 end.rcode-->
 
 <p>Now convert Rat and Liver into categorical variables in the same way - we will need this data later.</p>
@@ -188,13 +199,19 @@ end.rcode-->
 
 # Install the package plyr - if you don't have it already - note you can check this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run the command again, even if it is installed!
 
-install.packages('plyr',repos="http://cran.rstudio.com/")
+install.packages(
+     'plyr',
+     repos="http://cran.rstudio.com/"
+     )
 
 # Load the package:
 
 library(plyr)
 
-rats$Treatment1 <- revalue(rats$Treatment, c("1" = "A", "2" = "B", "3" = "C"))
+rats$Treatment1 <- revalue(
+     rats$Treatment, 
+     c("1" = "A", "2" = "B", "3" = "C")
+     )
 
 rats$Treatment
 rats$Treatment1

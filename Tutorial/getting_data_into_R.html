@@ -88,58 +88,51 @@
 
 <p>Get used to the idea of calling functions like this with a number of arguments following - we will do this a lot!</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Create an object called short_variable, and assign a series of numbers to</span>
-<span class="hl com"># it.</span>
-<span class="hl com"># We use '&lt;-' to create the object. This is called 'gets'.</span>
-<span class="hl std">short_variable</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">7</span><span class="hl std">,</span> <span class="hl num">9</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">)</span>
-<span class="hl com"># To see what is contained within an object, simply input the name of the</span>
-<span class="hl com"># object.</span>
-<span class="hl std">short_variable</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Note that this the equivalent in R of writing print(short_variable).  This</span>
-<span class="hl com"># is not particularly important in this course, but it becomes important as</span>
-<span class="hl com"># you begin to write your own functions.</span>
-<span class="hl kwd">print</span><span class="hl std">(short_variable)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
-</pre></div>
-<div class="source"><pre class="knitr r">
-# A more convenient way of entering a series of numbers is to use the scan()
-# function.  You must still assign a name to the object you are creating as
-# before, but scan() Will allow you to enter the data more easily.
 
-# Try that now.
+<p>Create an object called short_variable, and assign a series of numbers to it. We use <tt><-</tt> to create the object. This is called 'gets'.</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">short_variable</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">7</span><span class="hl std">,</span> <span class="hl num">9</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
 
 
 
-<p>A more convenient way of entering a series of numbers is to use the scan() function.
-You must still assign a name to the object you are creating as before, but scan() Will allow you to enter the data more easily.</p>
+<p>To see what is contained within an object, simply input the name of the object.</p>
 
-<p class="ex">Try that now.</p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">short_variable</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  1  5  6  7  9  2 10
+</pre></div>
+</div></div>
 
+
+<p>Note that this the equivalent in R of writing <tt>print(short_variable)</tt>. This is not particularly important in this course, but it becomes important as you begin to write your own functions.</p>
+
+<p> A more convenient way of entering a series of numbers is to use the <tt>scan()</tt> function. You must still assign a name to the object you are creating as before, but <tt>scan()</tt> will allow you to enter the data more easily. </p>
+
+<div class= "ex">
+<h3>Exercise</h3>
+<p>Try creating a variable called <tt>short_variable2</tt> and populate it with 10 numbers, using <tt>scan()</tt>.</p>
+</div>
 
 <h2>Importing from the clipboard</h2>
 
 <p>It is possible to import data from R directly from the clipboard - having just copied a table from a spreadsheet. Simply select the table of interest and copy it to clipboard as usual (Ctrl + C). The following code will then allow you to paste the table directly into R.</p>
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># The line header = T tells R that you have copied the column headers with</span>
-<span class="hl com"># the data too.</span>
-<span class="hl std">new_table</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;clipboard&quot;</span><span class="hl std">,</span> <span class="hl kwc">header</span> <span class="hl std">= T)</span>
+<p> The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">new_table</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;clipboard&quot;</span><span class="hl std">,</span> <span class="hl kwc">header</span> <span class="hl std">= T)</span>
 </pre></div>
 </div></div>
 
 
 <p>If you copy direct from excel, this should work, but you may also want to copy from a 'comma separated values' file (.csv), in which case you need to tell R using the argument <tt>sep = ","</tt>, or equivalent.</p>
 
-<p>Whilst this is an easy way of getting data into R, I do not recommend it. Unless you then plan on re-saving the data using R. The problem with this kind of method, is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
+<p>Whilst this is an easy way of getting data into R, <b>I do not recommend it</b>. Unless you then plan on re-saving the data using R. The problem with this kind of method, is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
 
 <p>One solution to this, is to use R to re-save your data in a new format. This is very similar to the process of importing a new table:</p>
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(new_table,</span> <span class="hl str">&quot;C:/data/new_table.csv&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;,&quot;</span><span class="hl std">,</span> <span class="hl kwc">row.names</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(new_table,</span> <span class="hl str">&quot;C:/data/new_table.csv&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;,&quot;</span><span class="hl std">,</span> <span class="hl kwc">row.names</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
 
@@ -163,16 +156,17 @@ You must still assign a name to the object you are creating as before, but scan(
 
 <p>Let's assume we've done that already:</p>
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># To import from a '.txt' file we used the read.table() function again you</span>
-<span class="hl com"># must assign the function a name first. In this case we will import a data</span>
-<span class="hl com"># file referred to in 'The R book'. Notice that we are able to import it</span>
-<span class="hl com"># directly from the internet, but the location could just as easily be a</span>
-<span class="hl com"># local folder: 'C://data/'</span>
-<span class="hl std">rats</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt&quot;</span><span class="hl std">,</span>
+<p>To import from a '.txt' file we used the <tt>read.table()</tt> function again you must assign the function a name first. In this case we will import a data file referred to in 'The R book'. Notice that we are able to import it directly from the internet, but the location could just as easily be a local folder: <tt>C://data/</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt&quot;</span><span class="hl std">,</span>
     <span class="hl kwc">header</span> <span class="hl std">= T)</span>
-<span class="hl com"># Call the data to examine it. Note this data is dealt with on p475 of 'The</span>
-<span class="hl com"># R Book'</span>
-<span class="hl std">rats</span>
+</pre></div>
+</div></div>
+
+
+<p>Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 1       131         1   1     1
@@ -217,8 +211,9 @@ You must still assign a name to the object you are creating as before, but scan(
 
 <p>This isn't a particularly big table so we can view the whole thing at once, but if it was longer we might want to summarise the data or look at smaller chunks of it.</p>
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># we can look at the first 6 rows with:</span>
-<span class="hl kwd">head</span><span class="hl std">(rats)</span>
+<p>we can look at the first 6 rows with:</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
 ## 1      131         1   1     1
@@ -228,8 +223,12 @@ You must still assign a name to the object you are creating as before, but scan(
 ## 5      136         1   1     3
 ## 6      142         1   1     3
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Or the last 6 rows with:</span>
-<span class="hl kwd">tail</span><span class="hl std">(rats)</span>
+</div></div>
+
+
+<p>Or the last 6 rows with:</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 31      138         3   2     1
@@ -239,21 +238,32 @@ You must still assign a name to the object you are creating as before, but scan(
 ## 35      134         3   2     3
 ## 36      127         3   2     3
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># We can select individual columns or rows with square brackets. rats[1,1]</span>
-<span class="hl com"># will give you the value on the first row of the first column:</span>
-<span class="hl std">rats[</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">]</span>
+</div></div>
+
+
+<p>We can select individual columns or rows with square brackets. <tt>rats[1,1]</tt> will give you the value on the first row of the first column:</p>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats[</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 131
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># The first number denotes row, the second column. So to see the whole first</span>
-<span class="hl com"># row, we do:</span>
-<span class="hl std">rats[</span><span class="hl num">1</span><span class="hl std">, ]</span>
+</div></div>
+
+
+
+<p>The first number denotes row, the second column. So to see the whole first row, we do:</p>
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats[</span><span class="hl num">1</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   Glycogen Treatment Rat Liver
 ## 1      131         1   1     1
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># We can also specify a series by using a colon:</span>
-<span class="hl std">rats[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">, ]</span>
+</div></div>
+
+
+<p>We can also specify a series by using a colon:</p>
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 1       131         1   1     1
@@ -267,8 +277,12 @@ You must still assign a name to the object you are creating as before, but scan(
 ## 9       140         1   2     2
 ## 10      143         1   2     2
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># If we wanted every third row, we could use the seq() function:</span>
-<span class="hl std">rats[</span><span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">36</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">), ]</span>
+</div></div>
+
+
+<p>If we wanted every third row, we could use the <tt>seq()</tt> function:</p>
+
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats[</span><span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">36</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">), ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
 ## 3       131         1   1     2
@@ -284,10 +298,14 @@ You must still assign a name to the object you are creating as before, but scan(
 ## 33      139         3   2     2
 ## 36      127         3   2     3
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># In this case the three arguments in the seq function mean: start at value</span>
-<span class="hl com"># 3, end at value 36, and jump 3 rows at a time.</span>
-<span class="hl com"># We can also compute some summary statistics from the data:</span>
-<span class="hl kwd">summary</span><span class="hl std">(rats)</span>
+</div></div>
+
+
+<p>In this case the three arguments in the seq function mean: start at value 3, end at value 36, and jump 3 rows at a time.</p>
+
+<p>We can also compute some summary statistics from the data:</p>
+
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##     Glycogen     Treatment      Rat          Liver  
 ##  Min.   :125   Min.   :1   Min.   :1.0   Min.   :1  
@@ -297,8 +315,12 @@ You must still assign a name to the object you are creating as before, but scan(
 ##  3rd Qu.:150   3rd Qu.:3   3rd Qu.:2.0   3rd Qu.:3  
 ##  Max.   :162   Max.   :3   Max.   :2.0   Max.   :3
 </pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Or look at the structure of the object</span>
-<span class="hl kwd">str</span><span class="hl std">(rats)</span>
+</div></div>
+
+
+<p>Or look at the structure of the object</p>
+
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
 ##  $ Glycogen : int  131 130 131 125 136 142 150 148 140 143 ...
@@ -309,15 +331,18 @@ You must still assign a name to the object you are creating as before, but scan(
 </div></div>
 
 
-<p> <tt>str()</tt> is useful, because it lets us know how R is seeing the parts of this table. <tt>int</tt> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labeling it as a <tt>factor</tt>.</p>
+<p><tt>str()</tt> is useful, because it lets us know how R is seeing the parts of this table. <tt>int</tt> for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labeling it as a <tt>factor</tt>.</p>
+
+<p>To solve this, either use characters - A, B, C instead of 1, 2, 3 for factors, or convert them manually:</p>
+
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(rats</span><span class="hl opt">$</span><span class="hl std">Treatment)</span>
+</pre></div>
+</div></div>
 
 
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># To solve this, either use characters - A, B, C instead of 1, 2, 3 for</span>
-<span class="hl com"># factors, or convert them manually:</span>
-<span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(rats</span><span class="hl opt">$</span><span class="hl std">Treatment)</span>
-<span class="hl com"># By using the factor command, we in effect convert a continuous variable</span>
-<span class="hl com"># into a categorical one:</span>
-<span class="hl kwd">str</span><span class="hl std">(rats)</span>
+<p>By using the factor command, we in effect convert a continuous variable into a categorical one:</p>
+
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
 ##  $ Glycogen : int  131 130 131 125 136 142 150 148 140 143 ...
@@ -337,7 +362,7 @@ You must still assign a name to the object you are creating as before, but scan(
 
 
 
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Install the package plyr - if you don't have it already - note you can</span>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Install the package plyr - if you don't have it already - note you can</span>
 <span class="hl com"># check this on the right hand 'packages' tab of RStudio. But, it doesn't</span>
 <span class="hl com"># hurt to run the command again, even if it is installed!</span>
 <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;plyr&quot;</span><span class="hl std">,</span> <span class="hl kwc">repos</span> <span class="hl std">=</span> <span class="hl str">&quot;http://cran.rstudio.com/&quot;</span><span class="hl std">)</span>
@@ -348,7 +373,7 @@ You must still assign a name to the object you are creating as before, but scan(
 <div class="output"><pre class="knitr r">## package 'plyr' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\s162906\AppData\Local\Temp\Rtmpy4hWme\downloaded_packages
+## 	C:\Users\s162906\AppData\Local\Temp\RtmpUJZmwd\downloaded_packages
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># Load the package:</span>
 <span class="hl kwd">library</span><span class="hl std">(plyr)</span>
@@ -377,7 +402,7 @@ You must still assign a name to the object you are creating as before, but scan(
 
 <p>If you have followed the above instructions, you should have something that looks like this:</p>
 
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(rats)</span>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(rats)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  5 variables:
 ##  $ Glycogen  : int  131 130 131 125 136 142 150 148 140 143 ...
