@@ -71,7 +71,7 @@
 
 <h1>R coding style</h1>
 
-<p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your R code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example <a href=#footnote-1>[1]</a>:
+<p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your <tt>R</tt> code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example <a href=#footnote-1>[1]</a>:
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Good</span>
 <span class="hl kwa">if</span> <span class="hl std">(debug)</span>
@@ -120,6 +120,57 @@
 
 
 <p>Other style guides do exist, for example the Google style guide (<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a>) or the 4D Pie charts guide (<a href="http://4dpiecharts.com/r-code-style-guide/">http://4dpiecharts.com/r-code-style-guide/</a>).</p>
+
+<h2>Lazy functions</h2>
+
+<p>Functions in <tt>R</tt> can usually be called in a 'lazy' way. This essentially means that we do not specify the names of the arguments in a function, and/or we do not specify all the arguments of that function.</p>
+
+<p>In this course, I have stuck to the convention of specifying the name of each argument before we define it, hence if we wanted to create a sequence of numbers from 1-10, in this course I have used:</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">seq</span><span class="hl std">(</span>
+     <span class="hl kwc">from</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl kwc">to</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span>
+     <span class="hl kwc">by</span> <span class="hl std">=</span> <span class="hl num">1</span>
+     <span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  1  2  3  4  5  6  7  8  9 10
+</pre></div>
+</div></div>
+
+
+<p>We can also get the same results by running:</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">seq</span><span class="hl std">(</span>
+     <span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl num">10</span><span class="hl std">,</span>
+     <span class="hl num">1</span>
+     <span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  1  2  3  4  5  6  7  8  9 10
+</pre></div>
+</div></div>
+
+
+<p>Or even:</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  1  2  3  4  5  6  7  8  9 10
+</pre></div>
+</div></div>
+
+
+<p><b>So what should you take from this?</b></p>
+
+<p>Just be aware that the code used in this course is the deliberately <i>long-hand</i>, and that in general you can shorten your code, by omitting the definition of certain arguments, and particularly by not specifying the name of the argument, so long as you are aware of the order in which <tt>R</tt> expects to receive them! If you give the names of the arguments first, it doesn't matter what the order is.</p>
+
+<p>To find out th default methods of a function, run <tt>?</tt> in front of the function to open the help file. For example with <tt>?seq</tt>:</p>
+
+<pre>
+## Default S3 method:
+seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)),
+    length.out = NULL, along.with = NULL, ...)
+</pre>
 
 <br><br><hr>
 

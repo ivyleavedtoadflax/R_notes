@@ -9,7 +9,7 @@
 
 <h1>R coding style</h1>
 
-<p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your R code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example <a href=#footnote-1>[1]</a>:
+<p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your <tt>R</tt> code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example <a href=#footnote-1>[1]</a>:
 
 <!--begin.rcode,eval=FALSE,tidy=FALSE
 # Good
@@ -56,6 +56,48 @@ end.rcode-->
 
 
 <p>Other style guides do exist, for example the Google style guide (<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a>) or the 4D Pie charts guide (<a href="http://4dpiecharts.com/r-code-style-guide/">http://4dpiecharts.com/r-code-style-guide/</a>).</p>
+
+<h2>Lazy functions</h2>
+
+<p>Functions in <tt>R</tt> can usually be called in a 'lazy' way. This essentially means that we do not specify the names of the arguments in a function, and/or we do not specify all the arguments of that function.</p>
+
+<p>In this course, I have stuck to the convention of specifying the name of each argument before we define it, hence if we wanted to create a sequence of numbers from 1-10, in this course I have used:</p>
+
+<!--begin.rcode,tidy=FALSE
+seq(
+     from = 1,
+     to = 10,
+     by = 1
+     )
+end.rcode-->
+
+<p>We can also get the same results by running:</p>
+
+<!--begin.rcode,tidy=FALSE
+seq(
+     1,
+     10,
+     1
+     )
+end.rcode-->
+
+<p>Or even:</p>
+
+<!--begin.rcode
+seq(10)
+end.rcode-->
+
+<p><b>So what should you take from this?</b></p>
+
+<p>Just be aware that the code used in this course is the deliberately <i>long-hand</i>, and that in general you can shorten your code, by omitting the definition of certain arguments, and particularly by not specifying the name of the argument, so long as you are aware of the order in which <tt>R</tt> expects to receive them! If you give the names of the arguments first, it doesn't matter what the order is.</p>
+
+<p>To find out th default methods of a function, run <tt>?</tt> in front of the function to open the help file. For example with <tt>?seq</tt>:</p>
+
+<pre>
+## Default S3 method:
+seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)),
+    length.out = NULL, along.with = NULL, ...)
+</pre>
 
 <br><br><hr>
 

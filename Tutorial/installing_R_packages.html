@@ -104,5 +104,18 @@
 
 <p>Note that you will need to call the package with <tt>library</tt> or <tt>require</tt> every time you run a new instance of R. Running the <tt>install.packages</tt> command will also update a package to the latest available version.</p>
 
+<p>For use in this course, you shoudl run the following code to make sure you have the correct packages:</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Note that this may throw up a warning message</span>
+<span class="hl kwd">install.packages</span><span class="hl std">(</span>
+     <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'agricolae'</span><span class="hl std">,</span><span class="hl str">'reshape'</span><span class="hl std">,</span><span class="hl str">'RColorBrewer'</span><span class="hl std">),</span>
+     <span class="hl kwc">repos</span><span class="hl std">=</span><span class="hl str">&quot;http://cran.rstudio.com/&quot;</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+
+
+
 </body>
 </html>

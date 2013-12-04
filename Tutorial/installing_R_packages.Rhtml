@@ -41,5 +41,19 @@ end.rcode-->
 
 <p>Note that you will need to call the package with <tt>library</tt> or <tt>require</tt> every time you run a new instance of R. Running the <tt>install.packages</tt> command will also update a package to the latest available version.</p>
 
+<p>For use in this course, you shoudl run the following code to make sure you have the correct packages:</p>
+
+<!--begin.rcode,eval=FALSE,tidy=FALSE
+
+# Note that this may throw up a warning message
+
+install.packages(
+     c('agricolae','plyr','reshape','RColorBrewer'), 
+     repos="http://cran.rstudio.com/"
+     )
+end.rcode-->
+
+
+
 </body>
 </html>
