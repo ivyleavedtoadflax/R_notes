@@ -18,17 +18,24 @@
 
 <p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 120 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
-<!--begin.rcode,tidy=TRUE
+<!--begin.rcode,echo=FALSE
+options(keep.comment = TRUE, keep.blank.line = FALSE)
+end.rcode-->
+
+
+<!--begin.rcode,tidy=FALSE,prompt=FALSE
 
 set.seed(1337)
 
-# For brevity the commands have been called lazily!
+# For brevity these commands have been called lazily!
+
+
 
 oc_data <- data.frame(
-     block = rep(1:3,each=40),
-     treatment = rep(rep(LETTERS[1:4],each=6),length.out=120),     
+     block = rep(rep(1:3,each=6),length.out=120),
+     treatment = rep(rep(LETTERS[1:4],length=24),length.out=120),     
      depth = rep(1:6,each=20),
-     oc = rev(sort(abs(c(5,3,2.2,1.8,1.2,1)+runif(120,min=-1.5,max=1.5)))),
+     oc = rev(sort(abs(c(5,3,2.2,1.8,1.2,1)+runif(120,max=1.5,min=1.5)+rexp(120,rate=10)))),
      bd = rev(sort(runif(120,min=0.85,max=1.6)))
      )
 
@@ -40,7 +47,12 @@ end.rcode-->
 
 <p>This makes for a reasonably complicated factorial experiment. If we want to get somethign sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
 
-<!--begin.rcode,tidy=FALSE,eval=1:3,message=FALSE,warning=FALSE,echo=-1
+<!--begin.rcode,echo=FALSE,warning=FALSE,message=FALSE
+require(reshape)
+end.rcode-->
+
+
+<!--begin.rcode,tidy=FALSE,message=FALSE,warning=FALSE,eval=-1
 
 require(reshape)
 
@@ -52,10 +64,79 @@ oc_data_m <- melt(
 
 head(oc_data_m)
 
-# I won't run this command for brevity, but you should!:
+# I won't run this command for brevity, but you should, just to check the data:
 
-oc_data_m
+#oc_data_m
 
+
+end.rcode-->
+
+<p>Suppose we want to see the average <tt>bd</tt> and <tt>oc</tt> for each treatment, each depth, and a combination of treatment and depth...</p>
+
+<!--begin.rcode,tidy=FALSE,message=FALSE,warning=FALSE
+
+cast(
+     oc_data_m,
+     treatment ~ variable,
+     mean
+     )
+
+
+# If we want the standard deviation as well as the mean, we can use:
+
+cast(
+     oc_data_m,
+     depth ~ variable,
+     c(mean, sd)
+     )
+
+# We can even apply our own custom functions - for example the upper and lower 
+# 95% confidence interval
+
+uci95 <- function(x) {
+     
+     mean(x) + qt(0.975,df = length(x)-1) * sd(x) / sqrt(length(x))
+
+}
+
+lci95 <- function(x) {
+     
+     mean(x) - qt(0.975,df = length(x)-1) * sd(x) / sqrt(length(x))
+
+}
+
+# and if we are only interested in one variable, and teh top three depths for
+# instance...., we subset the data
+
+cast(
+     subset(
+          oc_data_m, 
+          variable == "oc" & depth < 4),
+     treatment + depth ~ variable,
+     c(mean, sd, lci95, uci95)
+     )
+
+
+end.rcode-->
+
+<p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visuliation and analysis packages require it. With the excellent <tt>ggplot</tt> package, for instance, it is possible to produce complex graphics from long data very simply</p>
+
+<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
+
+require(ggplot2)
+
+ggplot(
+     oc_data_m,
+     aes(
+          x = factor(depth),
+          y = value,
+          group = factor(depth),
+          fill = variable
+          )
+     )+geom_boxplot(fill="gray")+
+     geom_jitter(shape=21,size=3.5,alpha=0.5)+
+     facet_grid(variable~treatment,scale="free")+
+     theme_bw()
 
 end.rcode-->
 
