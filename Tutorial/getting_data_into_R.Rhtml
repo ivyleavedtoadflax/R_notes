@@ -55,7 +55,7 @@ end.rcode-->
 
 <p> The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
 
-<!--begin.rcode, eval=FALSE
+<!--begin.rcode,eval=FALSE,tidy=FALSE
 new_table <- read.table(
      "clipboard", 
      header = T
@@ -68,7 +68,7 @@ end.rcode-->
 
 <p>One solution to this, is to use R to re-save your data in a new format. This is very similar to the process of importing a new table:</p>
 
-<!--begin.rcode, eval=FALSE
+<!--begin.rcode,eval=FALSE,tidy=FALSE
 
 write.table(
      new_table, 
@@ -100,7 +100,7 @@ end.rcode-->
 
 <p>To import from a '.txt' file we used the <tt>read.table()</tt> function again you must assign the function a name first. In this case we will import a data file referred to in 'The R book'. Notice that we are able to import it directly from the internet, but the location could just as easily be a local folder: <tt>C://data/</tt>.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats <- read.table(
      "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt", 
      header = T
@@ -109,7 +109,7 @@ end.rcode-->
 
 <p>Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats
 end.rcode-->
 
@@ -117,38 +117,38 @@ end.rcode-->
 
 <p>we can look at the first 6 rows with:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 head(rats)
 end.rcode-->
 
 <p>Or the last 6 rows with:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 tail(rats)
 end.rcode-->
 
 <p>We can select individual columns or rows with square brackets. <tt>rats[1,1]</tt> will give you the value on the first row of the first column:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats[1,1]
 end.rcode-->
 
 
 <p>The first number denotes row, the second column. So to see the whole first row, we do:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats[1,]
 end.rcode-->
 
 <p>We can also specify a series by using a colon:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats[1:10,]
 end.rcode-->
 
 <p>If we wanted every third row, we could use the <tt>seq()</tt> function:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats[seq(3,36,3),]
 end.rcode-->
 
@@ -156,13 +156,13 @@ end.rcode-->
 
 <p>We can also compute some summary statistics from the data:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 summary(rats)
 end.rcode-->
 
 <p>Or look at the structure of the object</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 str(rats)
 end.rcode-->
 
@@ -170,7 +170,7 @@ end.rcode-->
 
 <p>To solve this, either use characters - A, B, C instead of 1, 2, 3 for factors, or convert them manually:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 rats$Treatment <- factor(
      rats$Treatment
      )
@@ -178,13 +178,13 @@ end.rcode-->
 
 <p>By using the factor command, we in effect convert a continuous variable into a categorical one:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 str(rats)
 end.rcode-->
 
 <p>Now convert Rat and Liver into categorical variables in the same way - we will need this data later.</p>
 
-<!--begin.rcode,eval=TRUE,include=FALSE
+<!--begin.rcode,eval=TRUE,include=FALSE,tidy=FALSE
 
 rats$Rat <- factor(rats$Rat)
 rats$Liver <- factor(rats$Liver)
@@ -195,9 +195,11 @@ end.rcode-->
 
 
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
-# Install the package plyr - if you don't have it already - note you can check this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run the command again, even if it is installed!
+# Install the package plyr - if you don't have it already - note you can check
+# this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run
+# the command again, even if it is installed!
 
 install.packages(
      'plyr',
@@ -227,7 +229,7 @@ end.rcode-->
 
 <p>If you have followed the above instructions, you should have something that looks like this:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 str(rats)
 
 rats

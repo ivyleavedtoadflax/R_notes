@@ -13,30 +13,33 @@
 
 <p>Downloading and installing packages is a very simple procedure in R and can be done with a single line of code -- You will probably do this a lot!</p>
 
-<p>Int his instance, we specify the repository from which we will download the package - if you omitted <b>repos=""</b> then you would be asked to select a repository from a list. Rstudio's mirror is hosted by amazon, and hence, is pretty fast - so we'll use that one.</p>
+<p>Int his instance, we specify the repository from which we will download the package - if you omitted <tt>repos=""</tt> then you would be asked to select a repository from a list. Rstudio's mirror is hosted by amazon, and hence, is pretty fast - so we'll use that one.</p>
 
-<!--begin.rcode,eval=FALSE
+<!--begin.rcode,eval=FALSE,tidy=FALSE
 
-# Note that this may throw up a 
+# Note that this may throw up a warning message
 
-install.packages('agricolae', repos="http://cran.rstudio.com/")
+install.packages(
+     'agricolae', 
+     repos="http://cran.rstudio.com/"
+     )
 end.rcode-->
 
 <p>R will then download the package and install it in the relevant directory.</p>
 
-<p>In order to use the package you need to call the package using <b>library</b>. This may or may not generate a message or warning.</p>
+<p>In order to use the package you need to call the package using <tt>library</tt>. This may or may not generate a message or warning.</p>
 
 <!--begin.rcode, eval=FALSE
 library(agricolae)
 end.rcode-->
 
-<p>If you wanto to suppress warnings (for instance if you wish to call a package from within a function) you can also <b>require</b>:</p>
+<p>If you wanto to suppress warnings (for instance if you wish to call a package from within a function) you can also <tt>require</tt>:</p>
 
 <!--begin.rcode, eval=FALSE
 require(agricolae)
 end.rcode-->
 
-<p>Note that you will need to call the package with <b>library</b> or <b>require</b> every time you run a new instance of R. Running the <b>install.packages</b> command will also update a package to the latest available version.</p>
+<p>Note that you will need to call the package with <tt>library</tt> or <tt>require</tt> every time you run a new instance of R. Running the <tt>install.packages</tt> command will also update a package to the latest available version.</p>
 
 </body>
 </html>

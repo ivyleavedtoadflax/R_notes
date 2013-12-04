@@ -11,21 +11,35 @@
 
 <p>Believe it or not, quite a lot of discussion (online discussion that is) goes into the question of what your R code should look like when you write it, i.e. where you should put spaces, how you should name files, etc. For example <a href=#footnote-1>[1]</a>:
 
-<!--begin.rcode,eval=FALSE
+<!--begin.rcode,eval=FALSE,tidy=FALSE
 # Good
-`if (debug)`
-`plot(x, y)`
-
+if (debug)
+plot(x, y)
+###
 # Bad
-`if(debug)`
-`plot (x, y)`
+if(debug)
+plot (x, y)
 end.rcode-->
-
-
 
 <p>In the above example, it makes no difference at all <em>how</em> the code is interpreted by R, but it can make the difference between code that is easy to read, and code that isn't. This is especially important if you are sharing your code with collaborators, as there is nothing worse than having to re-arrange someone else's code before you can even read it!</p>
 
-<p>Throughout this document I have adhered (loosely in places) to <a href="https://github.com/hadley/devtools/wiki/Style">Hadley Wickham's style guide</a>, which is based on the Google style guide. If you want to explicitly know what this means - follow the link above and have a read - this is probably a good idea once you have had some practice with the language.</p>
+<p>It's also common practice to split command over multiple lines to make them easier to read. In this course, I have followed the convention of splitting commands that take more than one argument over several lines, so:</p>
+
+<!--begin.rcode,eval=FALSE,tidy=FALSE
+# Good
+plot(
+     x = x,
+     y = y,
+     type = "l",
+     col = "black"
+     )
+###
+# Bad
+plot(x=x,y=y,type="l",col="black")
+
+end.rcode-->
+
+<p>In general, I have adhered (loosely in places) to <a href="https://github.com/hadley/devtools/wiki/Style">Hadley Wickham's style guide</a>, which is based on the Google style guide. If you want to explicitly know what this means - follow the link above and have a read - this is probably a good idea once you have had some practice with the language.</p>
 
 <p>By all means, if you prefer, use a different style, it really doesn't matter so long as your code is clear and easy to read. Some important rules to follow, whichever style you decide to follow however are:</p>
 
@@ -34,6 +48,12 @@ end.rcode-->
 <li>Make file and object names meaningful: don't fall into the lazy practice of calling objects 'a' or 'b', or other unhelpful names.</li>
 <li>Comment your code liberally: explain why you are doing what you are doing - it makes it so much easier when either you go back to code you wrote months earlier, or when sharing your code with other collaborators.</li>
 </ol>
+
+<!--begin.rcode,eval=FALSE,tidy=FALSE
+# This is a comment!
+# Use this to explain your code!
+end.rcode-->
+
 
 <p>Other style guides do exist, for example the Google style guide (<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a>) or the 4D Pie charts guide (<a href="http://4dpiecharts.com/r-code-style-guide/">http://4dpiecharts.com/r-code-style-guide/</a>).</p>
 

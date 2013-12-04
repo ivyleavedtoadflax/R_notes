@@ -27,13 +27,13 @@
 
 <p>Define object <tt>x</tt> with the value 5</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 x <- 9  
 end.rcode-->
 
 <p>Try out the <tt>if</tt> statement...</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 if (x > 5) {
      print(TRUE)
      }
@@ -41,7 +41,7 @@ end.rcode-->
 
 <p>So far so good...and if we want to do exactly the same thing as we did in Excel we need to add <tt>else</tt>.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 if (x > 5) {
      print(TRUE)
@@ -61,7 +61,7 @@ end.rcode-->
 
 <p>In specifying a for loop, we must define the range over which we want the loop to run. In this case we use 1:10. The loop will then iterate across the sequence 1, 2, 3...etc substituting i for the number of the iteration</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 for (i in 1:10) {
      print(
@@ -81,7 +81,7 @@ end.rcode-->
 
 <p>First generate 100 random numbers using a normal distribution using rnorm - see <tt>?rnorm</tt> for details. We set the seed to 500 first to make this example reproducible. See <tt>?set.seed</tt></p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 set.seed(500) 
 
 dummy <- rnorm(
@@ -93,7 +93,7 @@ dummy <- rnorm(
 dummy
 end.rcode-->
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 # Now limit the data to two decimal places to make it easier to read
 
 dummy <- round(
@@ -106,19 +106,19 @@ end.rcode-->
 
 <p>Calculate the mean of this vector...</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 mean(dummy)
 end.rcode-->
 
 <p>Calculate the mean of this vector</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 sd(dummy)
 end.rcode-->
 
 <p>Let's also plot a probability density function of this data to see what it looks like:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 plot(
      density(dummy), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
@@ -147,7 +147,7 @@ end.rcode-->
 
 <p>First the <tt>if</tt> statement: let's start by using the last value of the dummy data:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 if (dummy[100] > (mean(dummy) + sd(dummy))) {
      
      print("ABOVE")
@@ -158,7 +158,7 @@ end.rcode-->
 <p> And... nothing happens... because the last value of dummy is <!--rinline dummy[100] -->; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <tt>else if</tt> statement to decide.</p>
 
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 if (dummy[100] > (mean(dummy) + sd(dummy))) {
      
@@ -175,7 +175,7 @@ end.rcode-->
 
 <p>There is a third possibility - the values are within the red lines in our plot - i.e. within one standard deviation of the mean. We can add an else statement to deal with this eventuality too.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 if (dummy[100] > (mean(dummy) + sd(dummy))) {
      
@@ -196,11 +196,12 @@ end.rcode-->
 <p>Now let's wrap the <tt>if else</tt> statement with a <tt>for</tt> loop, and run it over the whole dummy dataset.</p>
 
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 # first we must specify what we want to the loop to iterate over:
+# it's usual to name the indexer as i
 
-for (i in dummy) { # it's usual to name the indexer as i
+for (i in dummy) { 
      
      # we replace dummy[100] with i in both instances
      
@@ -224,7 +225,7 @@ end.rcode-->
 
 <p>First we create a vector into which we will store the answers:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 dummy_sd <- vector(
      length = 100,
      mode = "character"
@@ -233,7 +234,7 @@ end.rcode-->
 
 <p>Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 for (i in 1:length(dummy)) { 
      
      # now we need to change i back to dummy - but use 'i' as subscript:
@@ -262,7 +263,7 @@ end.rcode-->
 
 <p>Check the results:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 dummy_data <- data.frame(
      data = dummy, 
      sd = dummy_sd
@@ -280,7 +281,7 @@ end.rcode-->
 
 <p>We assign a name to the vector which our function will produce, using 'gets' (<tt><-</tt>). Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 dummy_sd1 <- sapply(dummy, 
        
        # then we need to wrap our for loop and if statements in a function wrapper
@@ -309,7 +310,7 @@ end.rcode-->
 
 <p>Check if the answer is the same as the previous example:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 identical(dummy_sd,dummy_sd1)
 end.rcode-->
 
@@ -320,7 +321,7 @@ end.rcode-->
 
 <p>We will call the function <tt>sd_check</tt>. With <tt>function(y)</tt> we specify that the function <tt>sd_check()</tt> should be called with one argument <tt>y</tt> - in this case the name of the vector on which we wish to perform the function.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 sd_check <- function(y) { 
      
@@ -330,30 +331,17 @@ sd_check <- function(y) {
      # Everything below is the same as we have used previously.
      
      sapply(y, 
-            
-       
             function(x) {
-                 
                  if (x > (mean(y) + sd(y))) { 
-                      
-            
                       "ABOVE"
-                      
                       } else if (x < (mean(y) - sd(y))) {
-                           
-                           
                            "BELOW"
-                           
                            } else
-                                
-                                
                                 "WITHIN"
-                 
                  }
             )
      
      # And we close the curly brackets here.
-     
      }
 
 end.rcode-->
@@ -363,8 +351,7 @@ end.rcode-->
 <p>We will again set the seed to 500, to ensure that we get reproducible results. Check <tt>?set.seed</tt> for more information, and we will round the data to decimal places as we create it.</p>
 
 
-<!--begin.rcode
-
+<!--begin.rcode,tidy=FALSE
 set.seed(500)
 
 # We also specify the rounding to two decimal places in this command
@@ -376,7 +363,7 @@ dummy1 <- round(
 end.rcode-->
 <p>Lets plot this data in the same way as before:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 plot(
      density(dummy1), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
@@ -395,19 +382,17 @@ abline(
      lty = 2
      )
 
-
 end.rcode-->
 
 <p>Here we can see that the distribution of the data are very different from the normal <tt>dummy</tt>. We can now run our function on this data. We call the function with <tt>sd_check(dummy1)</tt>, with the vector <tt>dummy1</tt> as argument <tt>y</tt>.</p>
 
-<!--begin.rcode
-
+<!--begin.rcode,tidy=FALSE
 sd_check(dummy1)
 end.rcode-->
 
 <p>We can again assign this to a dataframe, but this time, we use a call to our function within our specification of the dataframe.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 dummy_data1 <- data.frame(
      data = dummy1, 
      sd = sd_check(dummy1) # here we call the function
@@ -422,7 +407,7 @@ end.rcode-->
 <p>We will actually nest one function within another to make things simpler. This time we are going to use <tt>which</tt>, a command which essentially does the same as our nested <tt>if</tt> loops, but much more elegantly:</p>
 
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 
 which(
      dummy1 > (mean(dummy1) + sd(dummy1))
@@ -431,7 +416,7 @@ end.rcode-->
 
 <p>We can count the number of values with length:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 length(
      which(
           dummy1 > (mean(dummy1) + sd(dummy1))
@@ -441,7 +426,7 @@ end.rcode-->
 
 <p> We can make the results for readable. Here we use <tt>noquote</tt> to remove quotes around the result, and paste to combine some character text "ABOVE" with the results of some code.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 noquote(
      paste(
           "ABOVE",
@@ -458,7 +443,7 @@ end.rcode-->
 <p> So lets roll this into a more complicated that we can apply to other data:</p>
 <p>We generalise the logical <tt>dummy1 > (mean(dummy1) + sd(dummy1))</tt> into <tt>y</tt>, and the character "ABOVE" into <tt>x</tt>.</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 sd_check_sum <- function(x,y) {
      
      print( 
@@ -476,25 +461,34 @@ end.rcode-->
 
 <p>So let's check it works:</p>
 
-<!--begin.rcode
-sd_check_sum("ABOVE",(dummy1 > (mean(dummy1) + sd(dummy1))))
+<!--begin.rcode,tidy=FALSE
+sd_check_sum(
+     "ABOVE",
+     (dummy1 > (mean(dummy1) + sd(dummy1)))
+     )
 end.rcode-->
 
 <p>And again:</p>
 
-<!--begin.rcode
-sd_check_sum("WITHIN",(dummy < mean(dummy) + sd(dummy) & dummy > (mean(dummy) - sd(dummy))))
+<!--begin.rcode,tidy=FALSE
+sd_check_sum(
+     "WITHIN",
+     (dummy < mean(dummy) + sd(dummy) & dummy > (mean(dummy) - sd(dummy)))
+     )
 end.rcode-->
 
 <p>We can now run the function with a different set of arguments:</p>
 
-<!--begin.rcode
-sd_check_sum("BELOW",(dummy1 < (mean(dummy1) - sd(dummy1))))
+<!--begin.rcode,tidy=FALSE
+sd_check_sum(
+     "BELOW",
+     (dummy1 < (mean(dummy1) - sd(dummy1)))
+     )
 end.rcode-->
 
 <p>So now we can simplify this again, by generalising <tt>dummy1</tt> with <tt>z</tt>:</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 sd_check_count <- function(z) {
      
 sd_check_sum("ABOVE",(z > (mean(z) + sd(z))))
@@ -506,13 +500,13 @@ end.rcode-->
 
 <p>So for the normally distributed data...</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 sd_check_count(dummy)
 end.rcode-->
 
 <p>...and the exponentially distributed data....</p>
 
-<!--begin.rcode
+<!--begin.rcode,tidy=FALSE
 sd_check_count(dummy1)
 end.rcode-->
 
