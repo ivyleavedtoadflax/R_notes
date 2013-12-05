@@ -70,7 +70,11 @@
 
 <body>
 
-<h1>Getting data into R</h1>
+<a class="next" href="installing_R_packages.html">Previous...Installing R packages</a>
+
+<br><hr class="ex1"><br>
+
+<h1>Getting data into <tt>R</tt></h1>
 
 <p>Probably the first question you are likely to ask when approaching R for the first time is 'how do I get my data into R'?</p>
 
@@ -137,7 +141,7 @@
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(</span>
      <span class="hl std">new_table,</span>
-     <span class="hl str">&quot;C:/data/new_table.csv&quot;</span><span class="hl std">,</span>
+     <span class="hl str">&quot;new_table.csv&quot;</span><span class="hl std">,</span>
      <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;,&quot;</span><span class="hl std">,</span>
      <span class="hl kwc">row.names</span> <span class="hl std">=</span> <span class="hl num">FALSE</span>
      <span class="hl std">)</span>
@@ -145,7 +149,7 @@
 </div></div>
 
 
-<p>In this example, we save the data to a location o C:/ drive, and we specify that the file is separated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.</p>
+<p>In this example, we save the data to the working directory, and we specify that the file is separated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.</p>
 
 <p>In the next section we will see how to import files like the one we have just produced.</p> 
 
@@ -374,38 +378,18 @@
 
 
 
-<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Install the package plyr - if you don't have it already - note you can check</span>
-<span class="hl com"># this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run</span>
-<span class="hl com"># the command again, even if it is installed!</span>
-<span class="hl kwd">install.packages</span><span class="hl std">(</span>
-     <span class="hl str">'plyr'</span><span class="hl std">,</span>
-     <span class="hl kwc">repos</span><span class="hl std">=</span><span class="hl str">&quot;http://cran.rstudio.com/&quot;</span>
-     <span class="hl std">)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## Installing package into 'C:/Users/s162906/Documents/R/win-library/3.0'
-## (as 'lib' is unspecified)
-</pre></div>
-<div class="output"><pre class="knitr r">## package 'plyr' successfully unpacked and MD5 sums checked
-</pre></div>
-<div class="warning"><pre class="knitr r">## Warning: cannot remove prior installation of package 'plyr'
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## The downloaded binary packages are in
-## 	C:\Users\s162906\AppData\Local\Temp\Rtmpwnl2Ua\downloaded_packages
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># Load the package:</span>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Load the package plyr:</span>
+
 <span class="hl kwd">library</span><span class="hl std">(plyr)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: there is no package called 'plyr'
+<div class="warning"><pre class="knitr r">## Warning: package 'plyr' was built under R version 3.0.2
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">revalue</span><span class="hl std">(</span>
      <span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment,</span>
      <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;1&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;2&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;B&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;3&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">)</span>
      <span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: could not find function "revalue"
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment</span>
+
+<span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3
 ## [36] 3
@@ -413,7 +397,9 @@
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">rats</span><span class="hl opt">$</span><span class="hl std">Treatment1</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## NULL
+<div class="output"><pre class="knitr r">##  [1] A A A A A A A A A A A A B B B B B B B B B B B B C C C C C C C C C C C
+## [36] C
+## Levels: A B C
 </pre></div>
 </div></div>
 
@@ -429,51 +415,52 @@
 
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(rats)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  4 variables:
-##  $ Glycogen : int  131 130 131 125 136 142 150 148 140 143 ...
-##  $ Treatment: Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
-##  $ Rat      : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 2 2 2 2 ...
-##  $ Liver    : Factor w/ 3 levels "1","2","3": 1 1 2 2 3 3 1 1 2 2 ...
+<div class="output"><pre class="knitr r">## 'data.frame':	36 obs. of  5 variables:
+##  $ Glycogen  : int  131 130 131 125 136 142 150 148 140 143 ...
+##  $ Treatment : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Rat       : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 2 2 2 2 ...
+##  $ Liver     : Factor w/ 3 levels "1","2","3": 1 1 2 2 3 3 1 1 2 2 ...
+##  $ Treatment1: Factor w/ 3 levels "A","B","C": 1 1 1 1 1 1 1 1 1 1 ...
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">rats</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver
-## 1       131         1   1     1
-## 2       130         1   1     1
-## 3       131         1   1     2
-## 4       125         1   1     2
-## 5       136         1   1     3
-## 6       142         1   1     3
-## 7       150         1   2     1
-## 8       148         1   2     1
-## 9       140         1   2     2
-## 10      143         1   2     2
-## 11      160         1   2     3
-## 12      150         1   2     3
-## 13      157         2   1     1
-## 14      145         2   1     1
-## 15      154         2   1     2
-## 16      142         2   1     2
-## 17      147         2   1     3
-## 18      153         2   1     3
-## 19      151         2   2     1
-## 20      155         2   2     1
-## 21      147         2   2     2
-## 22      147         2   2     2
-## 23      162         2   2     3
-## 24      152         2   2     3
-## 25      134         3   1     1
-## 26      125         3   1     1
-## 27      138         3   1     2
-## 28      138         3   1     2
-## 29      135         3   1     3
-## 30      136         3   1     3
-## 31      138         3   2     1
-## 32      140         3   2     1
-## 33      139         3   2     2
-## 34      138         3   2     2
-## 35      134         3   2     3
-## 36      127         3   2     3
+<div class="output"><pre class="knitr r">##    Glycogen Treatment Rat Liver Treatment1
+## 1       131         1   1     1          A
+## 2       130         1   1     1          A
+## 3       131         1   1     2          A
+## 4       125         1   1     2          A
+## 5       136         1   1     3          A
+## 6       142         1   1     3          A
+## 7       150         1   2     1          A
+## 8       148         1   2     1          A
+## 9       140         1   2     2          A
+## 10      143         1   2     2          A
+## 11      160         1   2     3          A
+## 12      150         1   2     3          A
+## 13      157         2   1     1          B
+## 14      145         2   1     1          B
+## 15      154         2   1     2          B
+## 16      142         2   1     2          B
+## 17      147         2   1     3          B
+## 18      153         2   1     3          B
+## 19      151         2   2     1          B
+## 20      155         2   2     1          B
+## 21      147         2   2     2          B
+## 22      147         2   2     2          B
+## 23      162         2   2     3          B
+## 24      152         2   2     3          B
+## 25      134         3   1     1          C
+## 26      125         3   1     1          C
+## 27      138         3   1     2          C
+## 28      138         3   1     2          C
+## 29      135         3   1     3          C
+## 30      136         3   1     3          C
+## 31      138         3   2     1          C
+## 32      140         3   2     1          C
+## 33      139         3   2     2          C
+## 34      138         3   2     2          C
+## 35      134         3   2     3          C
+## 36      127         3   2     3          C
 </pre></div>
 </div></div>
 
@@ -492,6 +479,11 @@
 <p>Finally, create a new object called <tt>maximae</tt> including only rows <tt>144</tt>, <tt>542</tt>, <tt>965</tt>, <tt>1371</tt> and <tt>1769</tt>.</p>
 
 </div>
+
+<br><hr class="ex1"><br>
+
+<a class="next" href="selecting_data.html">Next...Selecting Data</a>
+
 
 </body>
 

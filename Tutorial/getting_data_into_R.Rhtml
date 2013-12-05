@@ -8,7 +8,11 @@
 
 <body>
 
-<h1>Getting data into R</h1>
+<a class="next" href="installing_R_packages.html">Previous...Installing R packages</a>
+
+<br><hr class="ex1"><br>
+
+<h1>Getting data into <tt>R</tt></h1>
 
 <p>Probably the first question you are likely to ask when approaching R for the first time is 'how do I get my data into R'?</p>
 
@@ -72,14 +76,14 @@ end.rcode-->
 
 write.table(
      new_table, 
-     "C:/data/new_table.csv", 
+     "new_table.csv", 
      sep = ",", 
      row.names = FALSE
      )
 
 end.rcode-->
 
-<p>In this example, we save the data to a location o C:/ drive, and we specify that the file is separated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.</p>
+<p>In this example, we save the data to the working directory, and we specify that the file is separated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.</p>
 
 <p>In the next section we will see how to import files like the one we have just produced.</p> 
 
@@ -197,16 +201,7 @@ end.rcode-->
 
 <!--begin.rcode,tidy=FALSE
 
-# Install the package plyr - if you don't have it already - note you can check
-# this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run
-# the command again, even if it is installed!
-
-install.packages(
-     'plyr',
-     repos="http://cran.rstudio.com/"
-     )
-
-# Load the package:
+# Load the package plyr:
 
 library(plyr)
 
@@ -250,6 +245,104 @@ end.rcode-->
 
 </div>
 
+<br><hr class="ex1"><br>
+
+<a class="next" href="selecting_data.html">Next...Selecting Data</a>
+
+
 </body>
 
 </html>
+
+
+write.table(new_table,"new_table.csv",sep=",",row.names=FALSE)
+
+rats <- read.table(
+     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt",
+     header = T
+     )
+rats
+     
+head(rats)
+tail(rats)
+
+rats[1,1]
+rats[1:10,]
+
+rats[seq(1,10,2),]
+
+summary(rats)
+
+str(rats)
+
+rats$Treatment<-factor(rats$Treatment)
+
+str(rats)
+
+rats$Rat<-factor(rats$Rat)
+
+rats$Liver<-factor(rats$Liver)
+
+library(plyr)
+
+rats$Treatment1 <- revalue(
+     rats$Treatment,
+     c("1" = "A", "2" = "B", "3" = "C")
+     )
+     
+fix(rats)
+
+env<-read.table("clipboard",header=T)
+head(env)
+summary(env)
+
+maximae<-(c(
+         env[144,],
+          env[542,],
+          env[965,],
+          env[1371,],
+          env[1769,]
+          ))
+          
+maximae
+
+
+?mtcars
+
+str(mtcars)
+
+mtcars[mtcars$gear==5,1:2]
+mtcars[mtcars$gear==5,c("mpg","gear")]
+
+mtcars[mtcars$mpg>30&mtcars$mpg<40,c("mpg")]
+
+subset(
+        x=mtcars,
+        subset=mpg>30&mpg<40,
+        select=mpg)
+        
+subset(
+        x=mtcars,
+        subset=mpg>30&mpg<40,
+        select=c(mpg,gear,cyl))
+        
+        
+maximae
+head(env)
+tail(env)
+
+subset(
+      x=env,
+      subset=humidity==60,
+      select=c(temperature,humidity)
+      )
+      
+maximae
+
+env.3.last<-env[1997:1999,]
+
+env.3.last
+
+summary(env.3.last)
+
+

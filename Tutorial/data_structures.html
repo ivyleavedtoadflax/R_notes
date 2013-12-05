@@ -70,6 +70,10 @@
 
 <body>
 
+<a class="next" href="selecting_data.html">Previous...Selecting data</a>
+
+<br><hr class="ex1"><br>
+
 <h1>Data structures</h1>
 
 <h2>Long and wide data</h2>
@@ -80,37 +84,33 @@
 
 <p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 120 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
-
-
-
-
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
 <span class="hl com"># For brevity these commands have been called lazily!</span>
 <span class="hl std">oc_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
-     <span class="hl kwc">block</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">6</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">120</span><span class="hl std">),</span>
-     <span class="hl kwc">treatment</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(LETTERS[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">],</span><span class="hl kwc">length</span><span class="hl std">=</span><span class="hl num">24</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">120</span><span class="hl std">),</span>
-     <span class="hl kwc">depth</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">6</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">),</span>
-     <span class="hl kwc">oc</span> <span class="hl std">=</span> <span class="hl kwd">rev</span><span class="hl std">(</span><span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">abs</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">2.2</span><span class="hl std">,</span><span class="hl num">1.8</span><span class="hl std">,</span><span class="hl num">1.2</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">rexp</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">rate</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">)))),</span>
-     <span class="hl kwc">bd</span> <span class="hl std">=</span> <span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">0.85</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.6</span><span class="hl std">))</span>
+     <span class="hl kwc">block</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">144</span><span class="hl std">),</span>
+     <span class="hl kwc">treatment</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(LETTERS[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">],</span><span class="hl kwc">length</span><span class="hl std">=</span><span class="hl num">24</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">144</span><span class="hl std">),</span>
+     <span class="hl kwc">depth</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">6</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">24</span><span class="hl std">),</span>
+     <span class="hl kwc">oc</span> <span class="hl std">=</span> <span class="hl kwd">rev</span><span class="hl std">(</span><span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">abs</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">2.2</span><span class="hl std">,</span><span class="hl num">1.8</span><span class="hl std">,</span><span class="hl num">1.2</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">144</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">rexp</span><span class="hl std">(</span><span class="hl num">144</span><span class="hl std">,</span><span class="hl kwc">rate</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">)))),</span>
+     <span class="hl kwc">bd</span> <span class="hl std">=</span> <span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">144</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">0.85</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.6</span><span class="hl std">))</span>
      <span class="hl std">)</span>
 <span class="hl kwd">head</span><span class="hl std">(oc_data)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   block treatment depth    oc     bd
-## 1     1         A     1 7.100 0.8576
-## 2     1         B     1 6.938 0.8656
-## 3     1         C     1 6.799 0.8763
-## 4     1         D     1 6.743 0.8847
-## 5     1         A     1 6.685 0.8908
-## 6     1         B     1 6.672 0.8954
+## 1     1         A     1 7.100 0.8550
+## 2     1         B     1 6.938 0.8551
+## 3     1         C     1 6.880 0.8576
+## 4     1         D     1 6.799 0.8734
+## 5     2         A     1 6.743 0.8763
+## 6     2         B     1 6.719 0.8847
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(oc_data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 'data.frame':	120 obs. of  5 variables:
-##  $ block    : int  1 1 1 1 1 1 2 2 2 2 ...
+<div class="output"><pre class="knitr r">## 'data.frame':	144 obs. of  5 variables:
+##  $ block    : int  1 1 1 1 2 2 2 2 3 3 ...
 ##  $ treatment: Factor w/ 4 levels "A","B","C","D": 1 2 3 4 1 2 3 4 1 2 ...
 ##  $ depth    : int  1 1 1 1 1 1 1 1 1 1 ...
-##  $ oc       : num  7.1 6.94 6.8 6.74 6.68 ...
-##  $ bd       : num  0.858 0.866 0.876 0.885 0.891 ...
+##  $ oc       : num  7.1 6.94 6.88 6.8 6.74 ...
+##  $ bd       : num  0.855 0.855 0.858 0.873 0.876 ...
 </pre></div>
 <div class="source"><pre class="knitr r">
 </pre></div>
@@ -119,13 +119,13 @@
 
 <p>This makes for a reasonably complicated factorial experiment. If we want to get somethign sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
 
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(reshape)</span>
+</pre></div>
+</div></div>
 
 
 
-
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com">## </span>
-<span class="hl kwd">require</span><span class="hl std">(reshape)</span>
-<span class="hl std">oc_data_m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">oc_data_m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(</span>
      <span class="hl std">oc_data,</span>
      <span class="hl kwc">id.vars</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span>
      <span class="hl kwc">measure.vars</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl opt">:</span><span class="hl num">5</span>
@@ -135,10 +135,10 @@
 <div class="output"><pre class="knitr r">##   block treatment depth variable value
 ## 1     1         A     1       oc 7.100
 ## 2     1         B     1       oc 6.938
-## 3     1         C     1       oc 6.799
-## 4     1         D     1       oc 6.743
-## 5     1         A     1       oc 6.685
-## 6     1         B     1       oc 6.672
+## 3     1         C     1       oc 6.880
+## 4     1         D     1       oc 6.799
+## 5     2         A     1       oc 6.743
+## 6     2         B     1       oc 6.719
 </pre></div>
 <div class="source"><pre class="knitr r">
 # I won't run this command for brevity, but you should, just to check the data:
@@ -151,17 +151,17 @@
 
 <p>Suppose we want to see the average <tt>bd</tt> and <tt>oc</tt> for each treatment, each depth, and a combination of treatment and depth...</p>
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">cast</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">cast</span><span class="hl std">(</span>
      <span class="hl std">oc_data_m,</span>
      <span class="hl std">treatment</span> <span class="hl opt">~</span> <span class="hl std">variable,</span>
      <span class="hl std">mean</span>
      <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   treatment    oc    bd
-## 1         A 3.985 1.209
-## 2         B 3.965 1.213
-## 3         C 3.949 1.219
-## 4         D 3.939 1.226
+## 1         A 3.979 1.217
+## 2         B 3.965 1.223
+## 3         C 3.952 1.228
+## 4         D 3.942 1.234
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># If we want the standard deviation as well as the mean, we can use:</span>
 <span class="hl kwd">cast</span><span class="hl std">(</span>
@@ -171,12 +171,12 @@
      <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   depth oc_mean   oc_sd bd_mean   bd_sd
-## 1     1   6.638 0.15619  0.9253 0.04580
-## 2     2   4.572 0.08014  1.0349 0.03132
-## 3     3   3.793 0.07575  1.1375 0.02505
-## 4     4   3.387 0.06998  1.2649 0.05470
-## 5     5   2.774 0.06469  1.3927 0.02901
-## 6     6   2.593 0.05850  1.5452 0.03725
+## 1     1   6.642 0.15548  0.9202 0.04280
+## 2     2   4.576 0.08146  1.0329 0.03709
+## 3     3   3.799 0.07755  1.1584 0.02403
+## 4     4   3.382 0.07175  1.2807 0.05505
+## 5     5   2.772 0.06143  1.4101 0.03244
+## 6     6   2.587 0.05605  1.5515 0.03253
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># We can even apply our own custom functions - for example the upper and lower </span>
 <span class="hl com"># 95% confidence interval</span>
@@ -197,18 +197,18 @@
      <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    treatment depth oc_mean   oc_sd oc_lci95 oc_uci95
-## 1          A     1   6.696 0.23571    6.403    6.989
-## 2          A     2   4.597 0.10780    4.463    4.731
-## 3          A     3   3.807 0.08764    3.698    3.915
-## 4          B     1   6.647 0.17354    6.431    6.862
-## 5          B     2   4.575 0.08018    4.476    4.675
-## 6          B     3   3.804 0.08679    3.696    3.912
-## 7          C     1   6.613 0.11689    6.468    6.758
-## 8          C     2   4.561 0.07558    4.467    4.655
-## 9          C     3   3.789 0.08236    3.687    3.891
-## 10         D     1   6.597 0.09673    6.477    6.717
-## 11         D     2   4.553 0.07322    4.462    4.644
-## 12         D     3   3.774 0.06638    3.691    3.856
+## 1          A     1   6.685 0.22024    6.454    6.916
+## 2          A     2   4.594 0.10185    4.487    4.701
+## 3          A     3   3.811 0.08436    3.723    3.900
+## 4          B     1   6.650 0.16141    6.481    6.819
+## 5          B     2   4.581 0.08931    4.487    4.674
+## 6          B     3   3.804 0.08327    3.717    3.891
+## 7          C     1   6.630 0.13924    6.484    6.776
+## 8          C     2   4.568 0.07798    4.486    4.650
+## 9          C     3   3.794 0.07984    3.710    3.878
+## 10         D     1   6.601 0.11309    6.483    6.720
+## 11         D     2   4.563 0.07348    4.485    4.640
+## 12         D     3   3.788 0.08274    3.701    3.875
 </pre></div>
 <div class="source"><pre class="knitr r">
 </pre></div>
@@ -236,6 +236,9 @@ ggplot(
 
 end.rcode-->
 
+<br><hr class="ex1"><br>
+
+<a class="next" href="scatterplots.html">Next...Scatter-plots</a>
 
 </body>
 
