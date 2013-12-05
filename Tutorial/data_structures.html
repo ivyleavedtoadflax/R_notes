@@ -91,17 +91,17 @@
      <span class="hl kwc">treatment</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(LETTERS[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">],</span><span class="hl kwc">length</span><span class="hl std">=</span><span class="hl num">24</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">120</span><span class="hl std">),</span>
      <span class="hl kwc">depth</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">6</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">),</span>
      <span class="hl kwc">oc</span> <span class="hl std">=</span> <span class="hl kwd">rev</span><span class="hl std">(</span><span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">abs</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">2.2</span><span class="hl std">,</span><span class="hl num">1.8</span><span class="hl std">,</span><span class="hl num">1.2</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">1.5</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">rexp</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">rate</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">)))),</span>
-     <span class="hl kwc">bd</span> <span class="hl std">=</span> <span class="hl kwd">rev</span><span class="hl std">(</span><span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">0.85</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.6</span><span class="hl std">)))</span>
+     <span class="hl kwc">bd</span> <span class="hl std">=</span> <span class="hl kwd">sort</span><span class="hl std">(</span><span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">120</span><span class="hl std">,</span><span class="hl kwc">min</span><span class="hl std">=</span><span class="hl num">0.85</span><span class="hl std">,</span><span class="hl kwc">max</span><span class="hl std">=</span><span class="hl num">1.6</span><span class="hl std">))</span>
      <span class="hl std">)</span>
 <span class="hl kwd">head</span><span class="hl std">(oc_data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##   block treatment depth    oc    bd
-## 1     1         A     1 7.100 1.599
-## 2     1         B     1 6.938 1.595
-## 3     1         C     1 6.799 1.590
-## 4     1         D     1 6.743 1.590
-## 5     1         A     1 6.685 1.589
-## 6     1         B     1 6.672 1.580
+<div class="output"><pre class="knitr r">##   block treatment depth    oc     bd
+## 1     1         A     1 7.100 0.8576
+## 2     1         B     1 6.938 0.8656
+## 3     1         C     1 6.799 0.8763
+## 4     1         D     1 6.743 0.8847
+## 5     1         A     1 6.685 0.8908
+## 6     1         B     1 6.672 0.8954
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(oc_data)</span>
 </pre></div>
@@ -110,7 +110,7 @@
 ##  $ treatment: Factor w/ 4 levels "A","B","C","D": 1 2 3 4 1 2 3 4 1 2 ...
 ##  $ depth    : int  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ oc       : num  7.1 6.94 6.8 6.74 6.68 ...
-##  $ bd       : num  1.6 1.6 1.59 1.59 1.59 ...
+##  $ bd       : num  0.858 0.866 0.876 0.885 0.891 ...
 </pre></div>
 <div class="source"><pre class="knitr r">
 </pre></div>
@@ -158,10 +158,10 @@
      <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   treatment    oc    bd
-## 1         A 3.985 1.226
-## 2         B 3.965 1.219
-## 3         C 3.949 1.213
-## 4         D 3.939 1.209
+## 1         A 3.985 1.209
+## 2         B 3.965 1.213
+## 3         C 3.949 1.219
+## 4         D 3.939 1.226
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># If we want the standard deviation as well as the mean, we can use:</span>
 <span class="hl kwd">cast</span><span class="hl std">(</span>
@@ -171,12 +171,12 @@
      <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   depth oc_mean   oc_sd bd_mean   bd_sd
-## 1     1   6.638 0.15619  1.5452 0.03725
-## 2     2   4.572 0.08014  1.3927 0.02901
-## 3     3   3.793 0.07575  1.2649 0.05470
-## 4     4   3.387 0.06998  1.1375 0.02505
-## 5     5   2.774 0.06469  1.0349 0.03132
-## 6     6   2.593 0.05850  0.9253 0.04580
+## 1     1   6.638 0.15619  0.9253 0.04580
+## 2     2   4.572 0.08014  1.0349 0.03132
+## 3     3   3.793 0.07575  1.1375 0.02505
+## 4     4   3.387 0.06998  1.2649 0.05470
+## 5     5   2.774 0.06469  1.3927 0.02901
+## 6     6   2.593 0.05850  1.5452 0.03725
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># We can even apply our own custom functions - for example the upper and lower </span>
 <span class="hl com"># 95% confidence interval</span>
@@ -217,26 +217,24 @@
 
 <p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visuliation and analysis packages require it. With the excellent <tt>ggplot</tt> package, for instance, it is possible to produce complex graphics from long data very simply</p>
 
-<div class="chunk" id="data_structures-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">require</span><span class="hl std">(ggplot2)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## Loading required package: ggplot2
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span>
-     <span class="hl std">oc_data_m,</span>
-     <span class="hl kwd">aes</span><span class="hl std">(</span>
-          <span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl kwd">factor</span><span class="hl std">(depth),</span>
-          <span class="hl kwc">y</span> <span class="hl std">= value,</span>
-          <span class="hl kwc">group</span> <span class="hl std">=</span> <span class="hl kwd">factor</span><span class="hl std">(depth),</span>
-          <span class="hl kwc">fill</span> <span class="hl std">= variable</span>
-          <span class="hl std">)</span>
-     <span class="hl std">)</span><span class="hl opt">+</span><span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl str">&quot;gray&quot;</span><span class="hl std">)</span><span class="hl opt">+</span>
-     <span class="hl kwd">geom_jitter</span><span class="hl std">(</span><span class="hl kwc">shape</span><span class="hl std">=</span><span class="hl num">21</span><span class="hl std">,</span><span class="hl kwc">size</span><span class="hl std">=</span><span class="hl num">3.5</span><span class="hl std">,</span><span class="hl kwc">alpha</span><span class="hl std">=</span><span class="hl num">0.5</span><span class="hl std">)</span><span class="hl opt">+</span>
-     <span class="hl kwd">facet_grid</span><span class="hl std">(variable</span><span class="hl opt">~</span><span class="hl std">treatment,</span><span class="hl kwc">scale</span><span class="hl std">=</span><span class="hl str">&quot;free&quot;</span><span class="hl std">)</span><span class="hl opt">+</span>
-     <span class="hl kwd">theme_bw</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/data_structures-1.png" title="plot of chunk data_structures-1" alt="plot of chunk data_structures-1" class="plot" /></div></div>
+<!--<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
 
+require(ggplot2)
 
+ggplot(
+     oc_data_m,
+     aes(
+          x = factor(depth),
+          y = value,
+          group = factor(depth),
+          fill = variable
+          )
+     )+#geom_boxplot(fill="gray")+
+     geom_jitter(shape=21,size=3.5,alpha=0.5)+
+     facet_grid(variable~treatment,scale="free")+
+     theme_bw()+xlab("Sampling Depth")
+
+end.rcode-->
 
 
 </body>

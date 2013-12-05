@@ -36,7 +36,7 @@ oc_data <- data.frame(
      treatment = rep(rep(LETTERS[1:4],length=24),length.out=120),     
      depth = rep(1:6,each=20),
      oc = rev(sort(abs(c(5,3,2.2,1.8,1.2,1)+runif(120,max=1.5,min=1.5)+rexp(120,rate=10)))),
-     bd = rev(sort(runif(120,min=0.85,max=1.6)))
+     bd = sort(runif(120,min=0.85,max=1.6))
      )
 
 head(oc_data)
@@ -121,7 +121,7 @@ end.rcode-->
 
 <p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visuliation and analysis packages require it. With the excellent <tt>ggplot</tt> package, for instance, it is possible to produce complex graphics from long data very simply</p>
 
-<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
+<!--<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
 
 require(ggplot2)
 
@@ -133,13 +133,12 @@ ggplot(
           group = factor(depth),
           fill = variable
           )
-     )+geom_boxplot(fill="gray")+
+     )+#geom_boxplot(fill="gray")+
      geom_jitter(shape=21,size=3.5,alpha=0.5)+
      facet_grid(variable~treatment,scale="free")+
-     theme_bw()
+     theme_bw()+xlab("Sampling Depth")
 
 end.rcode-->
-
 
 
 </body>
