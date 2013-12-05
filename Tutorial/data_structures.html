@@ -76,15 +76,221 @@
 
 <h1>Data structures</h1>
 
+<p>You may have noticed that we have already dealt with two of the different types of data structures - or more correctly - 'objects' available in R. We created vectors using the <tt>c()</tt> and <tt>scan()</tt> commands, whilst we most of the data we have imported so far has been in the <tt>dataframe</tt> format.</p>
+
+<p>I'm going to talk a little about the different types here, just to make you aware, but a much better discussion can be found <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">here</a>.</p>
+
+<h2>Vectors, lists, and matrices</h2>
+
+<h3>Vectors</h3>
+
+<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
+
+<p>Vectors can contain numbers or characters, or booleans (TRUE/FALSE), but they cannot be a mix, they must always contain the same type of data.</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">seq</span><span class="hl std">(</span>
+     <span class="hl kwc">from</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl kwc">to</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">8</span>
+     <span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 1.000 1.143 1.286 1.429 1.571 1.714 1.857 2.000
+</pre></div>
+</div></div>
+
+
+<h3>Lists</h3>
+
+<p>A <tt>list</tt> can be thought of as a collection of one or more named <tt>vector</tt> of potentially different types. In a list, you can stored many different types of data of different lengths.</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_list</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">list</span><span class="hl std">(</span>
+     <span class="hl kwc">m_names</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Andrew&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Bradley&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Charles&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Derrick&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Edmond&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Frank&quot;</span><span class="hl std">),</span>
+     <span class="hl kwc">f_names</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Georgina&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Heidi&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Isabelle&quot;</span><span class="hl std">),</span>
+     <span class="hl kwc">age</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">),</span>
+     <span class="hl kwc">t_f</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">TRUE</span><span class="hl std">,</span><span class="hl num">FALSE</span><span class="hl std">,</span><span class="hl num">TRUE</span><span class="hl std">,</span><span class="hl num">FALSE</span><span class="hl std">)</span>
+     <span class="hl std">)</span>
+<span class="hl std">our_list</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $m_names
+## [1] "Andrew"  "Bradley" "Charles" "Derrick" "Edmond"  "Frank"  
+## 
+## $f_names
+## [1] "Georgina" "Heidi"    "Isabelle"
+## 
+## $age
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+## 
+## $t_f
+## [1]  TRUE FALSE  TRUE FALSE
+</pre></div>
+</div></div>
+
+
+<p>Note that if we only want to call one <tt>vector</tt> from within <tt>our_list</tt>, we must subset it with:</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_list</span><span class="hl opt">$</span><span class="hl std">m_names</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] "Andrew"  "Bradley" "Charles" "Derrick" "Edmond"  "Frank"
+</pre></div>
+</div></div>
+
+
+<p>Or...</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_list[</span><span class="hl num">1</span><span class="hl std">]</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $m_names
+## [1] "Andrew"  "Bradley" "Charles" "Derrick" "Edmond"  "Frank"
+</pre></div>
+</div></div>
+
+
+<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split</tt> function.</p>
+
+<h3>Matrices</h3>
+
+<p>If a <tt>vector</tt> can be thought of as a column in a spreadsheet, a <tt>matrix</tt> can be thought of as one of more columns bound together. A <tt>matrix</tt> is essentially a spreadsheet as we would think about it. Sometimes the best way to view a <tt>matrix</tt> is to use <tt>fix()</tt> or <tt>View()</tt>.</p>
+
+<p>We can make a <tt>matrix</tt> with a call to <tt>matrix()</tt></p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_matrix</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+<span class="hl std">our_matrix</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       [,1] [,2] [,3] [,4] [,5]
+##  [1,]   NA   NA   NA   NA   NA
+##  [2,]   NA   NA   NA   NA   NA
+##  [3,]   NA   NA   NA   NA   NA
+##  [4,]   NA   NA   NA   NA   NA
+##  [5,]   NA   NA   NA   NA   NA
+##  [6,]   NA   NA   NA   NA   NA
+##  [7,]   NA   NA   NA   NA   NA
+##  [8,]   NA   NA   NA   NA   NA
+##  [9,]   NA   NA   NA   NA   NA
+## [10,]   NA   NA   NA   NA   NA
+</pre></div>
+</div></div>
+
+
+<p>Here we created a matrix with 50 columns and ten rows. Again, if we want to select part of the matrix, we need to use subsets <tt>[,]</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_matrix[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">2</span><span class="hl std">, ]</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   NA   NA   NA   NA   NA
+## [2,]   NA   NA   NA   NA   NA
+</pre></div>
+</div></div>
+
+
+<p>And we can populate our matrices in a similar way...</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_matrix[, ]</span> <span class="hl kwb">&lt;-</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">50</span>
+<span class="hl std">our_matrix</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       [,1] [,2] [,3] [,4] [,5]
+##  [1,]    1   11   21   31   41
+##  [2,]    2   12   22   32   42
+##  [3,]    3   13   23   33   43
+##  [4,]    4   14   24   34   44
+##  [5,]    5   15   25   35   45
+##  [6,]    6   16   26   36   46
+##  [7,]    7   17   27   37   47
+##  [8,]    8   18   28   38   48
+##  [9,]    9   19   29   39   49
+## [10,]   10   20   30   40   50
+</pre></div>
+</div></div>
+
+
+<p>Note how the numbers were distributed in the matrix. And, of course, we can subset a smaller part of the matrix:</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_matrix[</span><span class="hl num">4</span><span class="hl opt">:</span><span class="hl num">7</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl std">letters[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">]</span>
+<span class="hl std">our_matrix</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       [,1] [,2] [,3] [,4] [,5]
+##  [1,] "1"  "11" "21" "31" "41"
+##  [2,] "2"  "12" "22" "32" "42"
+##  [3,] "3"  "13" "23" "33" "43"
+##  [4,] "4"  "a"  "a"  "a"  "44"
+##  [5,] "5"  "b"  "b"  "b"  "45"
+##  [6,] "6"  "c"  "c"  "c"  "46"
+##  [7,] "7"  "d"  "d"  "d"  "47"
+##  [8,] "8"  "18" "28" "38" "48"
+##  [9,] "9"  "19" "29" "39" "49"
+## [10,] "10" "20" "30" "40" "50"
+</pre></div>
+</div></div>
+
+
+<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, boolean, character, etc.</p>
+
+<p>Note that it is possible to convert between the data types. We can change a vector into a matrix:</p>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">our_vector</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">our_vector</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  1  2  3  4  5  6  7  8  9 10
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">our_vector_matrix</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">as.matrix</span><span class="hl std">(our_vector)</span>
+<span class="hl std">our_vector_matrix</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       [,1]
+##  [1,]    1
+##  [2,]    2
+##  [3,]    3
+##  [4,]    4
+##  [5,]    5
+##  [6,]    6
+##  [7,]    7
+##  [8,]    8
+##  [9,]    9
+## [10,]   10
+</pre></div>
+</div></div>
+
+
+<p>And we can do the opposite operation...</p>
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">as.vector</span><span class="hl std">(our_vector_matrix)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  1  2  3  4  5  6  7  8  9 10
+</pre></div>
+</div></div>
+
+
+
+<p>This may seem a bit academic...what difference does it really make if your data is a vector or a matrix? Well not a great deal, in truth, but there are occasions when your code will slip up because your data is in the wrong format. Two useful functions to learn are <tt>as.</tt> followed by matrix/vector/list/data.frame, and <tt>is.</tt> followed by the same. The latter is useful to interrogate what an object is without converting it - this comes in very handy when dealing with functions you do not know.</p>
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">is.data.frame</span><span class="hl std">(our_vector_matrix)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">is.list</span><span class="hl std">(our_vector_matrix)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">is.vector</span><span class="hl std">(our_vector_matrix)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">is.matrix</span><span class="hl std">(our_vector_matrix)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+</div></div>
+
+
+<h3>Dataframes</h3>
+
 <h2>Long and wide data</h2>
 
 <p>The astute among you may have noticed, that although I have recommended that you save your data in 'long' format, all the datasets loaded from R and elsewhere, so far, have been in 'wide' rather than 'long' format.</p>
 
 <p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter. To give you an example, we'll simulate some data to practice on. This data consist
 
-<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 120 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
+<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 144 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
 <span class="hl com"># For brevity these commands have been called lazily!</span>
 <span class="hl std">oc_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
      <span class="hl kwc">block</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">144</span><span class="hl std">),</span>
@@ -119,13 +325,13 @@
 
 <p>This makes for a reasonably complicated factorial experiment. If we want to get somethign sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(reshape)</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(reshape)</span>
 </pre></div>
 </div></div>
 
 
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">oc_data_m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">oc_data_m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">melt</span><span class="hl std">(</span>
      <span class="hl std">oc_data,</span>
      <span class="hl kwc">id.vars</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span>
      <span class="hl kwc">measure.vars</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl opt">:</span><span class="hl num">5</span>
@@ -151,7 +357,7 @@
 
 <p>Suppose we want to see the average <tt>bd</tt> and <tt>oc</tt> for each treatment, each depth, and a combination of treatment and depth...</p>
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">cast</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">cast</span><span class="hl std">(</span>
      <span class="hl std">oc_data_m,</span>
      <span class="hl std">treatment</span> <span class="hl opt">~</span> <span class="hl std">variable,</span>
      <span class="hl std">mean</span>

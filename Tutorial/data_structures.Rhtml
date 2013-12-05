@@ -14,13 +14,135 @@
 
 <h1>Data structures</h1>
 
+<p>You may have noticed that we have already dealt with two of the different types of data structures - or more correctly - 'objects' available in R. We created vectors using the <tt>c()</tt> and <tt>scan()</tt> commands, whilst we most of the data we have imported so far has been in the <tt>dataframe</tt> format.</p>
+
+<p>I'm going to talk a little about the different types here, just to make you aware, but a much better discussion can be found <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">here</a>.</p>
+
+<h2>Vectors, lists, and matrices</h2>
+
+<h3>Vectors</h3>
+
+<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
+
+<p>Vectors can contain numbers or characters, or booleans (TRUE/FALSE), but they cannot be a mix, they must always contain the same type of data.</p>
+
+<!--begin.rcode,tidy=FALSE
+seq(
+     from = 1,
+     to = 2,
+     length.out = 8
+     )
+end.rcode-->
+
+<h3>Lists</h3>
+
+<p>A <tt>list</tt> can be thought of as a collection of one or more named <tt>vector</tt> of potentially different types. In a list, you can stored many different types of data of different lengths.</p>
+
+<!--begin.rcode,tidy=FALSE
+our_list <- list(
+     m_names = c("Andrew","Bradley","Charles","Derrick","Edmond","Frank"),
+     f_names = c("Georgina","Heidi","Isabelle"),
+     age = seq(1,20,1),
+     t_f = c(TRUE,FALSE,TRUE,FALSE)
+     )
+
+our_list
+end.rcode-->
+
+<p>Note that if we only want to call one <tt>vector</tt> from within <tt>our_list</tt>, we must subset it with:</p>
+
+<!--begin.rcode,tidy=FALSE
+our_list$m_names
+end.rcode-->
+
+<p>Or...</p>
+
+<!--begin.rcode,tidy=FALSE
+our_list[1]
+end.rcode-->
+
+<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split</tt> function.</p>
+
+<h3>Matrices</h3>
+
+<p>If a <tt>vector</tt> can be thought of as a column in a spreadsheet, a <tt>matrix</tt> can be thought of as one of more columns bound together. A <tt>matrix</tt> is essentially a spreadsheet as we would think about it. Sometimes the best way to view a <tt>matrix</tt> is to use <tt>fix()</tt> or <tt>View()</tt>.</p>
+
+<p>We can make a <tt>matrix</tt> with a call to <tt>matrix()</tt></p>
+
+<!--begin.rcode,tide=FALSE
+our_matrix <- matrix(
+     ncol = 5,
+     nrow = 10
+     )
+
+our_matrix
+end.rcode-->
+
+<p>Here we created a matrix with 50 columns and ten rows. Again, if we want to select part of the matrix, we need to use subsets <tt>[,]</tt>.</p>
+
+<!--begin.rcode,tide=FALSE
+our_matrix[1:2,]
+end.rcode-->
+
+<p>And we can populate our matrices in a similar way...</p>
+
+<!--begin.rcode,tide=FALSE
+our_matrix[,] <- 1:50
+
+our_matrix
+end.rcode-->
+
+<p>Note how the numbers were distributed in the matrix. And, of course, we can subset a smaller part of the matrix:</p>
+
+<!--begin.rcode,tide=FALSE
+our_matrix[4:7,2:4] <- letters[1:4]
+
+our_matrix
+end.rcode-->
+
+<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, boolean, character, etc.</p>
+
+<p>Note that it is possible to convert between the data types. We can change a vector into a matrix:</p>
+
+<!--begin.rcode,tide=FALSE
+our_vector <- seq(
+     1,
+     10,
+     1
+     )
+
+our_vector    
+
+our_vector_matrix <- as.matrix(our_vector)
+
+our_vector_matrix
+end.rcode-->
+
+<p>And we can do the opposite operation...</p>
+
+<!--begin.rcode,tide=FALSE
+as.vector(our_vector_matrix)
+end.rcode-->
+
+
+<p>This may seem a bit academic...what difference does it really make if your data is a vector or a matrix? Well not a great deal, in truth, but there are occasions when your code will slip up because your data is in the wrong format. Two useful functions to learn are <tt>as.</tt> followed by matrix/vector/list/data.frame, and <tt>is.</tt> followed by the same. The latter is useful to interrogate what an object is without converting it - this comes in very handy when dealing with functions you do not know.</p>
+
+<!--begin.rcode,tide=FALSE
+is.data.frame(our_vector_matrix)
+is.list(our_vector_matrix)
+is.vector(our_vector_matrix)
+is.matrix(our_vector_matrix)
+end.rcode-->
+
+<h3>Dataframes</h3>
+
 <h2>Long and wide data</h2>
 
 <p>The astute among you may have noticed, that although I have recommended that you save your data in 'long' format, all the datasets loaded from R and elsewhere, so far, have been in 'wide' rather than 'long' format.</p>
 
 <p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter. To give you an example, we'll simulate some data to practice on. This data consist
 
-<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 120 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
+<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 144 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
 <!--begin.rcode,tidy=FALSE
 
