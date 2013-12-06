@@ -38,6 +38,8 @@ font-family:"Calibri","Verdana","Arial";
 font-size: 15pt;
 background-color: #F0F8FF;
 padding: 5px;
+text-align: center;
+width: 30%;
 }
 
 a:link {
@@ -60,6 +62,7 @@ display: inline
 a:active {
 color: #ccc;
 text-decoration: none;
+border-bottom: 1px dotted; 
 }
 
 hr.ex1 {
