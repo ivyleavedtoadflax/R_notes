@@ -90,7 +90,7 @@
 
 <h3>Vectors</h3>
 
-<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
+<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan()</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
 
 <p>Vectors can contain numbers or characters, or booleans (TRUE/FALSE), but they cannot be a mix, they must always contain the same type of data.</p>
 
@@ -151,7 +151,7 @@
 </div></div>
 
 
-<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split</tt> function.</p>
+<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split()</tt> function.</p>
 
 <h3>Matrices</h3>
 
@@ -228,7 +228,7 @@
 </div></div>
 
 
-<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, boolean, character, etc.</p>
+<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, Boolean, character, etc.</p>
 
 <p>Note that it is possible to convert between the data types. We can change a vector into a matrix:</p>
 
@@ -292,11 +292,13 @@
 
 <p>The astute among you may have noticed, that although I have recommended that you save your data in 'long' format, all the datasets loaded from R and elsewhere, so far, have been in 'wide' rather than 'long' format.</p>
 
-<p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter. To give you an example, we'll simulate some data to practice on. This data consist
+<p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter? To give you an example, we'll simulate some data to practice on. from a soil science example.</p>
 
-<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 144 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
+<p>We simulate data for an experiment in which 144 samples of bulk density (<tt>bd</tt>), and organic carbon (<tt>oc</tt>) were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Create our simulated dataset Don't worry too much about the commands here, but</span>
+<span class="hl com"># you could look them up if interested.</span>
+<span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1337</span><span class="hl std">)</span>
 <span class="hl com"># For brevity these commands have been called lazily!</span>
 <span class="hl std">oc_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
      <span class="hl kwc">block</span> <span class="hl std">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl kwc">each</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span><span class="hl kwc">length.out</span><span class="hl std">=</span><span class="hl num">144</span><span class="hl std">),</span>
@@ -329,7 +331,7 @@
 </div></div>
 
 
-<p>This makes for a reasonably complicated factorial experiment. If we want to get somethign sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
+<p>This makes for a reasonably complicated factorial experiment. If we want to get something sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
 
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(reshape)</span>
 </pre></div>
@@ -392,42 +394,45 @@
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># We can even apply our own custom functions - for example the upper and lower </span>
 <span class="hl com"># 95% confidence interval</span>
+<span class="hl std">se</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
+     <span class="hl kwd">sd</span><span class="hl std">(x)</span><span class="hl opt">/</span><span class="hl kwd">sqrt</span><span class="hl std">(</span><span class="hl kwd">length</span><span class="hl std">(x))</span>
+     <span class="hl std">}</span>
 <span class="hl std">uci95</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
      <span class="hl kwd">mean</span><span class="hl std">(x)</span> <span class="hl opt">+</span> <span class="hl kwd">qt</span><span class="hl std">(</span><span class="hl num">0.975</span><span class="hl std">,</span><span class="hl kwc">df</span> <span class="hl std">=</span> <span class="hl kwd">length</span><span class="hl std">(x)</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">*</span> <span class="hl kwd">sd</span><span class="hl std">(x)</span> <span class="hl opt">/</span> <span class="hl kwd">sqrt</span><span class="hl std">(</span><span class="hl kwd">length</span><span class="hl std">(x))</span>
 <span class="hl std">}</span>
 <span class="hl std">lci95</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
      <span class="hl kwd">mean</span><span class="hl std">(x)</span> <span class="hl opt">-</span> <span class="hl kwd">qt</span><span class="hl std">(</span><span class="hl num">0.975</span><span class="hl std">,</span><span class="hl kwc">df</span> <span class="hl std">=</span> <span class="hl kwd">length</span><span class="hl std">(x)</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">*</span> <span class="hl kwd">sd</span><span class="hl std">(x)</span> <span class="hl opt">/</span> <span class="hl kwd">sqrt</span><span class="hl std">(</span><span class="hl kwd">length</span><span class="hl std">(x))</span>
 <span class="hl std">}</span>
-<span class="hl com"># and if we are only interested in one variable, and teh top three depths for</span>
+<span class="hl com"># and if we are only interested in one variable, and the top three depths for</span>
 <span class="hl com"># instance...., we subset the data</span>
 <span class="hl kwd">cast</span><span class="hl std">(</span>
      <span class="hl kwd">subset</span><span class="hl std">(</span>
           <span class="hl std">oc_data_m,</span>
           <span class="hl std">variable</span> <span class="hl opt">==</span> <span class="hl str">&quot;oc&quot;</span> <span class="hl opt">&amp;</span> <span class="hl std">depth</span> <span class="hl opt">&lt;</span> <span class="hl num">4</span><span class="hl std">),</span>
      <span class="hl std">treatment</span> <span class="hl opt">+</span> <span class="hl std">depth</span> <span class="hl opt">~</span> <span class="hl std">variable,</span>
-     <span class="hl kwd">c</span><span class="hl std">(mean, sd, lci95, uci95)</span>
+     <span class="hl kwd">c</span><span class="hl std">(mean, sd, se, lci95, uci95)</span>
      <span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##    treatment depth oc_mean   oc_sd oc_lci95 oc_uci95
-## 1          A     1   6.685 0.22024    6.454    6.916
-## 2          A     2   4.594 0.10185    4.487    4.701
-## 3          A     3   3.811 0.08436    3.723    3.900
-## 4          B     1   6.650 0.16141    6.481    6.819
-## 5          B     2   4.581 0.08931    4.487    4.674
-## 6          B     3   3.804 0.08327    3.717    3.891
-## 7          C     1   6.630 0.13924    6.484    6.776
-## 8          C     2   4.568 0.07798    4.486    4.650
-## 9          C     3   3.794 0.07984    3.710    3.878
-## 10         D     1   6.601 0.11309    6.483    6.720
-## 11         D     2   4.563 0.07348    4.485    4.640
-## 12         D     3   3.788 0.08274    3.701    3.875
+<div class="output"><pre class="knitr r">##    treatment depth oc_mean   oc_sd   oc_se oc_lci95 oc_uci95
+## 1          A     1   6.685 0.22024 0.08991    6.454    6.916
+## 2          A     2   4.594 0.10185 0.04158    4.487    4.701
+## 3          A     3   3.811 0.08436 0.03444    3.723    3.900
+## 4          B     1   6.650 0.16141 0.06589    6.481    6.819
+## 5          B     2   4.581 0.08931 0.03646    4.487    4.674
+## 6          B     3   3.804 0.08327 0.03399    3.717    3.891
+## 7          C     1   6.630 0.13924 0.05685    6.484    6.776
+## 8          C     2   4.568 0.07798 0.03184    4.486    4.650
+## 9          C     3   3.794 0.07984 0.03259    3.710    3.878
+## 10         D     1   6.601 0.11309 0.04617    6.483    6.720
+## 11         D     2   4.563 0.07348 0.03000    4.485    4.640
+## 12         D     3   3.788 0.08274 0.03378    3.701    3.875
 </pre></div>
 <div class="source"><pre class="knitr r">
 </pre></div>
 </div></div>
 
 
-<p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visuliation and analysis packages require it. With the excellent <tt>ggplot</tt> package, for instance, it is possible to produce complex graphics from long data very simply</p>
+<p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visualisation and analysis packages require it.</p>
 
 <!--<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
 

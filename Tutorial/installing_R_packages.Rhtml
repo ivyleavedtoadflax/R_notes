@@ -43,7 +43,7 @@ end.rcode-->
 library(agricolae)
 end.rcode-->
 
-<p>If you wanto to suppress warnings (for instance if you wish to call a package from within a function) you can also <tt>require</tt>:</p>
+<p>If you want to to suppress warnings (for instance if you wish to call a package from within a function) you can also <tt>require</tt>:</p>
 
 <!--begin.rcode, eval=FALSE
 require(agricolae)
@@ -51,14 +51,19 @@ end.rcode-->
 
 <p>Note that you will need to call the package with <tt>library</tt> or <tt>require</tt> every time you run a new instance of R. Running the <tt>install.packages</tt> command will also update a package to the latest available version.</p>
 
-<p>For use in this course, you shoudl run the following code to make sure you have the correct packages:</p>
+<p>For use in this course, you should run the following code to make sure you have the correct packages:</p>
 
 <!--begin.rcode,eval=FALSE,tidy=FALSE
 
 # Note that this may throw up a warning message
 
 install.packages(
-     c('plyr','reshape','RColorBrewer','ggplot2'), 
+     c(
+          'plyr',
+          'reshape',
+          'RColorBrewer',
+          'ggplot2'
+          ), 
      repos="http://cran.rstudio.com/"
      )
 end.rcode-->

@@ -71,7 +71,7 @@
 
 <table align="center" width="80%">
 <tr>
-<td class="next"><a href="multiple_comp.html">Previous</a></td>
+<td class="next"><a href="ANOVA.html">Previous</a></td>
 <td class="next"><a href="index.html">Course Overview</a></td>
 <td class="next"><p>Next</p></td>
 </tr>
@@ -233,7 +233,7 @@
 
 <p>Let's also plot a probability density function of this data to see what it looks like:</p>
 
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+<div class="chunk" id="writing_functions1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
      <span class="hl kwd">density</span><span class="hl std">(dummy),</span> <span class="hl com"># create density estimates for the dummy dataset</span>
      <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span>   <span class="hl com"># set the line weight to 2 pixels</span>
      <span class="hl std">)</span>
@@ -249,7 +249,7 @@
      <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span>
      <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/writing_functions1.png" title="plot of chunk writing_functions1" alt="plot of chunk writing_functions1" class="plot" /></div></div>
 
 
 <p>Now let us suppose that we wanted to know which of the values within the dummy data lie above or below 1 standard deviation of the mean. i.e. to the left (below) or to the right (above) the red dotted lines in our plot.</p>
@@ -260,7 +260,7 @@
 
 <p>First the <tt>if</tt> statement: let's start by using the last value of the dummy data:</p>
 
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
      <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
      <span class="hl std">}</span>
 </pre></div>
@@ -270,7 +270,7 @@
 <p> And... nothing happens... because the last value of dummy is <code class="knitr inline">6.09</code>; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an <tt>else if</tt> statement to decide.</p>
 
 
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
      <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
      <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
           <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">)</span>
@@ -284,7 +284,7 @@
 
 <p>There is a third possibility - the values are within the red lines in our plot - i.e. within one standard deviation of the mean. We can add an else statement to deal with this eventuality too.</p>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
      <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">)</span>
      <span class="hl std">}</span> <span class="hl kwa">else if</span> <span class="hl std">(dummy[</span><span class="hl num">100</span><span class="hl std">]</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
           <span class="hl kwd">print</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">)</span>
@@ -301,7 +301,7 @@
 <p>Now let's wrap the <tt>if else</tt> statement with a <tt>for</tt> loop, and run it over the whole dummy dataset.</p>
 
 
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first we must specify what we want to the loop to iterate over:</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first we must specify what we want to the loop to iterate over:</span>
 <span class="hl com"># it's usual to name the indexer as i</span>
 <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl std">dummy) {</span>
      <span class="hl com"># we replace dummy[100] with i in both instances</span>
@@ -421,7 +421,7 @@
 
 <p>First we create a vector into which we will store the answers:</p>
 
-<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span>
      <span class="hl kwc">length</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span>
      <span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;character&quot;</span>
      <span class="hl std">)</span>
@@ -429,9 +429,9 @@
 </div></div>
 
 
-<p>Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.</p>
+<p>Instead of iterating directly over the dummy vector, this time, we need to iterate over a vector of numbers, the same length as the dummy data.</p>
 
-<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dummy)) {</span>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dummy)) {</span>
      <span class="hl com"># now we need to change i back to dummy - but use 'i' as subscript:</span>
      <span class="hl kwa">if</span> <span class="hl std">(dummy[i]</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
           <span class="hl com"># instead of printing the results, we assign them to a subscript</span>
@@ -449,7 +449,7 @@
 
 <p>Check the results:</p>
 
-<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
      <span class="hl kwc">data</span> <span class="hl std">= dummy,</span>
      <span class="hl kwc">sd</span> <span class="hl std">= dummy_sd</span>
      <span class="hl std">)</span>
@@ -518,7 +518,7 @@
 
 <p>We assign a name to the vector which our function will produce, using 'gets' (<tt><-</tt>). Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.</p>
 
-<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sapply</span><span class="hl std">(dummy,</span>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_sd1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sapply</span><span class="hl std">(dummy,</span>
        <span class="hl com"># then we need to wrap our for loop and if statements in a function wrapper</span>
            <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">) {</span>
             <span class="hl kwa">if</span> <span class="hl std">(x</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy))) {</span>
@@ -536,7 +536,7 @@
 
 <p>Check if the answer is the same as the previous example:</p>
 
-<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">identical</span><span class="hl std">(dummy_sd,dummy_sd1)</span>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">identical</span><span class="hl std">(dummy_sd,dummy_sd1)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
 </pre></div>
@@ -550,7 +550,7 @@
 
 <p>We will call the function <tt>sd_check</tt>. With <tt>function(y)</tt> we specify that the function <tt>sd_check()</tt> should be called with one argument <tt>y</tt> - in this case the name of the vector on which we wish to perform the function.</p>
 
-<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">) {</span>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">y</span><span class="hl std">) {</span>
      <span class="hl com"># We need to open curly brackets in which to contain the function, unless</span>
      <span class="hl com"># it call all be contained within one line</span>
      <span class="hl com"># Everything below is the same as we have used previously.</span>
@@ -575,7 +575,7 @@
 <p>We will again set the seed to 500, to ensure that we get reproducible results. Check <tt>?set.seed</tt> for more information, and we will round the data to decimal places as we create it.</p>
 
 
-<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">)</span>
 <span class="hl com"># We also specify the rounding to two decimal places in this command</span>
 <span class="hl std">dummy1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">round</span><span class="hl std">(</span>
      <span class="hl kwd">rexp</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">),</span>
@@ -586,7 +586,7 @@
 
 <p>Lets plot this data in the same way as before:</p>
 
-<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+<div class="chunk" id="writing_functions2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
      <span class="hl kwd">density</span><span class="hl std">(dummy1),</span> <span class="hl com"># create density estimates for the dummy dataset</span>
      <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span>   <span class="hl com"># set the line weight to 2 pixels</span>
      <span class="hl std">)</span>
@@ -602,12 +602,12 @@
      <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span>
      <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/writing_functions2.png" title="plot of chunk writing_functions2" alt="plot of chunk writing_functions2" class="plot" /></div></div>
 
 
 <p>Here we can see that the distribution of the data are very different from the normal <tt>dummy</tt>. We can now run our function on this data. We call the function with <tt>sd_check(dummy1)</tt>, with the vector <tt>dummy1</tt> as argument <tt>y</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check</span><span class="hl std">(dummy1)</span>
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check</span><span class="hl std">(dummy1)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   [1] "WITHIN" "WITHIN" "WITHIN" "BELOW"  "WITHIN" "WITHIN" "WITHIN"
 ##   [8] "WITHIN" "WITHIN" "BELOW"  "WITHIN" "WITHIN" "WITHIN" "ABOVE" 
@@ -630,7 +630,7 @@
 
 <p>We can again assign this to a dataframe, but this time, we use a call to our function within our specification of the dataframe.</p>
 
-<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dummy_data1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
      <span class="hl kwc">data</span> <span class="hl std">= dummy1,</span>
      <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl kwd">sd_check</span><span class="hl std">(dummy1)</span> <span class="hl com"># here we call the function</span>
      <span class="hl std">)</span>
@@ -746,7 +746,7 @@
 <p>We will actually nest one function within another to make things simpler. This time we are going to use <tt>which</tt>, a command which essentially does the same as our nested <tt>if</tt> loops, but much more elegantly:</p>
 
 
-<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">which</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">which</span><span class="hl std">(</span>
      <span class="hl std">dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1))</span>
      <span class="hl std">)</span>
 </pre></div>
@@ -757,7 +757,7 @@
 
 <p>We can count the number of values with length:</p>
 
-<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">length</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">length</span><span class="hl std">(</span>
      <span class="hl kwd">which</span><span class="hl std">(</span>
           <span class="hl std">dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1))</span>
           <span class="hl std">)</span>
@@ -770,7 +770,7 @@
 
 <p> We can make the results for readable. Here we use <tt>noquote</tt> to remove quotes around the result, and paste to combine some character text "ABOVE" with the results of some code.</p>
 
-<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">noquote</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">noquote</span><span class="hl std">(</span>
      <span class="hl kwd">paste</span><span class="hl std">(</span>
           <span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">,</span>
           <span class="hl kwd">length</span><span class="hl std">(</span>
@@ -790,7 +790,7 @@
 <p> So lets roll this into a more complicated that we can apply to other data:</p>
 <p>We generalise the logical <tt>dummy1 > (mean(dummy1) + sd(dummy1))</tt> into <tt>y</tt>, and the character "ABOVE" into <tt>x</tt>.</p>
 
-<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_sum</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">) {</span>
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_sum</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">) {</span>
      <span class="hl kwd">print</span><span class="hl std">(</span>
           <span class="hl kwd">noquote</span><span class="hl std">(</span> <span class="hl com"># remove quotes from result</span>
                <span class="hl kwd">paste</span><span class="hl std">(</span> <span class="hl com"># combine x with </span>
@@ -807,7 +807,7 @@
 
 <p>So let's check it works:</p>
 
-<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
      <span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">,</span>
      <span class="hl std">(dummy1</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1)))</span>
      <span class="hl std">)</span>
@@ -819,7 +819,7 @@
 
 <p>And again:</p>
 
-<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
      <span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">,</span>
      <span class="hl std">(dummy</span> <span class="hl opt">&lt;</span> <span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(dummy)</span> <span class="hl opt">&amp;</span> <span class="hl std">dummy</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy)))</span>
      <span class="hl std">)</span>
@@ -831,7 +831,7 @@
 
 <p>We can now run the function with a different set of arguments:</p>
 
-<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_sum</span><span class="hl std">(</span>
      <span class="hl str">&quot;BELOW&quot;</span><span class="hl std">,</span>
      <span class="hl std">(dummy1</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(dummy1)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(dummy1)))</span>
      <span class="hl std">)</span>
@@ -843,7 +843,7 @@
 
 <p>So now we can simplify this again, by generalising <tt>dummy1</tt> with <tt>z</tt>:</p>
 
-<div class="chunk" id="unnamed-chunk-31"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_count</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">z</span><span class="hl std">) {</span>
+<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sd_check_count</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">z</span><span class="hl std">) {</span>
 <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;ABOVE&quot;</span><span class="hl std">,(z</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
 <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;WITHIN&quot;</span><span class="hl std">,(z</span> <span class="hl opt">&lt;</span> <span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">+</span> <span class="hl kwd">sd</span><span class="hl std">(z)</span> <span class="hl opt">&amp;</span> <span class="hl std">z</span> <span class="hl opt">&gt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
 <span class="hl kwd">sd_check_sum</span><span class="hl std">(</span><span class="hl str">&quot;BELOW&quot;</span><span class="hl std">,(z</span> <span class="hl opt">&lt;</span> <span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(z)</span> <span class="hl opt">-</span> <span class="hl kwd">sd</span><span class="hl std">(z))))</span>
@@ -854,7 +854,7 @@
 
 <p>So for the normally distributed data...</p>
 
-<div class="chunk" id="unnamed-chunk-32"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy)</span>
+<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] ABOVE = 18
 ## [1] WITHIN = 66
@@ -865,7 +865,7 @@
 
 <p>...and the exponentially distributed data....</p>
 
-<div class="chunk" id="unnamed-chunk-33"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy1)</span>
+<div class="chunk" id="unnamed-chunk-31"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sd_check_count</span><span class="hl std">(dummy1)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] ABOVE = 18
 ## [1] WITHIN = 78
@@ -880,7 +880,7 @@
 
 <table align="center" width="80%">
 <tr>
-<td class="next"><a href="multiple_comp.html">Previous</a></td>
+<td class="next"><a href="ANOVA.html">Previous</a></td>
 <td class="next"><a href="index.html">Course Overview</a></td>
 <td class="next"><p>Next</p></td>
 </tr>

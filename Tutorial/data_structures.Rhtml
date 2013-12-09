@@ -28,7 +28,7 @@
 
 <h3>Vectors</h3>
 
-<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
+<p>A <tt>vector</tt> can be thought of as a list of contiguous cells, like the first column of a spreadsheet. When we use the methods <tt>c()</tt>, and <tt>scan()</tt>, or indeed <tt>seq()</tt>, this is what we will end up with, and when you call a <tt>vector</tt>, you end up with a list of numbers (or other data) displayed horizontally in the console.</p>
 
 <p>Vectors can contain numbers or characters, or booleans (TRUE/FALSE), but they cannot be a mix, they must always contain the same type of data.</p>
 
@@ -67,7 +67,7 @@ end.rcode-->
 our_list[1]
 end.rcode-->
 
-<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split</tt> function.</p>
+<p>Lists are useful if you write you own functions, but in practice they are not useful when completing statistical analysis. By the end of this tutorial however, you encounter at least one instance when you need to use a <tt>list</tt>: the <tt>split()</tt> function.</p>
 
 <h3>Matrices</h3>
 
@@ -106,7 +106,7 @@ our_matrix[4:7,2:4] <- letters[1:4]
 our_matrix
 end.rcode-->
 
-<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, boolean, character, etc.</p>
+<p>Note that in this example the once numeric matrix has been converted to characters (denoted by the " marks), as we have included letters - like a vector, a matrix can only be one thing: number, Boolean, character, etc.</p>
 
 <p>Note that it is possible to convert between the data types. We can change a vector into a matrix:</p>
 
@@ -146,11 +146,14 @@ end.rcode-->
 
 <p>The astute among you may have noticed, that although I have recommended that you save your data in 'long' format, all the datasets loaded from R and elsewhere, so far, have been in 'wide' rather than 'long' format.</p>
 
-<p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter. To give you an example, we'll simulate some data to practice on. This data consist
+<p>What exactly do we mean by the terms 'long' and 'wide'? And why does it really matter? To give you an example, we'll simulate some data to practice on. from a soil science example.</p>
 
-<p>In this example we will create our own dataset by randomly generating values along a uniform distribution. We'll use a soil science example. We simulate data for an experiment in whcih 144 samples of bulk density <tt>bd</tt>, and organic carbon <tt>oc</tt> were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
+<p>We simulate data for an experiment in which 144 samples of bulk density (<tt>bd</tt>), and organic carbon (<tt>oc</tt>) were collected in 3 replicate <tt>blocks</tt>, 4 <tt>treatments</tt>, and at 6 <tt>depths</tt>.</p>
 
 <!--begin.rcode,tidy=FALSE
+
+# Create our simulated dataset Don't worry too much about the commands here, but
+# you could look them up if interested.
 
 set.seed(1337)
 
@@ -172,7 +175,7 @@ str(oc_data)
 
 end.rcode-->
 
-<p>This makes for a reasonably complicated factorial experiment. If we want to get somethign sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
+<p>This makes for a reasonably complicated factorial experiment. If we want to get something sensible from it, we need to convert it to long format first. We use the package <tt>reshape</tt> to do this...</p>
 
 <!--begin.rcode,warning=FALSE,message=FALSE
 library(reshape)
@@ -218,6 +221,12 @@ cast(
 # We can even apply our own custom functions - for example the upper and lower 
 # 95% confidence interval
 
+se <- function(x) {
+     
+     sd(x)/sqrt(length(x))
+     
+     }
+
 uci95 <- function(x) {
      
      mean(x) + qt(0.975,df = length(x)-1) * sd(x) / sqrt(length(x))
@@ -230,7 +239,7 @@ lci95 <- function(x) {
 
 }
 
-# and if we are only interested in one variable, and teh top three depths for
+# and if we are only interested in one variable, and the top three depths for
 # instance...., we subset the data
 
 cast(
@@ -238,13 +247,13 @@ cast(
           oc_data_m, 
           variable == "oc" & depth < 4),
      treatment + depth ~ variable,
-     c(mean, sd, lci95, uci95)
+     c(mean, sd, se, lci95, uci95)
      )
 
 
 end.rcode-->
 
-<p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visuliation and analysis packages require it. With the excellent <tt>ggplot</tt> package, for instance, it is possible to produce complex graphics from long data very simply</p>
+<p>It's good practice to start using long data early in your <tt>R</tt> career, as many of the more powerful visualisation and analysis packages require it.</p>
 
 <!--<!--begin.rcode,"data_structures-1",fig.width=15,tidy=FALSE,fig.height=10
 

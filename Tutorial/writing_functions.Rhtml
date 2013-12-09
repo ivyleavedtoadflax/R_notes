@@ -9,7 +9,7 @@
 
 <table align="center" width="80%">
 <tr>
-<td class="next"><a href="multiple_comp.html">Previous</a></td>
+<td class="next"><a href="ANOVA.html">Previous</a></td>
 <td class="next"><a href="index.html">Course Overview</a></td>
 <td class="next"><p>Next</p></td>
 </tr>
@@ -128,7 +128,7 @@ end.rcode-->
 
 <p>Let's also plot a probability density function of this data to see what it looks like:</p>
 
-<!--begin.rcode,tidy=FALSE
+<!--begin.rcode,"writing_functions1",tidy=FALSE
 plot(
      density(dummy), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
@@ -242,7 +242,7 @@ dummy_sd <- vector(
      )
 end.rcode-->
 
-<p>Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.</p>
+<p>Instead of iterating directly over the dummy vector, this time, we need to iterate over a vector of numbers, the same length as the dummy data.</p>
 
 <!--begin.rcode,tidy=FALSE
 for (i in 1:length(dummy)) { 
@@ -373,7 +373,7 @@ dummy1 <- round(
 end.rcode-->
 <p>Lets plot this data in the same way as before:</p>
 
-<!--begin.rcode,tidy=FALSE
+<!--begin.rcode,"writing_functions2",tidy=FALSE
 plot(
      density(dummy1), # create density estimates for the dummy dataset
      lwd = 2   # set the line weight to 2 pixels
@@ -526,7 +526,7 @@ end.rcode-->
 
 <table align="center" width="80%">
 <tr>
-<td class="next"><a href="multiple_comp.html">Previous</a></td>
+<td class="next"><a href="ANOVA.html">Previous</a></td>
 <td class="next"><a href="index.html">Course Overview</a></td>
 <td class="next"><p>Next</p></td>
 </tr>
