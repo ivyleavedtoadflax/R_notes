@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<title>Getting Started with R - Selecting Data</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+<table align="center" style="width:80%;">
+<tr>
+<td class="next"><a href="getting_data_into_R.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="data_structures.html">Next</a></td>
+</tr>
+</table>
+
+<br><hr class="ex1"><br>
+
+<h1>Selecting data</h1>
+
+<p>In the previous section, we dealt a little with the question of selecting parts of your data from an imported table. We will expand on that introduction here by introducing some additional commands. For the next example, we will use the R <tt>mtcars</tt> dataset: 'The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models)' (see <tt>?mtcars</tt>).</p>
+
+<p>First we call and examine the data.</p>
+
+<!--begin.rcode,tidy=FALSE
+mtcars
+str(mtcars)
+end.rcode-->
+
+<p>So it's a reasonably complex (if short) dataset, with a number of variables that we might be interested in.</p>
+
+<p>Suppose we wanted to select all the cars which have 5 forward gears (the <tt>gear</tt> variable): there are a number of ways of doing this. We can start by selecting a 'logical' subset.</p>
+
+<!--begin.rcode,tidy=FALSE
+mtcars[mtcars$gear == 5,]
+end.rcode-->
+
+<p>In this example we select only the rows which match out conditions <tt>mtcars$gear == 5</tt>, and all the columns. We can specify a particular column  numerically if required:</p>
+
+<!--begin.rcode,tidy=FALSE
+mtcars[mtcars$gear == 5,1:2]
+end.rcode-->
+
+<p>We can also use the column title to select columns.</p>
+
+<!--begin.rcode,tidy=FALSE
+mtcars[mtcars$gear == 5,c("mpg","gear")]
+end.rcode-->
+
+<p>And we can use more than one criteria if required...</p>
+
+<!--begin.rcode,tidy=FALSE
+mtcars[mtcars$mpg > 30 & mtcars$mpg < 40,c("mpg")]
+end.rcode-->
+
+<p>Notice that in this example, because we specify just one column, the code outputs a vector of numbers, not a dataframe (more on this later) with row and column names.</p>
+
+<p>Also note that in all these examples were, rather tiresomely, have to specify <tt>mtcars$gear</tt>, but there is a simpler way:</p>
+
+<!--begin.rcode,tidy=FALSE
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = mpg
+     )
+end.rcode-->
+
+<p><tt>subset()</tt> simplifies the syntax for logical subsets, and note that even when you select just one column, it will output column and row names.</p>
+
+<p>If you want to select more than one column you will need to use <tt>c()</tt> to concatenate a vector names:</p>
+
+<!--begin.rcode,tidy=FALSE
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = c(mpg,gear,cyl)
+     )
+end.rcode-->
+
+<p>If you omit the <tt>select</tt> argument, you will end up with all the columns:</p>
+
+<!--begin.rcode,tidy=FALSE
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40
+     )
+end.rcode-->
+
+<p>And note that you can also use <tt>select</tt> to omit columns:</p>
+
+<!--begin.rcode,tidy=FALSE
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = -c(mpg,disp,hp)
+     )
+end.rcode-->
+
+<p>Or using <tt>:</tt> to select or deselect a range of columns:</p>
+
+<!--begin.rcode,tidy=FALSE
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = -c(mpg:wt)
+     )
+
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = c(mpg:wt)
+     )
+end.rcode-->
+
+<div class="ex">
+<h3>Exercise</h3>
+
+<p>Using the data you imported in the last exercise in the <a href="getting_data_into_R.html">Getting data into R</a> page, reproduce the same answers, this time using the <tt>subset</tt> methods covered on this page.</p>
+
+<p>i.e.:</p>
+
+<p>...create a summary of the last three columns,and create a new object called <tt>maximae</tt> including only rows <tt>144</tt>, <tt>542</tt>, <tt>965</tt>, <tt>1371</tt> and <tt>1769</tt>.</p>
+
+<p></p>
+
+</div>
+
+<br><hr class="ex1"><br>
+
+<table align="center" style="width:80%;">
+<tr>
+<td class="next"><a href="getting_data_into_R.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="data_structures.html">Next</a></td>
+</tr>
+</table>
+
+</body>
+
+</html>
