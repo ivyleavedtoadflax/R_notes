@@ -48,18 +48,33 @@ end.rcode-->
 
 <p>Note that this the equivalent in R of writing <tt>print(short_variable)</tt>. This is not particularly important in this course, but it becomes important as you begin to write your own functions.</p>
 
+<!--
 <p> A more convenient way of entering a series of numbers is to use the <tt>scan()</tt> function. You must still assign a name to the object you are creating as before, but <tt>scan()</tt> will allow you to enter the data more easily. </p>
 
 <div class= "ex">
 <h3>Exercise</h3>
 <p>Try creating a variable called <tt>short_variable2</tt> and populate it with 10 numbers, using <tt>scan()</tt>.</p>
 </div>
+-->
 
 <h2>Importing from the clipboard</h2>
 
 <p>It is possible to import data from R directly from the clipboard - having just copied a table from a spreadsheet. Simply select the table of interest and copy it to clipboard as usual (Ctrl + C). The following code will then allow you to paste the table directly into R.</p>
 
-<p> The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
+<p>Note that when importing data from a spreadsheet, R does not like:</p>
+
+<ul>
+<li>Missing values</li>
+<li>Unfilled lines</li>
+<li>Special characters</li>
+<li>Spaces</li>
+</ul>
+
+<p>If you try to import data which contains any of these, you will encounter an error. Character strings can be wrapped in double quote marks ("") in order to allow the use of spaces in qualitative data, but in general, it is best to avoid the use of spaces in titles, instead use underscore (_) or a full stop (.) between words.</p>
+
+<p>Importing data correctly is not always easy, and you will rarely get it right first time. More on this topic can be found here: <a href="http://cran.r-project.org/doc/manuals/R-data.pdf">http://cran.r-project.org/doc/manuals/R-data.pdf</a> and <a href="http://vita.had.co.nz/papers/tidy-data.pdf">http://vita.had.co.nz/papers/tidy-data.pdf</a>.</p>
+
+<p> Try the code below to import some data from a spreadsheet of your own. The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
 
 <!--begin.rcode,eval=FALSE,tidy=FALSE
 new_table <- read.table(
