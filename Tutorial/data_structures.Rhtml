@@ -245,7 +245,8 @@ lci95 <- function(x) {
 cast(
      subset(
           oc_data_m, 
-          variable == "oc" & depth < 4),
+          variable == "oc" & depth < 4
+          ),
      treatment + depth ~ variable,
      c(mean, sd, se, lci95, uci95)
      )

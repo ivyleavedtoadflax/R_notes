@@ -408,7 +408,8 @@
 <span class="hl kwd">cast</span><span class="hl std">(</span>
      <span class="hl kwd">subset</span><span class="hl std">(</span>
           <span class="hl std">oc_data_m,</span>
-          <span class="hl std">variable</span> <span class="hl opt">==</span> <span class="hl str">&quot;oc&quot;</span> <span class="hl opt">&amp;</span> <span class="hl std">depth</span> <span class="hl opt">&lt;</span> <span class="hl num">4</span><span class="hl std">),</span>
+          <span class="hl std">variable</span> <span class="hl opt">==</span> <span class="hl str">&quot;oc&quot;</span> <span class="hl opt">&amp;</span> <span class="hl std">depth</span> <span class="hl opt">&lt;</span> <span class="hl num">4</span>
+          <span class="hl std">),</span>
      <span class="hl std">treatment</span> <span class="hl opt">+</span> <span class="hl std">depth</span> <span class="hl opt">~</span> <span class="hl std">variable,</span>
      <span class="hl kwd">c</span><span class="hl std">(mean, sd, se, lci95, uci95)</span>
      <span class="hl std">)</span>

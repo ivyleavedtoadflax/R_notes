@@ -140,7 +140,7 @@
 
 <p>Importing data correctly is not always easy, and you will rarely get it right first time. More on this topic can be found here: <a href="http://cran.r-project.org/doc/manuals/R-data.pdf">http://cran.r-project.org/doc/manuals/R-data.pdf</a> and <a href="http://vita.had.co.nz/papers/tidy-data.pdf">http://vita.had.co.nz/papers/tidy-data.pdf</a>.</p>
 
-<p> Try the code below to import some data from a spreadsheet of your own. The line <tt>header = T</tt>  tells R that you have copied the column headers with the data too.</p>
+<p>Try the code below to import some data from the google spreadsheet here: <a href="http://goo.gl/yOk9uZ" target="_blank">http://goo.gl/yOk9uZ</a> (this link will open a new tab). The line <tt>header = T</tt> tells R that you have copied the column names with the data too.</p>
 
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">new_table</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span>
      <span class="hl str">&quot;clipboard&quot;</span><span class="hl std">,</span>
@@ -150,7 +150,7 @@
 </div></div>
 
 
-<p>If you copy direct from excel, this should work, but you may also want to copy from a 'comma separated values' file (.csv), in which case you need to tell R using the argument <tt>sep = ","</tt>, or equivalent.</p>
+<p>If you copy direct from excel, or other spreadsheet, this should work, but you may also want to copy from a 'comma separated values' file (.csv), in which case you need to tell R using the argument <tt>sep = ","</tt>, or equivalent.</p>
 
 <p>Whilst this is an easy way of getting data into R, <b>I do not recommend it</b>, unless you then plan on re-saving the data using R. The problem with this kind of method is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.</p>
 
