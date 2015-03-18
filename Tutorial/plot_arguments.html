@@ -1,0 +1,165 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Getting Started with R - Scatterplots</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body style="background-color: lightgray";>
+
+<h4>Arguments</h4>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>1-character string giving the type of plot desired.  The
+following values are possible, for details, see <code>plot</code>:
+<code>"p"</code> for points, <code>"l"</code> for lines,
+<code>"b"</code> for both points and lines,
+<code>"c"</code> for empty points joined by lines,
+<code>"o"</code> for overplotted points and lines,
+<code>"s"</code> and <code>"S"</code> for stair steps and
+<code>"h"</code> for histogram-like vertical lines.  Finally,
+<code>"n"</code> does not produce any points or lines.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>the x limits (x1, x2) of the plot.  Note that <code>x1 &gt; x2</code>
+is allowed and leads to a &lsquo;reversed axis&rsquo;.
+</p>
+<p>The default value, <code>NULL</code>, indicates that the range of the finite values to be plotted should be used.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>the y limits of the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>a character string which contains <code>"x"</code> if the x axis
+is to be logarithmic, <code>"y"</code> if the y axis is to be logarithmic
+and <code>"xy"</code> or <code>"yx"</code> if both axes are to be logarithmic.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>a main title for the plot, see also <code>title</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+<p>a sub title for the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>a label for the x axis, defaults to a description of <code>x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>a label for the y axis, defaults to a description of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p>a logical value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a logical value indicating whether both axes should be drawn on
+the plot.  Use graphical parameter <code>"xaxt"</code> or <code>"yaxt"</code>
+to suppress just one of the axes.</p>
+</td></tr>
+<tr valign="top"><td><code>frame.plot</code></td>
+<td>
+<p>a logical indicating whether a box should be drawn
+around the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.first</code></td>
+<td>
+<p>an &lsquo;expression&rsquo; to be evaluated after the
+plot axes are set up but before any plotting takes place.  This can
+be useful for drawing background grids or scatterplot smooths.  Note
+that this works by lazy evaluation: passing this argument from other
+<code>plot</code> methods may well not work since it may be evaluated too
+early.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.last</code></td>
+<td>
+<p>an expression to be evaluated after plotting has
+taken place but before the axes, title and box are added.  See the
+comments about <code>panel.first</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+<p>the <i>y/x</i> aspect ratio, see <code>plot.window</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other graphical parameters (see <code>par</code> and
+section &lsquo;Details&rsquo; below).</p>
+</td></tr>
+</table>
+
+</body>
+
+</html>
