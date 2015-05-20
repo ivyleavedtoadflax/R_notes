@@ -6,8 +6,3 @@ Notes for the course can be found in /Tutorial. Users are advised to clone or do
 
 The course was written in html and R and compiled using RStudio (http://www.rstudio.com/).
 
-This repo is also home to a collection of notes and examples on using particular R functions. These can be found in /Notes. Each sub-directory refers to an individual R command, and provides an example of how to use that command, or it refers to a particular outcome, and includes scripts on how to achieve that outcome: e.g. overlaid_histograms/
-
-Incomplete examples are followed by the suffix '_incomplete'
-
-Html files for examples were created using the 'compile a notebook' function in RStudio (http://www.rstudio.com/).
