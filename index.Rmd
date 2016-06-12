@@ -1,0 +1,94 @@
+---
+title: "Getting started with R"
+#author: "Matthew Upson"
+#date: "13 July 2015"
+css: "stylesheet.css"
+---
+
+<table align="center" width="80%">
+<tr>
+<td class="next">Previous</td>
+<td class="next">Course Overview</td>
+<td class="next"><a href="R_environment.html">Next</a></td>
+</tr>
+</table>
+
+This course was originally delivered in 2012 for a class of researchers and research students at Cranfield University, most with little or no experience of R.
+As I have continued to teach R in various capacities ever since, I have updated this course to provide more up-to-date material for those coming to R for teh first time in 2016.
+
+The aim of this course remains the same as the original:
+
+> This course is designed to give you a brief introduction to the statistical programming environment R. <b>This is not a course on which statistics to use and why</b>, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.
+
+In its previous incarnation, this book relied on examples from Mick Crawley's seminal text'The R Book'.
+This course relies less on that book, and although a little dated now, it remains ane excellent resource, especially when using R for generalised linear modelling.
+
+## Course materials and structure
+
+All the course materials are available here. In addition you will need to download data from the internet for certain exercises, but this will be explained to you in the appropriate section.
+
+## Structure
+
+The course is divided as follows:
+
+* Getting started
+    * [The R environment](R_environment.html)
+    * [R Studio](RStudio.html)
+    * [R style](r_style_guide.html)
+    * [Installing R packages](installing_R_packages.html)
+* Moving data around
+    * [Getting data into R](getting_data_into_R.html)
+    * [Selecting Data](selecting_data.html)
+    * [Data structures and types](data_structures.html)
+* Visualising your data
+    * [Scatter-plots](scatterplots.html)
+    * [Histograms and Box-and-whisker plots](histograms.html)
+    * [Multiple plots](multiple_plots.html)
+* Basic data analysis
+    * [T-test](t-test.html)
+    * [Linear regression](regression.html)
+    * [ANOVA](ANOVA.html)
+* More advanced stuff...
+    * [Writing functions](writing_functions.html)
+
+As you go along, You will be able to copy and paste the code from these notes directly into the `R` console., but do try to understand what it is you are doing! 
+
+ In addition there are a number of exercises throughout. These are indicated by a box:
+
+### Navigating the course
+
+You'll find links to the course overview, the next, and the previous page of the course at the top and bottom of each page.
+
+## Getting help
+
+Getting help with R is very easy - there is a thriving online community of R users who, so the chances are that if you have a problem, someone else will have posted a solution online before you.
+
+### Within R
+
+It is possible to get help in R itself. If you are interested in a function, you can simply type the name of that function into the console preceded by a question mark. This will bring up the relevant help file - although they are not always that easy to decipher!
+
+### Books and guides
+
+There are also many online guides available - googling 'R guide' will reveal many, but three are listed below:
+
+* [http://www.rstudio.com/ide/docs/help_with_r](http://www.rstudio.com/ide/docs/help_with_r)
+*[http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf](http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf)
+*[https://sites.google.com/site/undergraduateguidetor/](https://sites.google.com/site/undergraduateguidetor)
+
+I point the reader particularly in the direction of: 
+
+* [Advanced R](http://adv-r.had.co.nz/)
+* [R for Data Science](http://r4ds.had.co.nz/)
+
+### Forums
+
+Forums are a great place for R help - again try googling this, although one of the most well known is: [http://stats.stackexchange.com/](http://stats.stackexchange.com/). Just make sure you read the rules of the forum carefully, as contributors often don't take kindly to poorly stated questions!
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><p>Previous</p></td>
+<td class="next"><p>Course Overview</p></td>
+<td class="next"><a href="R_environment.html">Next</a></td>
+</tr>
+</table>
+
