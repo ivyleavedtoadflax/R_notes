@@ -1,0 +1,459 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Getting Started with R - Linear regression</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="t-test.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="ANOVA.html">Next</a></td>
+</tr>
+</table>
+
+<br><hr class="ex1"><br>
+
+<h1>Linear regression</h1>
+
+<p>Linear regression can be completed in a similarly uncomplicated way in <tt>R</tt>. In this example, we will revisit the <tt>trees</tt> dataset we used earlier</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">trees</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Girth Height Volume
+## 1    8.3     70   10.3
+## 2    8.6     65   10.3
+## 3    8.8     63   10.2
+## 4   10.5     72   16.4
+## 5   10.7     81   18.8
+## 6   10.8     83   19.7
+## 7   11.0     66   15.6
+## 8   11.0     75   18.2
+## 9   11.1     80   22.6
+## 10  11.2     75   19.9
+## 11  11.3     79   24.2
+## 12  11.4     76   21.0
+## 13  11.4     76   21.4
+## 14  11.7     69   21.3
+## 15  12.0     75   19.1
+## 16  12.9     74   22.2
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 19  13.7     71   25.7
+## 20  13.8     64   24.9
+## 21  14.0     78   34.5
+## 22  14.2     80   31.7
+## 23  14.5     74   36.3
+## 24  16.0     72   38.3
+## 25  16.3     77   42.6
+## 26  17.3     81   55.4
+## 27  17.5     82   55.7
+## 28  17.9     80   58.3
+## 29  18.0     80   51.5
+## 30  18.0     80   51.0
+## 31  20.6     87   77.0
+</pre></div>
+</div></div>
+
+
+<p>Now let us assume that there is likely to be a correlation between <tt>Girth</tt> and <tt>Volume</tt>, and we want to examine this with a linear model.</p>
+
+<p>We start by plotting the data</p>
+
+<div class="chunk" id="regression1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= Girth,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= Volume</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression1.png" title="plot of chunk regression1" alt="plot of chunk regression1" class="plot" /></div></div>
+
+
+<p>So it looks like there is a positive relationship...let's explore this with linear regression. We specify a model formula of <tt>Volume ~ Girth</tt>, which means <tt>Volume</tt> is dependent on <tt>Girth</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">model</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(</span>
+     <span class="hl kwc">formula</span> <span class="hl std">= Volume</span> <span class="hl opt">~</span> <span class="hl std">Girth,</span>
+     <span class="hl kwc">data</span> <span class="hl std">= trees</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+
+<p>We must call the results of the test with <tt>summary</tt>.</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(model)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Call:
+## lm(formula = Volume ~ Girth, data = trees)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.065 -3.107  0.152  3.495  9.587 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  -36.943      3.365   -11.0  7.6e-12 ***
+## Girth          5.066      0.247    20.5  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.25 on 29 degrees of freedom
+## Multiple R-squared:  0.935,	Adjusted R-squared:  0.933 
+## F-statistic:  419 on 1 and 29 DF,  p-value: <2e-16
+</pre></div>
+</div></div>
+
+
+<p>So we get quite a lot of output...</p>
+
+<p>First we are reminded of the model we called:</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="output"><pre class="knitr r">## lm(formula = Volume ~ Girth, data = trees)
+</pre></div>
+</div></div>
+
+
+<p>Then we get some summary information from the residuals - the minimum, maximum, median, and the 1st and 3rd quartiles. Remember that our residuals should be normally distributed in a regression model, so we can get an initial idea of whether this is so from this summary:</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="output"><pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -8.070  -3.110   0.152   0.000   3.490   9.590
+</pre></div>
+</div></div>
+
+
+<p>Then we get the juicy stuff...</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="output"><pre class="knitr r">##             Estimate Std. Error t value  Pr(>|t|)
+## (Intercept)  -36.943     3.3651  -10.98 7.621e-12
+## Girth          5.066     0.2474   20.48 8.644e-19
+</pre></div>
+</div></div>
+
+
+<p>First we get the model coefficients. Note that the name of the response variable (Volume) has been replaced with <tt>(Intercept)</tt>, and the first value immediately to the right of this is the intercept of our regression line. The number beneath this is the slope of our regression line - hence these two can be considered as &alpha; and &beta; in the equation <tt>y = &alpha; + &beta;x</tt></p>
+
+<p>Hence we can use them to plot the regression line represented by the model with:</p>
+
+<div class="chunk" id="regression2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span>
+     <span class="hl kwc">a</span> <span class="hl std">=</span> <span class="hl kwd">coef</span><span class="hl std">(model[</span><span class="hl num">1</span><span class="hl std">]),</span>
+     <span class="hl kwc">b</span> <span class="hl std">=</span> <span class="hl kwd">coef</span><span class="hl std">(model[</span><span class="hl num">2</span><span class="hl std">])</span>
+     <span class="hl std">)</span>
+<span class="hl com"># Or more simply:</span>
+<span class="hl kwd">abline</span><span class="hl std">(model)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression2.png" title="plot of chunk regression2" alt="plot of chunk regression2" class="plot" /></div></div>
+
+
+<p>We also get the results from t-tests on the two variables:</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="output"><pre class="knitr r">##             Estimate Std. Error t value  Pr(>|t|)
+## (Intercept)  -36.943     3.3651  -10.98 7.621e-12
+## Girth          5.066     0.2474   20.48 8.644e-19
+</pre></div>
+</div></div>
+
+
+<p>The number of interest to us is <tt><0.00276**</tt>, which tells us that there is a significant correlation (which is positive because the t value <tt>3.272</tt> is also positive) between <tt>Volume</tt> and <tt>Girth</tt></p>
+
+<p>Other pertinent information is the r-square (R<sup>2</sup>) and adjusted-r-squared values (<span style="text-decoration: overline">R</span><sup>2</sup>). If you don't know what these are you should look them up: <a href="http://en.wikipedia.org/wiki/R-squared">http://en.wikipedia.org/wiki/R-squared</a>.</p>
+
+<p>If we want to include this information on the graph, we can:</p>
+
+<div class="chunk" id="regression3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume,</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">abline</span><span class="hl std">(model)</span>
+<span class="hl std">formula_text</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">paste</span><span class="hl std">(</span>
+     <span class="hl str">&quot;y=&quot;</span><span class="hl std">,</span>
+     <span class="hl kwd">round</span><span class="hl std">(</span><span class="hl kwd">coef</span><span class="hl std">(model)[</span><span class="hl num">1</span><span class="hl std">],</span><span class="hl num">2</span><span class="hl std">),</span>
+     <span class="hl str">&quot;+&quot;</span><span class="hl std">,</span>
+     <span class="hl kwd">round</span><span class="hl std">(</span><span class="hl kwd">coef</span><span class="hl std">(model)[</span><span class="hl num">2</span><span class="hl std">],</span><span class="hl num">2</span><span class="hl std">),</span>
+     <span class="hl str">&quot;x, &quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">sep</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span>
+     <span class="hl std">)</span>
+<span class="hl std">rsquared_text</span> <span class="hl kwb">=</span> <span class="hl kwd">paste</span><span class="hl std">(</span>
+     <span class="hl str">&quot;=&quot;</span><span class="hl std">,</span>
+     <span class="hl kwd">round</span><span class="hl std">(</span>
+     <span class="hl std">(</span><span class="hl kwd">summary</span><span class="hl std">(model))</span><span class="hl opt">$</span><span class="hl std">r.squared</span>
+     <span class="hl std">,</span><span class="hl num">2</span>
+     <span class="hl std">)</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">text</span><span class="hl std">(</span>
+     <span class="hl kwd">substitute</span><span class="hl std">(</span>
+          <span class="hl kwd">paste</span><span class="hl std">(ft, R</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl std">, rt),</span>
+          <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">ft</span><span class="hl std">=formula_text,</span><span class="hl kwc">rt</span> <span class="hl std">= rsquared_text)</span>
+          <span class="hl std">),</span>
+     <span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span>
+     <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">75</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression3.png" title="plot of chunk regression3" alt="plot of chunk regression3" class="plot" /></div></div>
+
+
+<p>All good - but we do need to check the model diagnostic plots to ensure that we have met the assumptions of a linear model.</p>
+
+<div class="chunk" id="regression4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl kwd">plot</span><span class="hl std">(model)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression4.png" title="plot of chunk regression4" alt="plot of chunk regression4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+
+
+<p>As I keep saying, this is not a statistics course. If you don't know what you are looking at here, You should find out.</p>
+
+<p>These plots are discussed in the R book on p.357, but in general terms the first and third plot should should look like a sky at night, without any particular patternation - and in particular the data should not be clustered in a wedge shape. The second plot should generally follow the straight line indicated - this is the same as the <tt>qqnorm</tt> plot discussed elsewhere in the course.</p>
+
+<h2>Transformation</h2>
+
+<p>The astute amongst you may have noticed that we could improve the fit of the model by transforming the data - probably with a log transformation.</p>
+
+<p>Let's try this now:</p>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">model1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">lm</span><span class="hl std">(</span>
+     <span class="hl kwc">formula</span> <span class="hl std">=</span> <span class="hl kwd">log10</span><span class="hl std">(Volume)</span> <span class="hl opt">~</span> <span class="hl kwd">log10</span><span class="hl std">(Girth),</span>
+     <span class="hl kwc">data</span> <span class="hl std">= trees</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(model1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Call:
+## lm(formula = log10(Volume) ~ log10(Girth), data = trees)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.08946 -0.02984  0.00044  0.03152  0.10769 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   -1.0220     0.1002   -10.2  4.2e-11 ***
+## log10(Girth)   2.2000     0.0898    24.5  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0499 on 29 degrees of freedom
+## Multiple R-squared:  0.954,	Adjusted R-squared:  0.952 
+## F-statistic:  600 on 1 and 29 DF,  p-value: <2e-16
+</pre></div>
+</div></div>
+
+
+<p>Yes, the R-squared is slightly better than with the transformed model. Now let's reproduce the plot, this time with log10 transformed axes:</p>
+
+
+<div class="chunk" id="regression5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume,</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Untransformed&quot;</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">abline</span><span class="hl std">(model)</span>
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume,</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>
+     <span class="hl kwc">log</span> <span class="hl std">=</span> <span class="hl str">&quot;xy&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Transformed&quot;</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">abline</span><span class="hl std">(model1)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression5.png" title="plot of chunk regression5" alt="plot of chunk regression5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+
+
+<p>A nice touch when plotting data on transformed axes, is to produce a plot of the original data within the first plot with the model line plotted untransformed.</p>
+
+<div class="chunk" id="regression6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Create intial plot</span>
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume,</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>
+     <span class="hl kwc">log</span> <span class="hl std">=</span> <span class="hl str">&quot;xy&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Volume ~ Girth &quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">bty</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Girth (in)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl kwd">bquote</span><span class="hl std">(Volume</span><span class="hl opt">~</span><span class="hl std">(ft</span><span class="hl opt">^</span><span class="hl num">3</span><span class="hl std">)),</span>
+     <span class="hl kwc">yaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">las</span> <span class="hl std">=</span> <span class="hl num">2</span>
+     <span class="hl std">)</span>
+<span class="hl com"># Pot regression line</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span>
+     <span class="hl std">model1,</span>
+     <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">rgb</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0.5</span><span class="hl std">)</span>
+     <span class="hl std">)</span>
+<span class="hl com"># Set up graphical parameters for sub plot see ?par</span>
+<span class="hl kwd">par</span><span class="hl std">(</span>
+     <span class="hl kwc">fig</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.6</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0.075</span><span class="hl std">,</span><span class="hl num">0.6</span><span class="hl std">),</span>
+     <span class="hl kwc">new</span> <span class="hl std">= T,</span>
+     <span class="hl kwc">bty</span> <span class="hl std">=</span> <span class="hl str">&quot;o&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">0.8</span><span class="hl std">,</span>
+     <span class="hl kwc">cex.lab</span> <span class="hl std">=</span> <span class="hl num">0.8</span><span class="hl std">,</span>
+     <span class="hl kwc">mgp</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span> <span class="hl num">1.95</span><span class="hl std">,</span> <span class="hl num">0.3</span><span class="hl std">,</span> <span class="hl num">0</span><span class="hl std">),</span>
+     <span class="hl kwc">tck</span> <span class="hl std">=</span> <span class="hl opt">-</span><span class="hl num">0.02</span>
+<span class="hl std">)</span>
+<span class="hl com"># Plot sub plot</span>
+<span class="hl com"># Note that x and y axes have been suppressed, as have annotations</span>
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Volume,</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;hotpink&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ann</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">,</span>
+     <span class="hl kwc">xlim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">),</span>
+     <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl num">70</span><span class="hl std">),</span>
+     <span class="hl kwc">xaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">yaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span>
+     <span class="hl std">)</span>
+<span class="hl com"># Use predict to calculate the untransformed model. Note the untf=T</span>
+<span class="hl kwd">lines</span><span class="hl std">(</span>
+     <span class="hl num">10</span> <span class="hl opt">^</span> <span class="hl kwd">predict</span><span class="hl std">(</span>
+          <span class="hl std">model1,</span>
+          <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">Girth</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">50</span><span class="hl std">),</span>
+          <span class="hl kwc">untf</span> <span class="hl std">= T</span>
+          <span class="hl std">),</span>
+     <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">rgb</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0.5</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+<span class="hl com"># Add x-axis</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">5</span><span class="hl std">),</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">0.5</span>
+<span class="hl std">)</span>
+<span class="hl com"># Add y-axis</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">),</span>
+     <span class="hl kwc">las</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">0.5</span>
+<span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression6.png" title="plot of chunk regression6" alt="plot of chunk regression6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl com"># Reset the plotting parameters</span>
+<span class="hl kwd">par</span><span class="hl std">(</span>
+     <span class="hl kwc">fig</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">),</span>
+     <span class="hl kwc">new</span> <span class="hl std">= F</span>
+<span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+
+<p>Finally, we should check the model assumptions again...</p>
+
+<div class="chunk" id="regression7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl kwd">plot</span><span class="hl std">(model1)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/regression7.png" title="plot of chunk regression7" alt="plot of chunk regression7" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+
+
+<p>The diagnostic plots seem to be a little better for the transformed data. Hence it seems like a justified choice to transform the data.</p>
+
+<br><hr class="ex1"><br>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="t-test.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="ANOVA.html">Next</a></td>
+</tr>
+</table>
+
+</body>
+
+</html>

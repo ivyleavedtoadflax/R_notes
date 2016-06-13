@@ -1,0 +1,481 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Getting Started with R - Scatterplots</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="data_structures.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="histograms.html">Next</a></td>
+</tr>
+</table>
+
+<br><hr class="ex1"><br>
+
+<h1>Scatter-plots</h1>
+
+<p>The basic plotting functions are very easy, but we first need some data to work with. For this example we are going to use one of the inbuilt datasets.</p>
+
+<p>There are a number of datasets which come readily loaded with the <tt>datasets</tt> package. In this example we are using the <tt>trees</tt> dataset, which contains 'measurements of the girth, height and volume of timber in 31 felled black cherry trees' (See <tt>?trees</tt> for more information)</p>
+
+<p>First, we will look at the data.</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">trees</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Girth Height Volume
+## 1    8.3     70   10.3
+## 2    8.6     65   10.3
+## 3    8.8     63   10.2
+## 4   10.5     72   16.4
+## 5   10.7     81   18.8
+## 6   10.8     83   19.7
+## 7   11.0     66   15.6
+## 8   11.0     75   18.2
+## 9   11.1     80   22.6
+## 10  11.2     75   19.9
+## 11  11.3     79   24.2
+## 12  11.4     76   21.0
+## 13  11.4     76   21.4
+## 14  11.7     69   21.3
+## 15  12.0     75   19.1
+## 16  12.9     74   22.2
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 19  13.7     71   25.7
+## 20  13.8     64   24.9
+## 21  14.0     78   34.5
+## 22  14.2     80   31.7
+## 23  14.5     74   36.3
+## 24  16.0     72   38.3
+## 25  16.3     77   42.6
+## 26  17.3     81   55.4
+## 27  17.5     82   55.7
+## 28  17.9     80   58.3
+## 29  18.0     80   51.5
+## 30  18.0     80   51.0
+## 31  20.6     87   77.0
+</pre></div>
+</div></div>
+
+
+<p>So far so good. To produce a basic scatter plot in R is very simple. We use the <tt>plot</tt> command. In this example, we need to specify which parts of the trees dataset we are going to use. Just as revision, we will try three different ways of doing this - all will produce the same plot, but each one has a subtly different use.</p>
+
+<p>In the first example, we select a subscript from the dataframe using square brackets <tt>[,1]</tt>. Refer back to <a href="Tutorial/getting_data_into_R.html">Getting data into R</a> if you are unsure. This can be a useful way to select data from a larger dataset, if for instance we are dealing with matrices.</p>
+
+<div class="chunk" id="Scatterplots-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees[,</span><span class="hl num">1</span><span class="hl std">],</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees[,</span><span class="hl num">2</span><span class="hl std">]</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-1.png" title="plot of chunk Scatterplots-1" alt="plot of chunk Scatterplots-1" class="plot" /></div></div>
+
+
+<p>The second way, we will use the <tt>$</tt> operator to select a column from within the dataframe:</p>
+
+<div class="chunk" id="Scatterplots-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Girth,</span>
+     <span class="hl kwc">y</span> <span class="hl std">= trees</span><span class="hl opt">$</span><span class="hl std">Height</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-2.png" title="plot of chunk Scatterplots-2" alt="plot of chunk Scatterplots-2" class="plot" /></div></div>
+
+
+<p>And finally, we can try the <tt>with()</tt> function. Using <tt>with()</tt> dispenses with the need for the <tt>$</tt> operator, and allows us to call objects within a dataframe without specifying the name of the dataframe every time.</p>
+
+<div class="chunk" id="Scatterplots-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= Girth,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= Height</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-3.png" title="plot of chunk Scatterplots-3" alt="plot of chunk Scatterplots-3" class="plot" /></div></div>
+
+
+<p>It doesn't really matter which method you use in this example, but it is useful to revise different ways of getting at data within a dataframe</p>
+
+<p>This plot is not particularly inspiring, so let's look at some of the ways we can make it nicer.</p>
+
+<p>Within the <tt>plot</tt> command, there are a number of arguments that we can change in order to alter the appearance of the plot, these are <a href="plot_arguments.html", target="_blank">here</a>, lifted from the help file for <tt>?plot</tt>. You can get a similar list of arguments for any of the other plot functions (or indeed any function) by calling up the help file for that function (just place a "?" in front of the function: e.g. <tt>?boxplot</tt>).</p>
+
+
+<h3>Point colour and shape</h3>
+
+<p>So lets change some general things first. We'll label the axes (<tt>xlab</tt> or <tt>ylab</tt>)  and change the shape (<tt>pch</tt>) and colour (<tt>col</tt>) of the points.</p>
+
+<div class="chunk" id="Scatterplots-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= Girth,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= Height,</span>
+          <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Girth (in)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Height (ft)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+          <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-4.png" title="plot of chunk Scatterplots-4" alt="plot of chunk Scatterplots-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+</pre></div>
+</div></div>
+
+
+<br>
+
+<p>A little bit better...</p>
+
+<p>Note that there a wide range of symbol shapes available...</p>
+
+<img src="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png" alt="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png", style="width: 50%;">
+
+<br><br>
+
+<p>...and pretty much any colour you can imagine. Colours can either be specified as a name (e.g. "red"), as a hexadecimal code (e.g. <tt>col = "#FF0000"</tt>) or in RGB format (e.g. <tt>col = rgb(1, 0, 0)</tt>). Try <a href="http://www.colorpicker.com/">http://www.colorpicker.com</a>) if you get stuck. Note that unless you are going to pay for colour figures in journal plates, or you can be sure that no colour blind people will read your work, it is good practice to use a combination of colours and symbols</p>
+
+<p>We can use the package <tt>RColorBrewer</tt> to make picking complementary colour palettes a little easier. See <tt>?RColorBrewer</tt> or <a href="http://colorbrewer2.org">http://colorbrewer2.org</a> for more information. There are a number of palettes for different applications. We will just use the first of them - this palette is good for colouring lines and points, but should be avoided for blocks of colour.</p>
+
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(RColorBrewer)</span>
+</pre></div>
+</div></div>
+
+
+<p>We can see the various palettes with:</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">display.brewer.pal</span><span class="hl std">(</span>
+     <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">9</span><span class="hl std">,</span>
+     <span class="hl kwc">name</span> <span class="hl std">=</span> <span class="hl str">&quot;Set1&quot;</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+
+
+<p>And create our palette with:</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pal</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">brewer.pal</span><span class="hl std">(</span>
+     <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">9</span><span class="hl std">,</span>
+     <span class="hl kwc">name</span> <span class="hl std">=</span> <span class="hl str">&quot;Set1&quot;</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+
+<p>Note that <tt>RColorBrewer</tt> specifies colours with hexadecimals:</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pal</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] "#E41A1C" "#377EB8" "#4DAF4A" "#984EA3" "#FF7F00" "#FFFF33" "#A65628"
+## [8] "#F781BF" "#999999"
+</pre></div>
+</div></div>
+
+
+<h3>Axes and outlines</h3>
+
+<p>We are also able to customise the axes in any way we want, but it is usually necessary to remove the axes altogether with <tt>xaxt="n"</tt> and/or <tt>yaxt="n"</tt> and replace them with the <tt>axis</tt> command.</p>
+
+<p>This example also demonstrates the use of the <tt>bty</tt> argument.</p>
+
+<div class="chunk" id="Scatterplots-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= Girth,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= Height,</span>
+          <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Girth (in)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Height (ft)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+          <span class="hl kwc">col</span> <span class="hl std">= pal[</span><span class="hl num">2</span><span class="hl std">],</span>         <span class="hl com"># second colour from the palette we produced.</span>
+          <span class="hl kwc">yaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span><span class="hl std">,</span>           <span class="hl com"># remove the y axis</span>
+          <span class="hl kwc">xaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span><span class="hl std">,</span>           <span class="hl com"># remove the y axis</span>
+          <span class="hl kwc">cex.lab</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">,</span>      <span class="hl com"># scaling factor relating to the size of axis titles.</span>
+          <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>          <span class="hl com"># scaling factor for the size of points</span>
+          <span class="hl kwc">bty</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span>             <span class="hl com"># this can be either &quot;o&quot;, &quot;l&quot; or &quot;u&quot;</span>
+          <span class="hl std">)</span>                   <span class="hl com"># and affects the box bordering the plot</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>           <span class="hl com"># 1=below, 2=left, 3=above and 4=right.</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">),</span>   <span class="hl com"># a sequence denoting the location of axis tick marks</span>
+     <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">1.2</span>      <span class="hl com"># a scaling factor of the default text size</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">5</span><span class="hl std">),</span>
+     <span class="hl kwc">las</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>            <span class="hl com"># Rotate axis labels</span>
+     <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">1.2</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-5.png" title="plot of chunk Scatterplots-5" alt="plot of chunk Scatterplots-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+</pre></div>
+</div></div>
+
+
+<h3>Additional observations</h3>
+
+<p>If we want to add additional observations to a plot, it is quite simple. We can use the <tt>points</tt> command, which is specified in a very similar way to the original <tt>plot</tt> command.</p>
+
+<p>In this example, we will use the same <tt>trees</tt> dataset and plot as the previous example, but we will add a second set of observations which we have simulated using <tt>jitter</tt>. The <tt>jitter</tt> command adds a small amount of 'noise' to an observation by adding or removing a small amount from it.</p>
+
+<div class="chunk" id="Scatterplots-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Repeat the same code as the last example:</span>
+<span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= Girth,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= Height,</span>
+          <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Girth (in)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Height (ft)&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+          <span class="hl kwc">col</span> <span class="hl std">= pal[</span><span class="hl num">2</span><span class="hl std">],</span>         <span class="hl com"># second colour from the palette we produced.</span>
+          <span class="hl kwc">yaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span><span class="hl std">,</span>           <span class="hl com"># remove the y axis</span>
+          <span class="hl kwc">xaxt</span> <span class="hl std">=</span> <span class="hl str">&quot;n&quot;</span><span class="hl std">,</span>           <span class="hl com"># remove the y axis</span>
+          <span class="hl kwc">cex.lab</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">,</span>      <span class="hl com"># scaling factor relating to the size of axis titles.</span>
+          <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>          <span class="hl com"># scaling factor for the size of points</span>
+          <span class="hl kwc">bty</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span>             <span class="hl com"># this can be either &quot;o&quot;, &quot;l&quot; or &quot;u&quot;</span>
+          <span class="hl std">)</span>                   <span class="hl com"># and affects the box bordering the plot</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>           <span class="hl com"># 1=below, 2=left, 3=above and 4=right.</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">),</span>   <span class="hl com"># a sequence denoting the location of axis tick marks</span>
+     <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">1.2</span>      <span class="hl com"># a scaling factor of the default text size</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">axis</span><span class="hl std">(</span>
+     <span class="hl kwc">side</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>
+     <span class="hl kwc">at</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">5</span><span class="hl std">),</span>
+     <span class="hl kwc">las</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span>            <span class="hl com"># Rotate axis labels</span>
+     <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">1.2</span>
+     <span class="hl std">)</span>
+<span class="hl com"># Add an additonal set of points:</span>
+<span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">trees,</span>
+     <span class="hl kwd">points</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl kwd">jitter</span><span class="hl std">(Girth,</span> <span class="hl kwc">amount</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">),</span>       <span class="hl com"># See ?jitter for details</span>
+          <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">jitter</span><span class="hl std">(Height,</span> <span class="hl kwc">amount</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">),</span>
+          <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">15</span><span class="hl std">,</span>
+          <span class="hl kwc">col</span> <span class="hl std">= pal[</span><span class="hl num">1</span><span class="hl std">],</span>
+          <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+<span class="hl com"># We also now need to add a legend:</span>
+<span class="hl kwd">legend</span><span class="hl std">(</span>
+     <span class="hl str">&quot;bottomright&quot;</span><span class="hl std">,</span>      <span class="hl com"># this can also take the form of x and y coordinates</span>
+     <span class="hl kwc">legend</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Jittered&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Original&quot;</span><span class="hl std">),</span> <span class="hl com"># labels for the legend</span>
+     <span class="hl kwc">col</span> <span class="hl std">= pal[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">2</span><span class="hl std">],</span>     <span class="hl com"># colour in order of appearance</span>
+     <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">15</span><span class="hl opt">:</span><span class="hl num">16</span><span class="hl std">),</span>     <span class="hl com"># pch in order of appearance</span>
+     <span class="hl kwc">pt.cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>       <span class="hl com"># size of legend points</span>
+     <span class="hl kwc">bty</span><span class="hl std">=</span><span class="hl str">&quot;n&quot;</span>             <span class="hl com"># remove the black outline from the legend</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-6.png" title="plot of chunk Scatterplots-6" alt="plot of chunk Scatterplots-6" class="plot" /></div></div>
+
+
+<p>Note that in the above example we would need to adjust the limits of the x and y axes in order to accommodate all of the extra points which we added. This can be done with the arguments <tt>xlim=c(1,2)</tt> or <tt>ylim=c(1,2)</tt>, substituting the lowest and highest numbers for the 1 and 2.</p>
+
+<h3>Log transformations</h3>
+
+<p>It is sometimes necessary to transform your data when plotting. This is quite easy to achieve in R.</p>
+
+<p>In this example, we will import directly from an online text file (also from Crawley's R book).</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sapdecay</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span>
+     <span class="hl str">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">header</span><span class="hl std">=T</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+
+<p> We'll call the data to examine it. Note this data is dealt with on p70 of 'The R Book'. remember that typing the name of the object <tt>sapdecay</tt> is the 'short-hand' equivalent of typing <tt>print(sapdecay)</tt> - there are certain occasions when it will be necessary to use the full command - more of that later.</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sapdecay</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##     x       y
+## 1   0 1.00000
+## 2   2 0.96024
+## 3   4 0.84466
+## 4   6 0.70694
+## 5   8 0.70864
+## 6  10 0.60980
+## 7  12 0.51325
+## 8  14 0.47140
+## 9  16 0.38408
+## 10 18 0.37228
+## 11 20 0.33409
+## 12 22 0.27331
+## 13 24 0.25162
+## 14 26 0.22279
+## 15 28 0.21022
+## 16 30 0.19059
+## 17 32 0.16691
+## 18 34 0.14073
+## 19 36 0.12029
+## 20 38 0.11646
+## 21 40 0.09274
+## 22 42 0.08397
+## 23 44 0.08829
+## 24 46 0.07179
+## 25 48 0.05933
+## 26 50 0.06171
+</pre></div>
+</div></div>
+
+
+<p class="ex">Now plot the data producing the graph below. Remember to check the arguments listed above if you don't know how to do something.</p>
+
+<div class="chunk" id="Scatterplots-7"><div class="rimage default"><img src="figure/Scatterplots-7.png" title="plot of chunk Scatterplots-7" alt="plot of chunk Scatterplots-7" class="plot" /></div></div>
+
+
+<p>It is possible for us to fit a non-linear model to this data. We're not going to cover non-linear modelling in this material, but it is covered elsewhere in the R book.</p>
+
+<p>The code below (p.70 in the R book) fits an exponential model to this data</p>
+
+<div class="chunk" id="Scatterplots-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">lines</span><span class="hl std">(</span>
+     <span class="hl kwc">x</span> <span class="hl std">= xv,</span>
+     <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">0.055</span><span class="hl opt">*</span><span class="hl std">xv)</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-8.png" title="plot of chunk Scatterplots-8" alt="plot of chunk Scatterplots-8" class="plot" /></div></div>
+
+
+<p>In general however, it is easier if we can linearise our data somehow. For plots, this can be achieved in two ways in R. Either we add the command <tt>log="x"</tt> to convert the x-axis to a base 10 logarithmic scale (or you can specify <tt>"y"</tt> or <tt>"xy"</tt> for both), or we can convert the data itself before plotting using the <tt>log10()</tt> command.</p>
+
+<div class="ex">
+
+<h3>Exercise</h3>
+
+<p>Reproduce the above graph again, but this time try specifying <tt>log="y"</tt>.Then try by converting <tt>y</tt> to a logarithmic scale with <tt>log10(y)</tt>. You should produce the two plots below:
+</p>
+
+</div>
+
+
+<div class="chunk" id="Scatterplots-9"><div class="rimage default"><img src="figure/Scatterplots-9.png" title="plot of chunk Scatterplots-9" alt="plot of chunk Scatterplots-9" class="plot" /></div></div>
+
+
+<p>Notice that when we log the axes rather than the data, the axis labels remain a lot more comprehensible.</p>
+
+<p>We are now able to fit a linear model to this data, which is mathematically simpler than specifying a non-linear model.</p>
+
+<div class="chunk" id="Scatterplots-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">with</span><span class="hl std">(</span>
+     <span class="hl std">sapdecay,</span>
+     <span class="hl kwd">plot</span><span class="hl std">(</span>
+          <span class="hl kwc">x</span> <span class="hl std">= x,</span>
+          <span class="hl kwc">y</span> <span class="hl std">= y,</span>
+          <span class="hl kwc">bty</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Radioactive decay&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Days&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;p&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Radioactive Decay Plot&quot;</span><span class="hl std">,</span>
+          <span class="hl kwc">col</span> <span class="hl std">= pal[</span><span class="hl num">2</span><span class="hl std">],</span>
+          <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+          <span class="hl kwc">cex</span> <span class="hl std">=</span> <span class="hl num">1.4</span><span class="hl std">,</span>
+          <span class="hl kwc">cex.axis</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">,</span>
+          <span class="hl kwc">cex.lab</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">,</span>
+          <span class="hl kwc">log</span> <span class="hl std">=</span> <span class="hl str">&quot;y&quot;</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span>
+     <span class="hl kwd">lm</span><span class="hl std">(</span>
+          <span class="hl kwc">formula</span> <span class="hl std">=</span> <span class="hl kwd">log10</span><span class="hl std">(y)</span><span class="hl opt">~</span><span class="hl std">x,</span>
+          <span class="hl kwc">data</span> <span class="hl std">= sapdecay</span>
+          <span class="hl std">)</span>
+     <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/Scatterplots-10.png" title="plot of chunk Scatterplots-10" alt="plot of chunk Scatterplots-10" class="plot" /></div></div>
+
+
+
+<h3>Customising white space</h3>
+
+<p>So by now, you may be realising that pretty much everything in R plots can be customised. This includes the amount of whitespace you leave around your plots. This can very useful to change when you are creating two plots next to each other.</p>
+
+<p>I'm not going to dwell on how to do this, because there are already some excellent guides written on the internet (see: <a href="http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/">http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/</a>).</p>
+
+<p>One of the plots from this page is included below, showing which commands control whitespace around a plot. Maybe take a deep breath first before looking at the code on the website!</p>
+
+<div class="chunk" id="Scatterplots-14"><div class="rimage default"><img src="figure/Scatterplots-14.png" title="plot of chunk Scatterplots-14" alt="plot of chunk Scatterplots-14" class="plot" /></div></div>
+
+
+
+<br><hr class="ex1"><br>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="data_structures.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="histograms.html">Next</a></td>
+</tr>
+</table>
+
+</body>
+
+</html>
