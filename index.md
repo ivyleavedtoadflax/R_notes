@@ -5,7 +5,7 @@ date: "2016-06-13"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-bibliography: [book.bib, packages.bib]
+#bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
@@ -19,7 +19,7 @@ As I have continued to teach R in various capacities ever since, I have updated 
 
 The aim of this course remains the same as the original:
 
-> This course is designed to give you a brief introduction to the statistical programming environment R. <b>This is not a course on which statistics to use and why</b>, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.
+> This course is designed to give you a brief introduction to the statistical programming environment R. *This is not a course on which statistics to use and why*, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.
 
 In its previous incarnation, this book relied on examples from Mick Crawley's seminal text'The R Book'.
 This course relies less on that book, and although a little dated now, it remains ane excellent resource, especially when using R for generalised linear modelling.
@@ -33,24 +33,24 @@ All the course materials are available here. In addition you will need to downlo
 The course is divided as follows:
 
 * Getting started
-    * [The R environment](R_environment.html)
-    * [R Studio](RStudio.html)
-    * [R style](r_style_guide.html)
-    * [Installing R packages](installing_R_packages.html)
+    * The R environment
+    * RStudio
+    * R coding style
+    * Installing R packages
 * Moving data around
-    * [Getting data into R](getting_data_into_R.html)
-    * [Selecting Data](selecting_data.html)
-    * [Data structures and types](data_structures.html)
+    * Getting data into R
+    * Selecting Data
+    * Data structures and types
 * Visualising your data
-    * [Scatter-plots](scatterplots.html)
-    * [Histograms and Box-and-whisker plots](histograms.html)
-    * [Multiple plots](multiple_plots.html)
+    * Scatter-plots
+    * Histograms and Box-and-whisker plots
+    * Multiple plots
 * Basic data analysis
-    * [T-test](t-test.html)
-    * [Linear regression](regression.html)
-    * [ANOVA](ANOVA.html)
+    * T-test
+    * Linear regression
+    * ANOVA
 * More advanced stuff...
-    * [Writing functions](writing_functions.html)
+    * Writing functions
 
 As you go along, You will be able to copy and paste the code from these notes directly into the `R` console., but do try to understand what it is you are doing! 
 
@@ -58,7 +58,7 @@ As you go along, You will be able to copy and paste the code from these notes di
 
 ### Navigating the course
 
-You'll find links to the course overview, the next, and the previous page of the course at the top and bottom of each page.
+Follow the links on the left hand pane to get around.
 
 ## Getting help
 

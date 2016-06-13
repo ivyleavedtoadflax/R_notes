@@ -1,6 +1,6 @@
 # The R environment {#R_environment}
 
-## The `R` console
+## The R console
 
 The first thing you will notice when you open `R`, is that there are not a great deal of buttons! In fact, you will be confronted by the window below or the 'R Console'. It is in this window that we can type commands, and in this window that we will get results returned
 
