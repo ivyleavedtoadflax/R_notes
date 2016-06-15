@@ -202,13 +202,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">x =</span> trees[,<span class="dv">1</span>],
      <span class="dt">y =</span> trees[,<span class="dv">2</span>]
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-1-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-1-1.png" width="672" /></p>
 <p>The second way, we will use the <code>$</code> operator to select a column from within the dataframe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
      <span class="dt">x =</span> trees$Girth,
      <span class="dt">y =</span> trees$Height
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-2-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-2-1.png" width="672" /></p>
 <p>And finally, we can try the <code>with()</code> function. Using <code>with()</code> dispenses with the need for the <code>$</code> operator, and allows us to call objects within a dataframe without specifying the name of the dataframe every time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(
      trees,
@@ -217,7 +217,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="dt">y =</span> Height
           )
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-3-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-3-1.png" width="672" /></p>
 <p>It doesn’t really matter which method you use in this example, but it is useful to revise different ways of getting at data within a dataframe</p>
 <p>This plot is not particularly inspiring, so let’s look at some of the ways we can make it nicer.</p>
 <p>Within the <code>plot</code> command, there are a number of arguments that we can change in order to alter the appearance of the plot, these are <a href="plot_arguments.html">here</a>, lifted from the help file for <code>?plot</code>. You can get a similar list of arguments for any of the other plot functions (or indeed any function) by calling up the help file for that function (just place a “?” in front of the function: e.g. <code>?boxplot</code>).</p>
@@ -235,7 +235,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>
           )
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-4-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-4-1.png" width="672" /></p>
 <p>A little bit better…</p>
 <p>Note that there a wide range of symbol shapes available…</p>
 <p><a href="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png"><img src="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png" alt="" /></a></p>
@@ -246,7 +246,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">n =</span> <span class="dv">9</span>,
      <span class="dt">name =</span> <span class="st">&quot;Set1&quot;</span>
      ) </code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>And create our palette with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pal &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(
      <span class="dt">n =</span> <span class="dv">9</span>,
@@ -289,7 +289,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">las =</span> <span class="dv">2</span>,            <span class="co"># Rotate axis labels</span>
      <span class="dt">cex.axis =</span> <span class="fl">1.2</span>
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-5-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-5-1.png" width="672" /></p>
 </div>
 <div id="additional-observations" class="section level3">
 <h3><span class="header-section-number">7.0.3</span> Additional observations</h3>
@@ -349,7 +349,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">pt.cex =</span> <span class="fl">1.4</span>,       <span class="co"># size of legend points</span>
      <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>             <span class="co"># remove the black outline from the legend</span>
      )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-6-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-6-1.png" width="672" /></p>
 <p>Note that in the above example we would need to adjust the limits of the x and y axes in order to accommodate all of the extra points which we added. This can be done with the arguments <code>xlim=c(1,2)</code> or <code>ylim=c(1,2)</code>, substituting the lowest and highest numbers for the 1 and 2.</p>
 </div>
 <div id="log-transformations" class="section level3">
@@ -406,20 +406,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">cex.axis =</span> <span class="fl">1.2</span>,
   <span class="dt">cex.lab =</span> <span class="fl">1.2</span>
 )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-7-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-7-1.png" width="672" /></p>
 <p>It is possible for us to fit a non-linear model to this data. We’re not going to cover non-linear modelling in this material, but it is covered elsewhere in the R book.</p>
 <p>The code below (.70 in the R book) fits an exponential model to this data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lines</span>(
   <span class="dt">x =</span> xv,
   <span class="dt">y =</span> <span class="kw">exp</span>(-<span class="fl">0.055</span>*xv)
 )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-8-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-8-1.png" width="672" /></p>
 <p>In general however, it is easier if we can linearise our data somehow. For plots, this can be achieved in two ways in R. Either we add the command <code>log=&quot;x&quot;</code> to convert the x-axis to a base 10 logarithmic scale (or you can specify <code>&quot;y&quot;</code> or <code>&quot;xy&quot;</code> for both), or we can convert the data itself before plotting using the <code>log10()</code> command.</p>
 <div class="ex">
 <h3 id="exercise-2"><span class="header-section-number">7.0.4</span> Exercise</h3>
 <p>Reproduce the above graph again, but this time try specifying <code>log=&quot;y&quot;</code>.Then try by converting <code>y</code> to a logarithmic scale with <code>log10(y)</code>. You should produce the two plots below:</p>
 </div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-9-1.png" width="1152" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-9-1.png" width="1152" /></p>
 <p>Notice that when we log the axes rather than the data, the axis labels remain a lot more comprehensible.</p>
 <p>We are now able to fit a linear model to this data, which is mathematically simpler than specifying a non-linear model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abline</span>(
@@ -428,14 +428,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="dt">data =</span> sapdecay
   )
 )</code></pre></div>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-10-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-10-1.png" width="672" /></p>
 </div>
 <div id="customising-white-space" class="section level3">
 <h3><span class="header-section-number">7.0.5</span> Customising white space</h3>
 <p>So by now, you may be realising that pretty much everything in R plots can be customised. This includes the amount of whitespace you leave around your plots. This can very useful to change when you are creating two plots next to each other.</p>
 <p>I’m not going to dwell on how to do this, because there are already some excellent guides written on the internet (see: <a href="http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/" class="uri">http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/</a>).</p>
 <p>One of the plots from this page is included below, showing which commands control whitespace around a plot. Maybe take a deep breath first before looking at the code on the website!</p>
-<p><img src="06-scatterplots_files/figure-html/Scatterplots-11-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-11-1.png" width="672" /></p>
 
 </div>
 </div>

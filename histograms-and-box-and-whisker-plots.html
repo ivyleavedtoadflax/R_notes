@@ -169,7 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(
   normal_data
 )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-1"-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-1"-1.png" width="672" /></p>
 <p>Simple enough. But if like me, you are a little pedantic about your plots, you may also want to make some changes…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(
      normal_data,
@@ -180,9 +180,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">cex.axis =</span> <span class="fl">1.2</span>, 
      <span class="dt">cex.lab =</span> <span class="fl">1.2</span>
      )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-2-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-2-1.png" width="672" /></p>
 <p>Bear in mind that we need to make some assumptions when we draw a histogram - i.e. where to choose the break points for the bins (columns). It’s usually fine to leave R to make the decision for us, but we can see the result of making changes to the break points below.</p>
-<p><img src="07-histograms_files/figure-html/histograms-3-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-3-1.png" width="672" /></p>
 <p>You may also at some point wish to compare two histograms by overlaying one over the other. This can be done with a few tweaks, as seen in the example below. Note that we have again had to specify the number of breaks. Hence we have made some assumptions about how to display this data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1337</span>)
 
@@ -229,7 +229,7 @@ p2&lt;-<span class="kw">hist</span>(
   <span class="dt">cex.axis =</span> <span class="fl">1.2</span>, 
   <span class="dt">cex.lab =</span> <span class="fl">1.2</span>
 )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-4-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-4-1.png" width="672" /></p>
 </div>
 <div id="box-and-whisker-plots" class="section level3">
 <h3><span class="header-section-number">8.0.2</span> Box and whisker plots</h3>
@@ -250,7 +250,7 @@ boxplot_data &lt;-<span class="st"> </span><span class="kw">rnorm</span>(
      <span class="dt">cex.axis =</span> <span class="fl">1.2</span>, 
      <span class="dt">cex.lab =</span> <span class="fl">1.2</span>
      )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-5-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-5-1.png" width="672" /></p>
 <p>In this example the thick line at the centre shows the median, the top and bottom of the box shows the upper and lower quartile, whilst the ‘whisker’ show the upper and low adjacent values. These are the highest and lowest values within 1.5 times the interquartile range (upper - lower quartile) of the upper and lower quartile respectively. Any values beyond the adjacent values are considered ‘outliers’ and represented by points.</p>
 <p>Note that this is not the only way of representing data in box and whisker plots. The other possibilities are listed here: <a href="http://en.wikipedia.org/wiki/Box_plot" class="uri">http://en.wikipedia.org/wiki/Box_plot</a>. For this reason, you should always mention what your boxplot is actually showing in the caption.</p>
 <div id="multiple-box-plots" class="section level4">
@@ -309,7 +309,7 @@ boxplot_data &lt;-<span class="st"> </span><span class="kw">rnorm</span>(
   ),
   <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#66C2A5&quot;</span>,<span class="st">&quot;#FC8D62&quot;</span>)
 )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-6"-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-6"-1.png" width="672" /></p>
 <p>We can make additional splits to this dataset if we like, by using a <code>list</code> of factors to split the data by.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(
   <span class="kw">split</span>(
@@ -322,7 +322,7 @@ boxplot_data &lt;-<span class="st"> </span><span class="kw">rnorm</span>(
   <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;#66C2A5&quot;</span>,<span class="st">&quot;#FC8D62&quot;</span>),
   <span class="dt">ylab=</span><span class="kw">bquote</span>(Asking~Price~(<span class="st">&quot;£&quot;</span>)) 
 )</code></pre></div>
-<p><img src="07-histograms_files/figure-html/histograms-8-1.png" width="672" /></p>
+<p><img src="Getting_started_with_R_files/figure-html/histograms-8-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using bquote() is required here to display the £ sign correctly</span></code></pre></div>
 <div class="ex">
 <h3 id="exercise-4"><span class="header-section-number">8.0.2.1</span> Exercise</h3>
