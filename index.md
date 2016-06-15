@@ -1,7 +1,7 @@
 --- 
 title: "Getting started with R"
 author: "Matthew Upson"
-date: "2016-06-13"
+date: "2016-06-15"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book

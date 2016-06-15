@@ -12,3 +12,10 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.ex{
+font-family:"Calibri","Verdana","Arial";
+background-color: #EDC9AF;
+padding: 10px;
+border-radius: 25px;
+}
