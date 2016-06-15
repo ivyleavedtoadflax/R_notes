@@ -30,25 +30,35 @@ All the course materials are available here. In addition you will need to downlo
 
 ## Structure
 
-The course is divided into four main sections:
+The course is divided as follows:
 
 * Getting started
+    * The R environment
+    * RStudio
+    * R coding style
+    * Installing R packages
 * Moving data around
+    * Getting data into R
+    * Selecting Data
+    * Data structures and types
 * Visualising your data
+    * Scatter-plots
+    * Histograms and Box-and-whisker plots
+    * Multiple plots
 * Basic data analysis
-* More advanced stuff
+    * T-test
+    * Linear regression
+    * ANOVA
+* More advanced stuff...
+    * Writing functions
 
-Follow the links on teh left hand side to get around.
-
-As you go along, You will be able to copy and paste the code from these notes directly into the R console., but do try to understand what it is you are doing! 
+As you go along, You will be able to copy and paste the code from these notes directly into the `R` console., but do try to understand what it is you are doing! 
 
  In addition there are a number of exercises throughout. These are indicated by a box:
 
-<div class=ex>
-*Exercise*
+### Navigating the course
 
-This is an exercise
-</div>
+Follow the links on the left hand pane to get around.
 
 ## Getting help
 
@@ -63,8 +73,8 @@ It is possible to get help in R itself. If you are interested in a function, you
 There are also many online guides available - googling 'R guide' will reveal many, but three are listed below:
 
 * [http://www.rstudio.com/ide/docs/help_with_r](http://www.rstudio.com/ide/docs/help_with_r)
-* [http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf](http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf)
-* [https://sites.google.com/site/undergraduateguidetor/](https://sites.google.com/site/undergraduateguidetor)
+*[http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf](http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf)
+*[https://sites.google.com/site/undergraduateguidetor/](https://sites.google.com/site/undergraduateguidetor)
 
 I point the reader particularly in the direction of: 
 
@@ -73,6 +83,4 @@ I point the reader particularly in the direction of:
 
 ### Forums
 
-Forums are a great place for R help - again try googling this, although arguably the best is: <http://stackoverflow.com/>.
-Make sure you read the rules of the forum carefully, as contributors often don't take kindly to poorly stated questions!
-That said, if you don't get an answer on Stack Overflow, you have found a very tricky problem indeed.
+Forums are a great place for R help - again try googling this, although one of the most well known is: [http://stats.stackexchange.com/](http://stats.stackexchange.com/). Just make sure you read the rules of the forum carefully, as contributors often don't take kindly to poorly stated questions!
