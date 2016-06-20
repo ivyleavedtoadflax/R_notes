@@ -109,7 +109,7 @@ lci95 <- function(x) {
 
 ```{r echo=FALSE, eval=FALSE, tidy=FALSE}
 
-require(reshape)
+library(reshape)
 
 paint_m <- melt(
      paint,
@@ -136,7 +136,7 @@ For this example we will use Tukey's Honest Significant Difference test (HSD), w
 
 ```{r}
 
-require(agricolae)
+library(agricolae)
 
 # Note that here we have to specify the response (y) and the treatment (trt) of
 # interest, in adittion to the mean residual mean squares and residual degree of
@@ -222,7 +222,7 @@ We can display these differences using error bars and letters to signify signifi
 
 ```{r ANOVA2}
 
-require(reshape)
+library(reshape)
 
 paint_m <- melt(
      paint,
