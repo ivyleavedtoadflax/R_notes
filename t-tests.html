@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="R-style.html">
+<link rel="prev" href="multiple-plots.html">
+<link rel="next" href="linear-regression.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -169,39 +169,97 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="R_environment" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> The R environment</h1>
-<div id="the-r-console" class="section level2">
-<h2><span class="header-section-number">2.1</span> The R console</h2>
-<p>The first thing you will notice when you open R, is that there are not a great deal of buttons! In fact, you will be confronted by the window below or the ‘R Console’. It is in this window that we can type commands, and in this window that we will get results returned</p>
-<p><a href="screenshots/R1.png"><img src="screenshots/R1.png" alt="" /></a></p>
-<p>While we will get to the more complicated commands that you can pass to Rvia the console, it can also function as a high level calculator.</p>
-<p>Throughout this course, when you see text displayed like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="dv">3</span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
-<p>This is essentially a command that has been run in the console, with lines preceded by <code>##</code> the response returned in the console. As you go along, you should replicate these commands by copying and pasting the commands into your console window.</p>
-<p>Note that there are all the usual functions you would expect from a good scientific calculator…and more.</p>
-</div>
-<div id="the-scripting-window" class="section level2">
-<h2><span class="header-section-number">2.2</span> The scripting window</h2>
-<p>The basic R installation allows you to write ‘scripts’ saved as <code>.R</code> files, in which you can save your code. You can open a new scripting window by going to the drop-down menu File&gt;New script.</p>
-<p>Once here, you can write your codes, and send it to the R console by pressing CTRL + r line by line, or CTRL + a to select all and CTRL + r to run all the selected code.</p>
-<p><a href="screenshots/R2.png"><img src="screenshots/R2.png" alt="" /></a></p>
-</div>
-<div id="the-plotting-window" class="section level2">
-<h2><span class="header-section-number">2.3</span> The plotting window</h2>
-<p>When you create a plot, a new window will open, in which your plot will appear. Every time you create a new plot, your old plot will be replaced by the new one. You can prevent this from happening, by running the command <code>windows()</code> (windows only!) before creating a plot, which will create a new plotting window, allowing you to keep several plots at any one time.</p>
-<p><a href="screenshots/R3.png"><img src="screenshots/R3.png" alt="" /></a></p>
+<div id="t-tests" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> T-tests</h1>
+<p>As mentioned at the beginning of this course, I am not going to discuss which tests you should use, or why you should use them. I am simply going to show you HOW to use them in <code>R</code></p>
+<p>When running t-tests, there is a simple, built in function we can use. See <code>?t.test</code> for more information.</p>
+<p>In this example we will use Crawley’s t.test data from .296 of the R book.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.test.data &lt;-<span class="st"> </span><span class="kw">read.table</span>(
+     <span class="st">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/t.test.data.txt&quot;</span>,
+     <span class="dt">header =</span> T
+     )
 
-</div>
+t.test.data</code></pre></div>
+<pre><code>##    gardenA gardenB
+## 1        3       5
+## 2        4       5
+## 3        4       6
+## 4        3       7
+## 5        2       4
+## 6        3       4
+## 7        1       3
+## 8        3       5
+## 9        5       6
+## 10       2       5</code></pre>
+<p>Remember that we must always satisfy ourselves that the data are normally distributed before completing a t-test, if not, the assumptions of these tests do not hold. You should consider the other <a href="http://en.wikipedia.org/wiki/Student%27s_t-test#Assumptions">assumptions</a> of a t-test too, before you run the test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gardenA &lt;-<span class="st"> </span>t.test.data$gardenA
+gardenB &lt;-<span class="st"> </span>t.test.data$gardenB
+
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+<span class="kw">qqnorm</span>(gardenA)
+<span class="kw">qqline</span>(gardenA)
+<span class="kw">qqnorm</span>(gardenB)
+<span class="kw">qqline</span>(gardenB)</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/T-test1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+<p>OK great…this data looks pretty normal. Let’s complete the <code>t.test()</code></p>
+<p>In this example we have assumed that the gardens are paired plots, and that we are interested in a two sided test. If you are not sure what is meant by these terms, you should read up on it before attempting to complete the test: <a href="http://en.wikipedia.org/wiki/Student%27s_t-test">Wikipedia</a> is a surprisingly good resource for statistical information.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(
+     <span class="dt">x =</span> gardenA,
+     <span class="dt">y =</span> gardenB,
+     <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,
+     <span class="dt">paired =</span> <span class="ot">TRUE</span>
+     )</code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  gardenA and gardenB
+## t = -6.7082, df = 9, p-value = 8.771e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.674445 -1.325555
+## sample estimates:
+## mean of the differences 
+##                      -2</code></pre>
+<p>The output gives us the test statistic, the degrees of freedom, and the -value - simple.</p>
+<p>Note that if you want to automate <code>t.test</code>, or another test, you can extract the results from the test object like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example_test &lt;-<span class="kw">t.test</span>(
+     <span class="dt">x =</span> gardenA,
+     <span class="dt">y =</span> gardenB,
+     <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,
+     <span class="dt">paired =</span> <span class="ot">TRUE</span>
+     )
+
+example_test$statistic</code></pre></div>
+<pre><code>##         t 
+## -6.708204</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example_test$parameter</code></pre></div>
+<pre><code>## df 
+##  9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example_test$.value</code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>So yes….it appears that our two samples are significantly different, because the test statistic is greater than our critical t value. We can can calculate the critical t value to check this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(
+     <span class="fl">0.975</span>, <span class="co"># 0.975 because it is a two tailed test and 2*(1-0.975) = 0.05!          </span>
+     <span class="dt">df =</span> <span class="dv">9</span>
+     )</code></pre></div>
+<pre><code>## [1] 2.262157</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We ignore signs in a two-sided t-test, hence if the absolute value of the test</span>
+<span class="co"># statistic is greater than the critical value, we reject the null hypothesis:</span>
+
+<span class="kw">abs</span>(example_test$statistic) &gt;<span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>,<span class="dv">9</span>)</code></pre></div>
+<pre><code>##    t 
+## TRUE</code></pre>
+<p>Easy!</p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="R-style.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="multiple-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -228,7 +286,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-R_environment.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-t-test.Rmd",
 "text": null
 },
 "download": null,
