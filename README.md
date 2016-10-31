@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/ivyleavedtoadflax/R_notes.svg?branch=master)](https://travis-ci.org/ivyleavedtoadflax/R_notes)
 
+**The repo is now being maintained at <https://github.com/machinegurning/Rcourse>. This repo is retained to ensure legacy links can still be fulfilled. Note that the new course is being hosted at <http://course.machinegurning.com>.**
+
 # README
 
 Originally this repo was home to the notes produced for a short course I ran for PhD and post-doctoral researchers at Cranfield University in 2013.
